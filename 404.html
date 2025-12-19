@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Страница не найдена | Коридор</title>
+    <meta name="description" content="Запрошенная страница не существует. Вернитесь на главную страницу сайта Коридор.">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Фоновые частицы */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        /* Контейнер ошибки */
+        .error-container {
+            text-align: center;
+            z-index: 2;
+            max-width: 600px;
+            padding: 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Код ошибки */
+        .error-code {
+            font-size: 8rem;
+            font-weight: 700;
+            color: #ff4757;
+            text-shadow: 0 0 20px rgba(255, 71, 87, 0.5);
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* Сообщение об ошибке */
+        .error-message {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #e0e0e0;
+        }
+
+        .error-description {
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            color: #a0a0a0;
+            line-height: 1.6;
+        }
+
+        /* Кнопка возврата */
+        .back-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, #ff4757, #ff6b7a);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 71, 87, 0.4);
+        }
+
+        /* Поиск */
+        .search-container {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .search-input {
+            padding: 10px 15px;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 0.9rem;
+            width: 250px;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #ff4757;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .search-button {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Полезные ссылки */
+        .helpful-links {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .helpful-links h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: #e0e0e0;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .link-item {
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .link-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .link-item a {
+            color: #a0a0a0;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .link-item a:hover {
+            color: #ff4757;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 5rem;
+            }
+            
+            .error-message {
+                font-size: 1.2rem;
+            }
+            
+            .search-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .search-input {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Фоновые частицы -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Основной контент -->
+    <div class="error-container">
+        <div class="error-code">404</div>
+        <h1 class="error-message">Страница не найдена</h1>
+        <p class="error-description">
+            К сожалению, запрошенная вами страница не существует. Возможно, она была перемещена, удалена или вы ввели неверный адрес.
+        </p>
+        
+        <a href="/" class="back-button">Вернуться на главную</a>
+        
+        <!-- Поиск -->
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Поиск по сайту..." id="searchInput">
+            <button class="search-button" onclick="performSearch()">Найти</button>
+        </div>
+        
+        <!-- Полезные ссылки -->
+        <div class="helpful-links">
+            <h3>Возможно, вы ищете:</h3>
+            <div class="links-grid">
+                <div class="link-item">
+                    <a href="/">Главная страница</a>
+                </div>
+                <div class="link-item">
+                    <a href="/about">О проекте</a>
+                </div>
+                <div class="link-item">
+                    <a href="/gallery">Галерея</a>
+                </div>
+                <div class="link-item">
+                    <a href="/contact">Контакты</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Создание частиц фона
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Функция поиска
+        function performSearch() {
+            const searchQuery = document.getElementById('searchInput').value.trim();
+            if (searchQuery) {
+                // В реальном проекте здесь будет перенаправление на страницу поиска
+                window.location.href = `/search?q=${encodeURIComponent(searchQuery)}`;
+            }
+        }
+
+        // Обработка нажатия Enter в поле поиска
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            
+            // Логирование ошибки для аналитики
+            if (typeof gtag !== 'undefined') {
+                gtag('event', '404_page_view', {
+                    'page_path': window.location.pathname,
+                    'page_location': window.location.href
+                });
+            }
+        });
+    </script>
+</body>
+</html>

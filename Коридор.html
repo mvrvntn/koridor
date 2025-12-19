@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>коридор</title>
+    <meta name="description" content="Технологический сервис коридор.">
+    <meta name="keywords" content="сервис, технология, коридор">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="коридор">
+    
+    <meta property="og:title" content="коридор">
+    <meta property="og:description" content="Технологический сервис">
+    <meta property="og:type" content="website">
+    
+    <meta name="theme-color" content="#F5F1EA">
+    <meta name="color-scheme" content="light dark">
+    
+    <link rel="preconnect" href="https://t.me">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="preload" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI0VCRTRENyIvPjxwYXRoIGQ9Ik0yNSAzMCBMNzAgNTAgTDI1IDcwIiBzdHJva2U9IiMzRDNEM0QiIHN0cm9rZS13aWR0aD0iNiIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PC9zdmc+">
+    
+    <style>
+        /* === Базовые стили и переменные === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Pantone 2026 Cloud Dancer & минималista дизайн */
+            --bg-light: #F5F1EA;
+            --bg-secondary: #FFFBF7;
+            --accent-primary: #2B2B2B;
+            --accent-muted: #707070;
+            --text-primary: #1F1F1F;
+            --text-secondary: #646464;
+            --border-color: #D0C9BC;
+            --highlight: #8B7355;
+            --stroke-color: #2B2B2B;
+            
+            /* Системные переменные */
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --spacing-2xl: 48px;
+            --spacing-3xl: 64px;
+            
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            
+            --transition-smooth: 0.35s cubic-bezier(0.4, 0.0, 0.2, 1);
+            --transition-quick: 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg-secondary);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text-primary);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow: hidden;
+        }
+
+        /* === Основная структура === */
+        .page {
+            width: 100%;
+            max-width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .container {
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            padding: 0;
+            box-shadow: none;
+            text-align: center;
+            animation: containerEntry 1s var(--transition-smooth) 0.5s forwards;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes containerEntry {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* === Хедер и логотип === */
+        .header {
+            margin-bottom: 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo-wrapper {
+            position: relative;
+            display: inline-block;
+            margin: 0 auto 0;
+            animation: none;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        .logo-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, rgba(255, 251, 247, 0.8) 0%, rgba(255, 255, 255, 0.5) 100%);
+            border: 3px solid var(--stroke-color);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: visible;
+            padding: 0;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            animation: buttonPulseInvite 4.5s ease-in-out infinite;
+            will-change: transform, box-shadow;
+        }
+
+        .logo-button::before {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border: 2px solid var(--stroke-color);
+            border-radius: 50%;
+            opacity: 0;
+            animation: pulseRing 2.5s ease-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes pulseRing {
+            0% {
+                transform: scale(0.95);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .logo-button:hover {
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.15);
+            transform: scale(1.08);
+            border-color: var(--highlight);
+        }
+
+        .logo-button:focus {
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(139, 115, 85, 0.3);
+        }
+
+        .logo-button:active {
+            transform: scale(0.96);
+        }
+
+        .logo-button.processing {
+            pointer-events: none;
+            animation: none;
+        }
+
+        .logo-svg {
+            width: 160px;
+            height: 160px;
+            animation: breathing 3s ease-in-out infinite;
+            will-change: transform, opacity;
+        }
+
+        @keyframes breathing {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes titleBreathe {
+            0%, 100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            50% {
+                opacity: 0.85;
+                transform: translateY(-2px);
+            }
+        }
+
+        @keyframes buttonPulseInvite {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.03);
+            }
+        }
+
+        .title {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            font-weight: 500;
+            margin: var(--spacing-2xl) 0 0 0;
+            letter-spacing: 0.08em;
+            line-height: 1.2;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            animation: titleBreathe 4s ease-in-out infinite;
+            opacity: 1;
+        }
+
+        @keyframes titleSlide {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .title-accent {
+            color: var(--highlight);
+            font-weight: 700;
+        }
+
+        /* === Дополнительные элементы === */
+        .subtitle {
+            font-size: 0;
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin: 0;
+            letter-spacing: 0em;
+            line-height: 1.5;
+            animation: none;
+            display: none;
+        }
+
+        @keyframes subtitleSlide {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .divider {
+            height: 0;
+            background: transparent;
+            margin: 0;
+            animation: none;
+            display: none;
+        }
+
+        @keyframes dividerExpand {
+            from {
+                opacity: 0;
+                transform: scaleX(0);
+            }
+            to {
+                opacity: 1;
+                transform: scaleX(1);
+            }
+        }
+
+        .content {
+            margin-top: 0;
+            display: none;
+        }
+
+        .description {
+            font-size: 0;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            letter-spacing: 0.005em;
+            margin: 0;
+            animation: none;
+            display: none;
+        }
+
+        @keyframes contentFade {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .accent-text {
+            color: var(--highlight);
+            font-weight: 500;
+        }
+
+        /* === Декоративные элементы === */
+        .decoration {
+            position: fixed;
+            width: 100px;
+            height: 100px;
+            border: 2px solid var(--stroke-color);
+            border-radius: 0;
+            opacity: 0.06;
+            pointer-events: none;
+            will-change: transform;
+        }
+
+        .decoration-1 {
+            top: 5%;
+            right: 5%;
+            width: 200px;
+            height: 200px;
+            border-top: 3px solid var(--stroke-color);
+            border-right: 3px solid var(--stroke-color);
+            border-bottom: none;
+            border-left: none;
+            animation: rotateCorner 20s linear infinite;
+        }
+
+        .decoration-2 {
+            bottom: 5%;
+            left: 5%;
+            width: 150px;
+            height: 150px;
+            border-bottom: 3px solid var(--stroke-color);
+            border-left: 3px solid var(--stroke-color);
+            border-top: none;
+            border-right: none;
+            animation: rotateCornerReverse 25s linear infinite;
+        }
+
+        @keyframes rotateCorner {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes rotateCornerReverse {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(-360deg); }
+        }
+
+        /* === Маскот-курсор === */
+        #cursor-follower {
+            position: fixed;
+            left: -40px;
+            top: -40px;
+            width: 80px;
+            height: 80px;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0;
+            will-change: transform, opacity;
+        }
+
+        #cursor-follower svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* === Оверлей перехода === */
+        #transition-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-secondary);
+            z-index: 10000;
+            opacity: 0;
+            pointer-events: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ring {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            border: 3px solid var(--stroke-color);
+            border-radius: 50%;
+            will-change: transform, opacity;
+            opacity: 0;
+            transform: scale(0);
+        }
+
+        /* === Скрытые элементы для доступности === */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        /* === Адаптивность === */
+        @media (max-width: 768px) {
+            .logo-button {
+                width: 240px;
+                height: 240px;
+            }
+
+            .logo-svg {
+                width: 130px;
+                height: 130px;
+            }
+
+            .title {
+                font-size: 16px;
+                margin-top: var(--spacing-xl);
+            }
+
+            .decoration-1 {
+                width: 120px;
+                height: 120px;
+                top: 3%;
+                right: 3%;
+            }
+
+            .decoration-2 {
+                width: 100px;
+                height: 100px;
+                bottom: 3%;
+                left: 3%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-button {
+                width: 200px;
+                height: 200px;
+            }
+
+            .logo-svg {
+                width: 110px;
+                height: 110px;
+            }
+
+            .title {
+                font-size: 14px;
+                margin-top: var(--spacing-lg);
+            }
+
+            .decoration-1 {
+                width: 80px;
+                height: 80px;
+                top: 2%;
+                right: 2%;
+            }
+
+            .decoration-2 {
+                width: 70px;
+                height: 70px;
+                bottom: 2%;
+                left: 2%;
+            }
+        }
+
+        /* === Уменьшение анимаций по запросу пользователя === */
+        @media (prefers-reduced-motion: reduce) {
+            .logo-wrapper,
+            .logo-svg,
+            .logo-button,
+            .title,
+            .subtitle,
+            .divider,
+            .description,
+            .container {
+                animation: none !important;
+                transition: none !important;
+            }
+            
+            #cursor-follower {
+                display: none;
+            }
+            
+            body {
+                cursor: auto;
+            }
+        }
+
+        /* === Темная тема === */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-light: #1A1A1A;
+                --bg-secondary: #242424;
+                --accent-primary: #F5F1EA;
+                --accent-muted: #B0B0B0;
+                --text-primary: #F5F1EA;
+                --text-secondary: #B0B0B0;
+                --border-color: #3A3A3A;
+                --highlight: #D4A574;
+            }
+
+            body {
+                background: linear-gradient(135deg, #1A1A1A 0%, #242424 100%);
+            }
+
+            .container {
+                background: rgba(30, 30, 30, 0.8);
+                border: 1px solid rgba(245, 241, 234, 0.1);
+                box-shadow: 
+                    0 20px 60px rgba(0, 0, 0, 0.4),
+                    0 0 1px rgba(245, 241, 234, 0.05) inset;
+            }
+
+            .logo-button {
+                background: linear-gradient(135deg, rgba(212, 165, 116, 0.12) 0%, rgba(245, 241, 234, 0.05) 100%);
+            }
+
+            .logo-button:hover {
+                background: linear-gradient(135deg, rgba(212, 165, 116, 0.2) 0%, rgba(245, 241, 234, 0.08) 100%);
+            }
+            
+            #cursor-follower circle[fill="#D4A574"] {
+                fill: var(--highlight);
+            }
+            #cursor-follower circle[fill="white"] {
+                fill: #242424;
+            }
+            #cursor-follower circle[fill="#2B2B2B"] {
+                fill: var(--text-primary);
+            }
+            
+            #transition-overlay {
+                background-color: var(--bg-light);
+            }
+            .ring {
+                border-color: var(--accent-primary);
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="page" role="main">
+        <div class="decoration decoration-1" aria-hidden="true"></div>
+        <div class="decoration decoration-2" aria-hidden="true"></div>
+
+        <div class="container">
+            <header class="header">
+                <div class="logo-wrapper">
+                    <button class="logo-button" id="mainButton" aria-label="Откройте сервис коридор">
+                        <svg class="logo-svg" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+                            <!-- Центральная стрелка (указывает вправо) - главная, идеально прямая -->
+                            <g>
+                                <line x1="35" y1="120" x2="175" y2="120" stroke="#2B2B2B" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+                                <polygon points="185,120 155,105 155,135" fill="#2B2B2B"/>
+                            </g>
+                        </svg>
+                    </button>
+                </div>
+
+                <h1 class="title">коридор</h1>
+            </header>
+        </div>
+    </main>
+
+    <div id="transition-overlay" aria-hidden="true">
+        <div class="ring"></div><div class="ring"></div><div class="ring"></div><div class="ring"></div><div class="ring"></div>
+        <div class="ring"></div><div class="ring"></div><div class="ring"></div><div class="ring"></div><div class="ring"></div>
+        <div class="ring"></div><div class="ring"></div><div class="ring"></div><div class="ring"></div><div class="ring"></div>
+        <div class="ring"></div><div class="ring"></div><div class="ring"></div><div class="ring"></div><div class="ring"></div>
+    </div>
+
+    <!-- Animated Cursor Follower -->
+    <div id="cursor-follower" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="rgba(0,0,0,0.1)"/>
+                </filter>
+            </defs>
+            <g filter="url(#shadow)">
+                <circle cx="50" cy="50" r="40" fill="#D4A574"/>
+                <g id="eyes">
+                    <circle cx="50" cy="45" r="15" fill="white"/>
+                    <circle id="left-pupil" cx="50" cy="45" r="7" fill="#2B2B2B"/>
+                </g>
+            </g>
+        </svg>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script>
+        (function() {
+            'use strict';
+
+            // --- Configuration ---
+            const botName = 'mavrtunbot';
+            const fullLink = `https://t.me/${botName}`;
+
+            // --- Element Selectors ---
+            const mainButton = document.getElementById('mainButton');
+            const follower = document.getElementById('cursor-follower');
+            const pupil = document.getElementById('left-pupil');
+            const eyes = document.getElementById('eyes');
+            const transitionOverlay = document.getElementById('transition-overlay');
+            const rings = transitionOverlay.querySelectorAll('.ring');
+            const container = document.querySelector('.container');
+
+            // --- Early exit if essential elements are missing ---
+            if (!mainButton || !follower || !pupil || !eyes || !transitionOverlay || !container || !window.gsap) {
+                console.error('Essential elements for animation are missing.');
+                return;
+            }
+
+            // --- State ---
+            let isFollowerVisible = false;
+            let isTransitioning = false;
+
+            // --- Functions ---
+
+            /**
+             * Настраивает интерактивный маскот-курсор
+             */
+            function setupCursorFollower() {
+                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+                document.body.style.cursor = 'none';
+
+                const xTo = gsap.quickTo(follower, "x", { duration: 0.5, ease: "power3" });
+                const yTo = gsap.quickTo(follower, "y", { duration: 0.5, ease: "power3" });
+                
+                let lastX = 0, lastY = 0;
+
+                const onMouseMove = (e) => {
+                    if (isTransitioning) return;
+                    
+                    const { clientX, clientY } = e;
+                    
+                    if (!isFollowerVisible) {
+                        isFollowerVisible = true;
+                        gsap.to(follower, { opacity: 1, duration: 0.3 });
+                    }
+
+                    const dx = clientX - lastX;
+                    const dy = clientY - lastY;
+                    const speed = Math.sqrt(dx * dx + dy * dy);
+                    lastX = clientX;
+                    lastY = clientY;
+
+                    xTo(clientX);
+                    yTo(clientY);
+
+                    const scaleFactor = gsap.utils.clamp(0, 1, speed / 100);
+                    gsap.to(follower, {
+                        scaleX: 1 + scaleFactor * 1.5,
+                        scaleY: 1 - scaleFactor * 0.5,
+                        duration: 0.8,
+                        ease: "power3.out"
+                    });
+                    
+                    const rect = eyes.getBoundingClientRect();
+                    if (rect.width > 0) {
+                        const eyeX = rect.left + rect.width / 2;
+                        const eyeY = rect.top + rect.height / 2;
+                        const angle = Math.atan2(clientY - eyeY, clientX - eyeX);
+                        const pupilDist = 4;
+
+                        gsap.to(pupil, {
+                            x: Math.cos(angle) * pupilDist,
+                            y: Math.sin(angle) * pupilDist,
+                            duration: 0.3,
+                            ease: "power2.out"
+                        });
+                    }
+                };
+
+                const onMouseLeave = () => {
+                    if (isTransitioning) return;
+                    isFollowerVisible = false;
+                    gsap.to(follower, { opacity: 0, duration: 0.3 });
+                };
+                
+                const onMouseEnter = () => {
+                    if (isTransitioning) return;
+                    if (!isFollowerVisible) {
+                        isFollowerVisible = true;
+                        gsap.to(follower, { opacity: 1, duration: 0.3 });
+                    }
+                };
+
+                window.addEventListener('mousemove', onMouseMove);
+                document.body.addEventListener('mouseleave', onMouseLeave);
+                document.body.addEventListener('mouseenter', onMouseEnter);
+            }
+
+            /**
+             * Настраивает взаимодействие с главной кнопкой
+             */
+            function setupMainButtonInteraction() {
+                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+                
+                const hoverTween = gsap.to(follower, { scale: 1.3, duration: 0.3, paused: true, ease: "power2.out" });
+                
+                mainButton.addEventListener('mouseenter', () => {
+                    if (isTransitioning) return;
+                    hoverTween.play();
+                    gsap.to(eyes, { y: -8, duration: 0.3, ease: 'power2.out' });
+                });
+
+                mainButton.addEventListener('mouseleave', () => {
+                    if (isTransitioning) return;
+                    hoverTween.reverse();
+                    gsap.to(eyes, { y: 0, duration: 0.3, ease: 'power2.inOut' });
+                });
+
+                mainButton.addEventListener('mousedown', () => {
+                    if (isTransitioning) return;
+                    gsap.to(follower, { scale: 0.9, duration: 0.15, ease: "power2.out" });
+                    gsap.to(eyes, { scaleY: 0.2, y: 12, duration: 0.1, transformOrigin: "center" });
+                });
+
+                mainButton.addEventListener('mouseup', () => {
+                    if (isTransitioning) return;
+                    gsap.to(follower, { scale: 1, duration: 0.3, ease: "power2.out" });
+                    gsap.to(eyes, { scaleY: 1, y: 0, duration: 0.3, ease: 'power2.inOut' });
+                });
+            }
+
+            /**
+             * Настраивает анимацию перехода "туннель"
+             */
+            function setupTransition() {
+                const tl = gsap.timeline({
+                    paused: true,
+                    onStart: () => {
+                        isTransitioning = true;
+                    },
+                    onComplete: () => {
+                        try {
+                            window.open(fullLink, '_blank', 'noopener,noreferrer');
+                        } catch (error) {
+                            console.error('Failed to open link:', error);
+                            // Запасной вариант
+                            window.location.href = fullLink;
+                        }
+                        
+                        setTimeout(() => {
+                            mainButton.classList.remove('processing');
+                            gsap.set(transitionOverlay, { opacity: 0, pointerEvents: 'none' });
+                            gsap.to(container, { opacity: 1, duration: 0.5 });
+                            // Восстановление состояния маскота
+                            isFollowerVisible = false;
+                            isTransitioning = false;
+                            gsap.set(follower, { opacity: 0, scale: 1, scaleX: 1, scaleY: 1 });
+                        }, 500);
+                    }
+                });
+
+                tl.to([container, follower], { duration: 0.3, opacity: 0, ease: 'power2.in' })
+                  .set(transitionOverlay, { opacity: 1, pointerEvents: 'auto' })
+                  .fromTo(rings, {
+                      scale: 0.01,
+                      opacity: 1
+                  }, {
+                      duration: 1.2,
+                      scale: 250,
+                      opacity: 0,
+                      stagger: {
+                          each: 0.04,
+                          from: 'center'
+                      },
+                      ease: 'power3.in'
+                  }, "-=0.2");
+
+                mainButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (tl.isActive() || isTransitioning) return;
+                    mainButton.classList.add('processing');
+                    tl.restart();
+                });
+            }
+
+            /**
+             * Предзагрузка ресурсов для оптимизации производительности
+             */
+            function preloadResources() {
+                // Предзагрузка шрифтов, если необходимо
+                if ('fonts' in document) {
+                    document.fonts.load('16px Inter');
+                    document.fonts.load('600 18px Inter');
+                }
+                
+                // Предзагрузка изображения иконки
+                const link = document.createElement('link');
+                link.rel = 'preload';
+                link.as = 'image';
+                link.href = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI0VCRTRENyIvPjxwYXRoIGQ9Ik0yNSAzMCBMNzAgNTAgTDI1IDcwIiBzdHJva2U9IiMzRDNEM0QiIHN0cm9rZS13aWR0aD0iNiIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PC9zdmc+';
+                document.head.appendChild(link);
+            }
+
+            /**
+             * Проверяет поддержку браузером необходимых функций
+             */
+            function checkBrowserSupport() {
+                const features = {
+                    gsap: typeof gsap !== 'undefined',
+                    matchMedia: typeof window.matchMedia !== 'undefined',
+                    addEventListener: typeof window.addEventListener !== 'undefined',
+                    requestAnimationFrame: typeof window.requestAnimationFrame !== 'undefined'
+                };
+                
+                const unsupported = Object.keys(features).filter(key => !features[key]);
+                if (unsupported.length > 0) {
+                    console.warn('Browser does not support the following features:', unsupported);
+                    // Можно добавить уведомление для пользователя
+                }
+                
+                return unsupported.length === 0;
+            }
+
+            /**
+             * Обработка ошибок
+             */
+            function setupErrorHandling() {
+                window.addEventListener('error', (e) => {
+                    console.error('JavaScript error:', e.error);
+                    // Можно добавить отправку ошибок в аналитику
+                });
+                
+                window.addEventListener('unhandledrejection', (e) => {
+                    console.error('Unhandled promise rejection:', e.reason);
+                    e.preventDefault();
+                });
+            }
+
+            // --- Initialization ---
+            function init() {
+                try {
+                    if (!checkBrowserSupport()) {
+                        console.error('Browser does not support required features');
+                        return;
+                    }
+                    
+                    setupErrorHandling();
+                    preloadResources();
+                    setupCursorFollower();
+                    setupMainButtonInteraction();
+                    setupTransition();
+                    
+                    // Устанавливаем начальное состояние для маскота
+                    gsap.set(follower, { opacity: 0, scale: 1 });
+                    
+                    console.log('Application initialized successfully');
+                } catch (error) {
+                    console.error('Failed to initialize application:', error);
+                }
+            }
+
+            // Запускаем инициализацию после загрузки DOM
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init);
+            } else {
+                init();
+            }
+
+        })();
+    </script>
+</body>
+</html>

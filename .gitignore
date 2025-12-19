@@ -1,0 +1,181 @@
+# Операционные системы
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Редакторы и IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+.classpath
+
+# Временные файлы
+*.tmp
+*.temp
+*.log
+*.bak
+*.backup
+*.cache
+
+# Node.js (если используется для сборки)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.eslintcache
+
+# Python (если используется для скриптов)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.venv
+
+# Папки сборки и дистрибутивы
+dist/
+build/
+out/
+.target/
+
+# Зависимости и пакеты
+bower_components/
+jspm_packages/
+
+# Файлы окружения и конфигурации
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+config.local.js
+config.local.json
+
+# Файлы с ключами и сертификатами
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+secrets/
+credentials/
+
+# Базы данных
+*.db
+*.sqlite
+*.sqlite3
+
+# Логи и отчеты
+logs/
+reports/
+coverage/
+.nyc_output/
+.coverage
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Кэш
+.cache/
+.parcel-cache/
+.sass-cache/
+.eslintcache
+.stylelintcache
+
+# Оптимизация изображений
+*.jpg.optimized
+*.jpeg.optimized
+*.png.optimized
+*.gif.optimized
+*.webp.optimized
+*.avif.optimized
+
+# Файлы, генерируемые автоматически
+*.min.js
+*.min.css
+*.bundle.js
+*.bundle.css
+*.map
+source-map.js
+
+# Документация, генерируемая автоматически
+docs/_build/
+docs/build/
+site/
+
+# Тестирование
+.jest/
+test-results/
+playwright-report/
+test-results.xml
+
+# CI/CD
+.github/workflows/temp-*
+
+# Резервные копии
+*.orig
+*.rej
+
+# Файлы, специфичные для проекта
+# (добавьте здесь файлы, специфичные для вашего проекта)
+
+# Временные файлы разработки
+dev/
+temp/
+tmp/
+
+# Архивы
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# Файлы Microsoft Office
+*.docx
+*.xlsx
+*.pptx
+
+# Файлы Adobe
+*.psd
+*.ai
+*.eps
+
+# Видео и аудио файлы большого размера
+*.mp4
+*.avi
+*.mov
+*.wmv
+*.flv
+*.webm
+*.mp3
+*.wav
+*.flac
+
+# Файлы 3D-графики
+*.3ds
+*.max
+*.blend
+*.obj
+
+# Другие бинарные файлы
+*.exe
+*.dmg
+*.pkg
+*.deb
+*.rpm

@@ -3,594 +3,397 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>обходняк</title>
-    <meta name="description" content="Технологический сервис.">
-    <meta name="keywords" content="сервис, технология">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <!-- Базовые метаданные -->
+    <title>Коридор - Интерактивный веб-опыт</title>
+    <meta name="description" content="Погрузитесь в уникальный интерактивный мир Коридора с современными анимациями и микро-взаимодействиями">
+    <meta name="keywords" content="инактивный дизайн, веб-анимации, интерактивный опыт, современный сайт, коридор">
+    <meta name="author" content="Коридор">
     <meta name="robots" content="index, follow">
-    <meta name="author" content="обходняк">
+    <meta name="language" content="Russian">
+    <meta name="theme-color" content="#0f0f0f">
     
-    <meta property="og:title" content="обходняк">
-    <meta property="og:description" content="Технологический сервис">
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://www.iconarchive.com/download/i137822/microsoft/fluentui-emoji-3d/Pig-Face-3d.1024.png">
+    <meta property="og:url" content="https://yourusername.github.io/koridor/">
+    <meta property="og:title" content="Коридор - Интерактивный веб-опыт">
+    <meta property="og:description" content="Погрузитесь в уникальный интерактивный мир Коридора с современными анимациями и микро-взаимодействиями">
+    <meta property="og:image" content="https://yourusername.github.io/koridor/assets/images/og-image.jpg">
+    <meta property="og:site_name" content="Коридор">
+    <meta property="og:locale" content="ru_RU">
     
-    <meta name="theme-color" content="#c050a0">
-    <meta name="color-scheme" content="dark">
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://yourusername.github.io/koridor/">
+    <meta property="twitter:title" content="Коридор - Интерактивный веб-опыт">
+    <meta property="twitter:description" content="Погрузитесь в уникальный интерактивный мир Коридора с современными анимациями и микро-взаимодействиями">
+    <meta property="twitter:image" content="https://yourusername.github.io/koridor/assets/images/og-image.jpg">
     
-    <link rel="dns-prefetch" href="//www.iconarchive.com">
-    <link rel="preconnect" href="https://t.me">
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="preload" as="style">
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- JSON-LD структурированные данные -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Коридор",
+        "url": "https://yourusername.github.io/koridor/",
+        "description": "Погрузитесь в уникальный интерактивный мир Коридора с современными анимациями и микро-взаимодействиями",
+        "inLanguage": "ru",
+        "isAccessibleForFree": true,
+        "isFamilyFriendly": true,
+        "author": {
+            "@type": "Organization",
+            "name": "Коридор"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Коридор"
+        },
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://yourusername.github.io/koridor/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
     
-    <link rel="preload" as="image" href="https://www.iconarchive.com/download/i137822/microsoft/fluentui-emoji-3d/Pig-Face-3d.1024.png">
-    <link rel="preload" as="image" href="https://www.iconarchive.com/download/i109761/microsoft/fluentui-emoji-3d/Backhand-Index-Pointing-Left-3d-Light.1024.png">
+    <!-- Preconnect для оптимизации -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
-    <link rel="icon" type="image/x-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48dGV4dCB5PSIuOWVtIiBmb250LXNpemU9IjkwIj7wn5C3PC90ZXh0Pjwvc3ZnPg==">
-    <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48dGV4dCB5PSIuOWVtIiBmb250LXNpemU9IjkwIj7wn5C3PC90ZXh0Pjwvc3ZnPg==">
+    <!-- Шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
     
+    <!-- Иконки -->
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+    <link rel="manifest" href="assets/manifest.json">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    
+    <!-- Критический CSS для быстрой загрузки -->
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        :root {
-            /* Цвета из ваших аватаров свиньи */
-            --color-accent: #9050e0;
-            --color-accent-dark: #7040c0;
-            --color-accent-light: #a050d0;
-            --color-accent-pink: #c050a0;
-            
-            --color-text-primary: #EDEDF0;
-            --color-text-secondary: #f0d0ff;
-            --color-text-tertiary: #d0a0e0;
-            
-            --spacing-lg: 24px;
-            --spacing-xl: 32px;
-            --spacing-2xl: 48px;
-            
-            --radius-lg: 16px;
-            
-            --transition-base: 220ms cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
+        /* Критические стили для быстрого рендеринга */
         body {
             margin: 0;
-            padding: var(--spacing-lg);
-            /* ГРАДИЕНТ КАК НА АВАТАРАХ! */
-            background: linear-gradient(135deg, #c050a0 0%, #9050e0 100%);
-            min-height: 100vh;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f0f0f;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0f0f0f;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            color: var(--color-text-primary);
+            z-index: 9999;
+            transition: opacity 0.5s ease;
         }
-
-        .container {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: var(--radius-lg);
-            padding: var(--spacing-2xl);
-            border: 2px solid rgba(255, 255, 255, 0.25);
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3), 
-                        0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-            max-width: 500px;
-            width: 100%;
-            text-align: center;
-            animation: slideIn var(--transition-base) forwards;
-            /* Улучшенный Liquid Glass эффект при ховере */
-            transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
-        }
-
-        /* Дополнительные Liquid Glass эффекты */
-        .container:hover {
-            background: rgba(255, 255, 255, 0.22);
-            border-color: rgba(255, 255, 255, 0.35);
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4), 
-                        0 0 0 1px rgba(255, 255, 255, 0.2) inset;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .title {
-            font-size: 52px;
-            font-weight: 700;
-            margin: 0 0 var(--spacing-2xl) 0;
-            letter-spacing: -1px;
-            line-height: 1.1;
-            color: #ffffff;
-            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
-            /* Улучшенный эффект свечения */
-            animation: titleGlow 4s ease-in-out infinite alternate;
-        }
-
-        @keyframes titleGlow {
-            0% {
-                text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
-            }
-            100% {
-                text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3), 
-                             0 0 30px rgba(255, 255, 255, 0.2);
-            }
-        }
-
-        .pig-wrapper {
-            position: relative;
-            display: inline-block;
-            margin-bottom: var(--spacing-xl);
-            margin-top: var(--spacing-xl);
-        }
-
-        .pig-link {
-            display: inline-block;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all var(--transition-base);
-            border-radius: 50%;
-            padding: 12px;
-            border: none;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-
-        .pig-link:focus {
-            outline: 3px solid rgba(255, 255, 255, 0.8);
-            outline-offset: 4px;
-        }
-
-        .pig-link:hover {
-            transform: scale(1.1) translateZ(0);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
-        }
-
-        .pig-link:active {
-            transform: scale(0.92) translateZ(0);
-        }
-
-        .pig-image {
-            width: 160px;
-            height: 160px;
-            display: block;
-            animation: pigBounce 2.8s ease-in-out infinite;
-            filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.4));
-            will-change: transform;
-            backface-visibility: hidden;
-            transition: filter 0.3s ease;
-        }
-
-        .pig-link:hover .pig-image {
-            filter: drop-shadow(0 12px 32px rgba(0, 0, 0, 0.5));
-            animation-duration: 2s;
-        }
-
-        @keyframes pigBounce {
-            0%, 100% {
-                transform: translateY(0) rotate(0deg) scale(1);
-            }
-            25% {
-                transform: translateY(-14px) rotate(-2deg) scale(1.02);
-            }
-            50% {
-                transform: translateY(-6px) rotate(0deg) scale(1);
-            }
-            75% {
-                transform: translateY(-10px) rotate(2deg) scale(1.01);
-            }
-        }
-
-        .arrow {
-            position: absolute;
-            width: 45px;
-            height: 45px;
+        
+        .preloader.hidden {
+            opacity: 0;
             pointer-events: none;
-            filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
-            will-change: transform;
-            backface-visibility: hidden;
-            transition: filter 0.3s ease;
         }
-
-        /* Улучшенные эффекты указателей при ховере на свинью */
-        .pig-wrapper:hover .arrow {
-            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
-            animation-duration: 1.2s;
+        
+        .preloader-content {
+            text-align: center;
         }
-
-        /* ПРАВИЛЬНЫЕ УКАЗАТЕЛИ */
-        .arrow-left {
-            left: -58px;
-            top: 50%;
-            transform: translateY(-50%) scaleX(-1) translateZ(0);
-            animation: pulseLeft 1.8s infinite ease-in-out;
+        
+        .preloader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid #ff4757;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
         }
-
-        .arrow-right {
-            right: -58px;
-            top: 50%;
-            transform: translateY(-50%) translateZ(0);
-            animation: pulseRight 1.8s infinite ease-in-out;
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
-
-        /* ИСПРАВЛЕНО: -90deg чтобы указывать ВНИЗ */
-        .arrow-top {
-            top: -50px;
-            left: 50%;
-            transform: translateX(-50%) rotate(-90deg) translateZ(0);
-            animation: pulseTop 1.8s infinite ease-in-out;
-        }
-
-        /* ИСПРАВЛЕННЫЕ АНИМАЦИИ - ТЫКАЮТ В СВИНЬЮ */
-        @keyframes pulseLeft {
-            0%, 100% {
-                opacity: 1;
-                transform: translateY(-50%) scaleX(-1) translateZ(0);
-            }
-            50% {
-                opacity: 0.6;
-                /* ТЫКАЕМ К СВИНЬЕ: движемся вправо К центру */
-                transform: translateY(-50%) scaleX(-1) translateX(-12px) scale(1.15) translateZ(0);
-            }
-        }
-
-        @keyframes pulseRight {
-            0%, 100% {
-                opacity: 1;
-                transform: translateY(-50%) translateZ(0);
-            }
-            50% {
-                opacity: 0.6;
-                /* ТЫКАЕМ К СВИНЬЕ: движемся влево К центру */
-                transform: translateY(-50%) translateX(12px) scale(1.15) translateZ(0);
-            }
-        }
-
-        @keyframes pulseTop {
-            0%, 100% {
-                opacity: 1;
-                transform: translateX(-50%) rotate(-90deg) translateZ(0);
-            }
-            50% {
-                opacity: 0.6;
-                /* ТЫКАЕМ К СВИНЬЕ: движемся вниз К центру */
-                transform: translateX(-50%) rotate(-90deg) translateY(-12px) scale(1.15) translateZ(0);
-            }
-        }
-
-        .subtitle {
-            font-size: 18px;
-            font-weight: 500;
-            color: #ffffff;
-            margin: var(--spacing-lg) 0 0 0;
-            letter-spacing: 0.3px;
-            animation: subtitlePulse 2.8s ease-in-out infinite;
-            min-height: 24px;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-        }
-
-        /* Улучшенный эффект для subtitle при ховере */
-        .subtitle.hover-effect {
-            transform: scale(1.05);
-            color: rgba(255, 255, 255, 0.95);
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
-        }
-
-        @keyframes subtitlePulse {
-            0%, 100% {
-                opacity: 1;
-                transform: scale(1) translateZ(0);
-            }
-            50% {
-                opacity: 0.8;
-                transform: scale(1.03) translateZ(0);
-            }
-        }
-
-        .hint {
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.85);
-            margin-top: var(--spacing-xl);
-            letter-spacing: 0.2px;
-            line-height: 1.6;
-            /* Добавлен Liquid Glass эффект для описания */
-            background: rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            padding: 12px 16px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .hint:hover {
-            background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(255, 255, 255, 0.2);
-            color: rgba(255, 255, 255, 0.95);
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .pig-image,
-            .arrow,
-            .subtitle,
-            .container,
-            .title {
-                animation: none !important;
-                transition: none !important;
-            }
-            
-            .pig-link:hover {
-                transform: scale(1.05);
-            }
-        }
-
-        @media (max-width: 480px) {
-            body {
-                padding: 16px;
-            }
-
-            .container {
-                padding: var(--spacing-xl) var(--spacing-lg);
-                border-radius: 12px;
-            }
-
-            .title {
-                font-size: 36px;
-                margin-bottom: var(--spacing-xl);
-            }
-
-            .pig-image {
-                width: 120px;
-                height: 120px;
-            }
-
-            .arrow {
-                width: 35px;
-                height: 35px;
-            }
-
-            .arrow-left {
-                left: -45px;
-            }
-
-            .arrow-right {
-                right: -45px;
-            }
-
-            .arrow-top {
-                top: -40px;
-            }
-
-            .subtitle {
-                font-size: 16px;
-            }
-
-            .hint {
-                font-size: 12px;
-                margin-top: var(--spacing-lg);
-            }
-        }
-
-        @media (max-width: 360px) {
-            .container {
-                padding: var(--spacing-lg);
-            }
-
-            .title {
-                font-size: 28px;
-                margin-bottom: var(--spacing-lg);
-            }
-
-            .pig-image {
-                width: 100px;
-                height: 100px;
-            }
-
-            .arrow {
-                width: 30px;
-                height: 30px;
-            }
-
-            .arrow-left {
-                left: -38px;
-            }
-
-            .arrow-right {
-                right: -38px;
-            }
-
-            .arrow-top {
-                top: -35px;
-            }
-        }
-
-        @media (min-width: 768px) {
-            .container {
-                padding: var(--spacing-2xl) 48px;
-            }
-
-            .title {
-                font-size: 64px;
-                margin-bottom: 48px;
-            }
-
-            .pig-image {
-                width: 200px;
-                height: 200px;
-            }
-
-            .arrow {
-                width: 55px;
-                height: 55px;
-            }
-
-            .arrow-left {
-                left: -75px;
-            }
-
-            .arrow-right {
-                right: -75px;
-            }
-
-            .arrow-top {
-                top: -65px;
-            }
-
-            .subtitle {
-                font-size: 20px;
-            }
-        }
-
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border-width: 0;
+        
+        .hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1 class="title">обходняк</h1>
-        
-        <div class="pig-wrapper">
-            <button class="pig-link" id="pigLink" aria-label="Нажми на свинью">
-                <img 
-                    src="https://www.iconarchive.com/download/i137822/microsoft/fluentui-emoji-3d/Pig-Face-3d.1024.png" 
-                    alt="Свинья" 
-                    class="pig-image"
-                    loading="lazy"
-                >
-            </button>
-            
-            <!-- ИСПРАВЛЕННЫЕ УКАЗАТЕЛИ -->
-            <!-- Левый: отзеркален scaleX(-1) - указывает ВПРАВО на свинью -->
-            <img 
-                src="https://www.iconarchive.com/download/i109761/microsoft/fluentui-emoji-3d/Backhand-Index-Pointing-Left-3d-Light.1024.png" 
-                class="arrow arrow-left" 
-                alt="" 
-                loading="lazy"
-                aria-hidden="true"
-            >
-            
-            <!-- Правый: без изменений - указывает ВЛЕВО на свинью -->
-            <img 
-                src="https://www.iconarchive.com/download/i109761/microsoft/fluentui-emoji-3d/Backhand-Index-Pointing-Left-3d-Light.1024.png" 
-                class="arrow arrow-right" 
-                alt="" 
-                loading="lazy"
-                aria-hidden="true"
-            >
-            
-            <!-- Верхний: повернут -90° - указывает ВНИЗ на свинью -->
-            <img 
-                src="https://www.iconarchive.com/download/i109761/microsoft/fluentui-emoji-3d/Backhand-Index-Pointing-Left-3d-Light.1024.png" 
-                class="arrow arrow-top" 
-                alt="" 
-                loading="lazy"
-                aria-hidden="true"
-            >
-        </div>
-        
-        <div class="subtitle" id="subtitle">нажми на свинью</div>
-
-        <div class="hint">
-            Технологический сервис
+    <!-- Прелоадер -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-spinner"></div>
+            <p>Загрузка Коридора...</p>
         </div>
     </div>
 
+    <!-- Основной контент -->
+    <header class="header" role="banner">
+        <nav class="navigation" role="navigation" aria-label="Основная навигация">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="/" aria-label="Коридор - на главную">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="40" height="40" rx="8" fill="#ff4757"/>
+                            <path d="M20 10L15 20L20 30L25 20L20 10Z" fill="white"/>
+                        </svg>
+                    </a>
+                </div>
+                
+                <ul class="nav-menu" role="menubar">
+                    <li role="none"><a href="#about" role="menuitem">О проекте</a></li>
+                    <li role="none"><a href="#gallery" role="menuitem">Галерея</a></li>
+                    <li role="none"><a href="#experience" role="menuitem">Опыт</a></li>
+                    <li role="none"><a href="#contact" role="menuitem">Контакты</a></li>
+                </ul>
+                
+                <button class="nav-toggle" aria-label="Переключить меню" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main role="main">
+        <!-- Hero секция -->
+        <section class="hero" id="hero" aria-labelledby="hero-title">
+            <div class="hero-container">
+                <h1 id="hero-title" class="hero-title">
+                    <span class="hero-title-line">Добро пожаловать в</span>
+                    <span class="hero-title-line hero-title-highlight">Коридор</span>
+                    <span class="hero-title-line">Интерактивное пространство</span>
+                </h1>
+                
+                <p class="hero-description">
+                    Погрузитесь в уникальный мир, где каждый элемент реагирует на ваши действия
+                </p>
+                
+                <div class="hero-actions">
+                    <button class="btn btn-primary" id="start-experience">
+                        Начать опыт
+                    </button>
+                    <button class="btn btn-secondary" id="learn-more">
+                        Узнать больше
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Интерактивный персонаж-маскот -->
+            <div class="mascot" id="mascot" aria-label="Интерактивный персонаж">
+                <div class="mascot-body">
+                    <div class="mascot-eye left"></div>
+                    <div class="mascot-eye right"></div>
+                    <div class="mascot-mouth"></div>
+                </div>
+                <div class="mascot-shadow"></div>
+            </div>
+        </section>
+
+        <!-- Секция "О проекте" -->
+        <section class="section about-section" id="about" aria-labelledby="about-title">
+            <div class="container">
+                <h2 id="about-title" class="section-title">О проекте</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>
+                            Коридор - это не просто веб-сайт, а интерактивное пространство, 
+                            созданное с использованием передовых веб-технологий и трендов 2025-2026 годов.
+                        </p>
+                        <p>
+                            Каждый элемент этого пространства разработан с вниманием к деталям, 
+                            создавая уникальный пользовательский опыт.
+                        </p>
+                    </div>
+                    <div class="about-features">
+                        <div class="feature-card">
+                            <div class="feature-icon">🎨</div>
+                            <h3>Современный дизайн</h3>
+                            <p>Трендовые визуальные решения и анимации</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">⚡</div>
+                            <h3>Высокая производительность</h3>
+                            <p>Оптимизированные анимации с частотой 60fps</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🎯</div>
+                            <h3>Интерактивность</h3>
+                            <p>Уникальные микро-взаимодействия</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция "Галерея" -->
+        <section class="section gallery-section" id="gallery" aria-labelledby="gallery-title">
+            <div class="container">
+                <h2 id="gallery-title" class="section-title">Галерея</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item" data-aos="fade-up">
+                        <div class="gallery-image">
+                            <img src="assets/images/gallery-1.jpg" alt="Интерактивный элемент 1" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
+                        <div class="gallery-image">
+                            <img src="assets/images/gallery-2.jpg" alt="Интерактивный элемент 2" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
+                        <div class="gallery-image">
+                            <img src="assets/images/gallery-3.jpg" alt="Интерактивный элемент 3" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция "Опыт" -->
+        <section class="section experience-section" id="experience" aria-labelledby="experience-title">
+            <div class="container">
+                <h2 id="experience-title" class="section-title">Интерактивный опыт</h2>
+                <div class="experience-content">
+                    <div class="experience-text">
+                        <p>
+                            Откройте для себя мир интерактивных возможностей:
+                        </p>
+                        <ul class="experience-list">
+                            <li>Персонаж-маскот следует за курсором</li>
+                            <li>Анимации реагируют на скролл</li>
+                            <li>Элементы меняют состояние при наведении</li>
+                            <li>Динамические переходы между секциями</li>
+                        </ul>
+                    </div>
+                    <div class="experience-demo">
+                        <div class="demo-container" id="demo-container">
+                            <!-- Интерактивные демонстрации -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция "Контакты" -->
+        <section class="section contact-section" id="contact" aria-labelledby="contact-title">
+            <div class="container">
+                <h2 id="contact-title" class="section-title">Контакты</h2>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <p>
+                            Свяжитесь с нами, чтобы узнать больше о проекте
+                            или предложить сотрудничество.
+                        </p>
+                        <div class="contact-methods">
+                            <div class="contact-method">
+                                <div class="contact-icon">📧</div>
+                                <div class="contact-details">
+                                    <h3>Email</h3>
+                                    <a href="mailto:info@koridor.example.com">info@koridor.example.com</a>
+                                </div>
+                            </div>
+                            <div class="contact-method">
+                                <div class="contact-icon">🌐</div>
+                                <div class="contact-details">
+                                    <h3>Социальные сети</h3>
+                                    <div class="social-links">
+                                        <a href="#" aria-label="Twitter">Twitter</a>
+                                        <a href="#" aria-label="GitHub">GitHub</a>
+                                        <a href="#" aria-label="LinkedIn">LinkedIn</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="contact-form" id="contact-form">
+                        <div class="form-group">
+                            <label for="name">Имя</label>
+                            <input type="text" id="name" name="name" required aria-required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required aria-required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Сообщение</label>
+                            <textarea id="message" name="message" rows="5" required aria-required="true"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Отправить</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Футер -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Коридор</h3>
+                    <p>Интерактивный веб-опыт</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Навигация</h4>
+                    <ul>
+                        <li><a href="#about">О проекте</a></li>
+                        <li><a href="#gallery">Галерея</a></li>
+                        <li><a href="#experience">Опыт</a></li>
+                        <li><a href="#contact">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Ресурсы</h4>
+                    <ul>
+                        <li><a href="/docs/technical-specs.md">Технические спецификации</a></li>
+                        <li><a href="/docs/deployment.md">Развертывание</a></li>
+                        <li><a href="/sitemap.xml">Карта сайта</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Коридор. Все права защищены.</p>
+                <p>
+                    <a href="/LICENSE">Лицензия MIT</a> | 
+                    <a href="/404.html">Политика конфиденциальности</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js" defer></script>
+    <script src="assets/js/animations.js" defer></script>
+    <script src="assets/js/utils.js" defer></script>
+    
+    <!-- Service Worker для PWA -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const botName = 'mavrvpnbot';
-            const fullLink = `https://t.me/${botName}`;
-            const pigLink = document.getElementById('pigLink');
-            const subtitle = document.getElementById('subtitle');
-
-            pigLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                window.open(fullLink, '_blank', 'noopener,noreferrer');
-            });
-
-            // Улучшенные hover эффекты
-            pigLink.addEventListener('mouseenter', () => {
-                subtitle.textContent = 'ты уверен?';
-                subtitle.classList.add('hover-effect');
-            });
-
-            pigLink.addEventListener('mouseleave', () => {
-                subtitle.textContent = 'нажми на свинью';
-                subtitle.classList.remove('hover-effect');
-            });
-
-            pigLink.addEventListener('focus', () => {
-                subtitle.textContent = 'ты уверен?';
-                subtitle.classList.add('hover-effect');
-            });
-
-            pigLink.addEventListener('blur', () => {
-                subtitle.textContent = 'нажми на свинью';
-                subtitle.classList.remove('hover-effect');
-            });
-
-            // Для мобильных устройств
-            pigLink.addEventListener('touchstart', () => {
-                subtitle.textContent = 'ты уверен?';
-                subtitle.classList.add('hover-effect');
-            }, { passive: true });
-
-            pigLink.addEventListener('touchend', () => {
-                setTimeout(() => {
-                    subtitle.textContent = 'нажми на свинью';
-                    subtitle.classList.remove('hover-effect');
-                }, 150);
-            }, { passive: true });
-
-            // Обработка ошибок загрузки изображений
-            document.querySelectorAll('img').forEach(img => {
-                img.addEventListener('error', function() {
-                    this.style.display = 'none';
-                    console.log('Image failed to load:', this.src);
-                });
-            });
-
-            // Оптимизация для медленного интернета
-            if ('connection' in navigator && navigator.connection) {
-                const connection = navigator.connection.effectiveType;
-                if (connection === 'slow-2g' || connection === '2g') {
-                    document.querySelectorAll('.pig-image, .arrow').forEach(el => {
-                        el.style.animation = 'none';
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/assets/sw.js')
+                    .then(function(registration) {
+                        console.log('ServiceWorker registration successful');
+                    })
+                    .catch(function(err) {
+                        console.log('ServiceWorker registration failed: ', err);
                     });
-                }
-            }
-
-            // Очистка will-change после анимаций
-            setTimeout(() => {
-                document.querySelectorAll('.pig-image, .arrow').forEach(el => {
-                    el.style.willChange = 'auto';
-                });
-            }, 3000);
-        });
+            });
+        }
     </script>
 </body>
 </html>
