@@ -1,651 +1,389 @@
 /**
- * Продвинутые анимации для проекта Коридор
- * Содержит оптимизированные анимации с использованием современных API
+ * Модуль анимаций для проекта Коридор
+ * Содержит продвинутые анимации с использованием Web Animations API
  */
 
-'use strict';
+(function() {
+    'use strict';
 
-// Глобальные переменные для анимаций
-let animationFrameId = null;
-let particles = [];
-let scrollProgress = 0;
-let isScrolling = false;
-let scrollTimeout = null;
-
-/**
- * Инициализация модуля анимаций
- */
-function initAnimations() {
-  console.log('Инициализация модуля анимаций...');
-  
-  // Создаем частицы фона
-  createBackgroundParticles();
-  
-  // Инициализируем анимации при скролле
-  initScrollAnimations();
-  
-  // Настраиваем анимации для галереи
-  initGalleryAnimations();
-  
-  // Запускаем основной цикл анимаций
-  startAnimationLoop();
-  
-  console.log('Модуль анимаций успешно инициализирован');
-}
-
-/**
- * Создание частиц фона
- */
-function createBackgroundParticles() {
-  const particlesContainer = document.createElement('div');
-  particlesContainer.className = 'particles';
-  document.body.appendChild(particlesContainer);
-  
-  // Создаем частицы
-  for (let i = 0; i < 50; i++) {
-    createParticle(particlesContainer);
-  }
-}
-
-/**
- * Создание одной частицы
- */
-function createParticle(container) {
-  const particle = document.createElement('div');
-  particle.className = 'particle';
-  
-  // Случайные параметры
-  const size = Math.random() * 4 + 2;
-  const opacity = Math.random() * 0.5 + 0.3;
-  const duration = Math.random() * 20 + 10;
-  const delay = Math.random() * 5;
-  
-  // Применяем стили
-  particle.style.width = `${size}px`;
-  particle.style.height = `${size}px`;
-  particle.style.opacity = opacity;
-  particle.style.left = `${Math.random() * 100}%`;
-  particle.style.animationDelay = `${delay}s`;
-  particle.style.animationDuration = `${duration}s`;
-  
-  // Добавляем в контейнер
-  container.appendChild(particle);
-  particles.push(particle);
-}
-
-/**
- * Инициализация анимаций при скролле
- */
-function initScrollAnimations() {
-  let lastScrollY = window.pageYOffset;
-  
-  window.addEventListener('scroll', () => {
-    const currentScrollY = window.pageYOffset;
-    const deltaY = currentScrollY - lastScrollY;
-    
-    // Обновляем прогресс скролла
-    updateScrollProgress();
-    
-    // Анимируем элементы при скролле
-    animateScrollElements(deltaY);
-    
-    // Анимируем параллакс
-    animateParallax(currentScrollY);
-    
-    lastScrollY = currentScrollY;
-    
-    // Оптимизация: определяем когда скролл завершился
-    clearTimeout(scrollTimeout);
-    isScrolling = true;
-    
-    scrollTimeout = setTimeout(() => {
-      isScrolling = false;
-    }, 150);
-  }, { passive: true });
-}
-
-/**
- * Обновление прогресса скролла
- */
-function updateScrollProgress() {
-  const windowHeight = window.innerHeight;
-  const documentHeight = document.documentElement.scrollHeight;
-  scrollProgress = window.pageYOffset / (documentHeight - windowHeight);
-}
-
-/**
- * Анимация элементов при скролле
- */
-function animateScrollElements(deltaY) {
-  const scrollElements = document.querySelectorAll('.scroll-animate, .scroll-animate-left, .scroll-animate-right');
-  
-  scrollElements.forEach(element => {
-    const rect = element.getBoundingClientRect();
-    const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-    
-    if (isVisible) {
-      const speed = parseFloat(element.dataset.speed) || 0.5;
-      const direction = element.dataset.direction || 'up';
-      
-      let transform = '';
-      
-      switch (direction) {
-        case 'left':
-          transform = `translateX(${deltaY * speed}px)`;
-          break;
-        case 'right':
-          transform = `translateX(${-deltaY * speed}px)`;
-          break;
-        case 'up':
-        default:
-          transform = `translateY(${-deltaY * speed}px)`;
-          break;
-      }
-      
-      element.style.transform = transform;
-    }
-  });
-}
-
-/**
- * Анимация параллакса
- */
-function animateParallax(scrollY) {
-  const parallaxElements = document.querySelectorAll('.parallax-layer');
-  
-  parallaxElements.forEach(element => {
-    const speed = parseFloat(element.dataset.speed) || 0.5;
-    const yPos = -(scrollY * speed);
-    element.style.transform = `translate3d(0, ${yPos}px, 0)`;
-  });
-}
-
-/**
- * Инициализация анимаций галереи
- */
-function initGalleryAnimations() {
-  const galleryItems = document.querySelectorAll('.gallery-item');
-  
-  // Используем Intersection Observer для оптимизации
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          animateGalleryItem(entry.target);
-        }
-      });
-    }, {
-      threshold: 0.2,
-      rootMargin: '0px 0px -50px 0px'
-    });
-    
-    galleryItems.forEach(item => {
-      observer.observe(item);
-    });
-  }
-}
-
-/**
- * Анимация элемента галереи
- */
-function animateGalleryItem(item) {
-  // Добавляем класс для анимации
-  item.classList.add('animate-in');
-  
-  // Анимация изображения
-  const image = item.querySelector('img');
-  if (image) {
-    image.style.transform = 'scale(1.05)';
-    setTimeout(() => {
-      image.style.transform = 'scale(1)';
-    }, 300);
-  }
-}
-
-/**
- * Основной цикл анимаций
- */
-function startAnimationLoop() {
-  function animate() {
-    // Анимируем частицы
-    animateParticles();
-    
-    // Обновляем время
-    updateTimers();
-    
-    // Продолжаем цикл
-    animationFrameId = requestAnimationFrame(animate);
-  }
-  
-  animate();
-}
-
-/**
- * Анимация частиц
- */
-function animateParticles() {
-  particles.forEach(particle => {
-    // Дополнительная логика анимации частиц при необходимости
-    if (particle.dataset.animated === 'true') {
-      const rect = particle.getBoundingClientRect();
-      const speed = parseFloat(particle.dataset.speed) || 1;
-      const angle = parseFloat(particle.dataset.angle) || 0;
-      
-      const newX = rect.left + Math.cos(angle) * speed;
-      const newY = rect.top + Math.sin(angle) * speed;
-      
-      particle.style.left = `${newX}px`;
-      particle.style.top = `${newY}px`;
-    }
-  });
-}
-
-/**
- * Обновление таймеров
- */
-function updateTimers() {
-  // Логика обновления времени/таймеров
-  const timers = document.querySelectorAll('.timer');
-  
-  timers.forEach(timer => {
-    const endTime = new Date(timer.dataset.endTime).getTime();
-    const now = new Date().getTime();
-    const remaining = Math.max(0, endTime - now);
-    
-    if (remaining > 0) {
-      const hours = Math.floor(remaining / (1000 * 60 * 60));
-      const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((remaining % (1000 * 60)) / 1000);
-      
-      timer.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    } else {
-      timer.textContent = '00:00:00';
-      timer.classList.add('expired');
-    }
-  });
-}
-
-/**
- * Создание эффекта печатной машинки
- */
-function typewriterEffect(element, text, speed = 50) {
-  element.textContent = '';
-  let index = 0;
-  
-  function type() {
-    if (index < text.length) {
-      element.textContent += text.charAt(index);
-      index++;
-      setTimeout(type, speed);
-    }
-  }
-  
-  type();
-}
-
-/**
- * Создание эффекта волны
- */
-function createWaveEffect(x, y, container = document.body) {
-  const wave = document.createElement('div');
-  wave.className = 'wave';
-  wave.style.left = `${x}px`;
-  wave.style.top = `${y}px`;
-  
-  container.appendChild(wave);
-  
-  // Активируем анимацию
-  setTimeout(() => {
-    wave.classList.add('active');
-  }, 10);
-  
-  // Удаляем элемент после анимации
-  setTimeout(() => {
-    wave.remove();
-  }, 1000);
-}
-
-/**
- * Анимация счетчика
- */
-function animateCounter(element, target, duration = 2000) {
-  const start = 0;
-  const increment = target / (duration / 16);
-  let current = start;
-  
-  function updateCounter() {
-    current += increment;
-    
-    if (current < target) {
-      element.textContent = Math.floor(current);
-      requestAnimationFrame(updateCounter);
-    } else {
-      element.textContent = target;
-    }
-  }
-  
-  updateCounter();
-}
-
-/**
- * Анимация появления текста
- */
-function revealText(element, delay = 100) {
-  const text = element.textContent;
-  element.textContent = '';
-  element.style.opacity = '0';
-  
-  text.split('').forEach((char, index) => {
-    const span = document.createElement('span');
-    span.textContent = char;
-    span.style.opacity = '0';
-    span.style.transform = 'translateY(20px)';
-    span.style.transition = `all 0.5s ease ${index * delay}ms`;
-    
-    element.appendChild(span);
-    
-    setTimeout(() => {
-      span.style.opacity = '1';
-      span.style.transform = 'translateY(0)';
-    }, 50 + index * delay);
-  });
-  
-  // Показываем весь элемент
-  setTimeout(() => {
-    element.style.opacity = '1';
-  }, text.length * delay + 500);
-}
-
-/**
- * Создание магнитного эффекта для кнопки
- */
-function createMagneticEffect(button) {
-  button.addEventListener('mousemove', (e) => {
-    const rect = button.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-    
-    button.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
-  });
-  
-  button.addEventListener('mouseleave', () => {
-    button.style.transform = 'translate(0, 0)';
-  });
-}
-
-/**
- * Анимация 3D переворота карточки
- */
-function createFlipCard(card) {
-  let isFlipped = false;
-  
-  card.addEventListener('click', () => {
-    isFlipped = !isFlipped;
-    card.style.transform = isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)';
-  });
-}
-
-/**
- * Оптимизированная анимация с использованием Web Animations API
- */
-function animateWithWebAnimations(element, keyframes, options = {}) {
-  if ('animate' in element) {
-    const defaultOptions = {
-      duration: 1000,
-      easing: 'ease-in-out',
-      fill: 'forwards'
+    // --- Конфигурация ---
+    const ANIMATION_CONFIG = {
+        duration: 300,
+        easing: 'cubic-bezier(0.4, 0.0, 0.2, 1)',
+        reducedMotionDuration: 0.01
     };
-    
-    const animationOptions = { ...defaultOptions, ...options };
-    
-    return element.animate(keyframes, animationOptions);
-  }
-  
-  // Fallback для старых браузеров
-  return null;
-}
 
-/**
- * Создание анимации свечения
- */
-function createGlowEffect(element, color = '#ff4757') {
-  const glowKeyframes = [
-    { 
-      boxShadow: `0 0 5px ${color}`,
-      offset: 0
-    },
-    { 
-      boxShadow: `0 0 20px ${color}, 0 0 30px ${color}`,
-      offset: 0.5
-    },
-    { 
-      boxShadow: `0 0 5px ${color}`,
-      offset: 1
+    /**
+     * Создаёт плавную анимацию появления элемента
+     * @param {Element} element - DOM элемент для анимации
+     * @param {Object} options - дополнительные параметры анимации
+     * @returns {Promise} - Promise, который разрешается после завершения анимации
+     */
+    function fadeIn(element, options = {}) {
+        if (!element) return Promise.resolve();
+        
+        const duration = options.duration || ANIMATION_CONFIG.duration;
+        const easing = options.easing || ANIMATION_CONFIG.easing;
+        
+        return element.animate([
+            { opacity: 0 },
+            { opacity: 1 }
+        ], {
+            duration: duration,
+            easing: easing,
+            fill: 'forwards'
+        }).finished;
     }
-  ];
-  
-  return animateWithWebAnimations(element, glowKeyframes, {
-    duration: 2000,
-    iterations: Infinity
-  });
-}
 
-/**
- * Анимация пульсации
- */
-function createPulseEffect(element, scale = 1.05) {
-  const pulseKeyframes = [
-    { transform: 'scale(1)' },
-    { transform: `scale(${scale})` },
-    { transform: 'scale(1)' }
-  ];
-  
-  return animateWithWebAnimations(element, pulseKeyframes, {
-    duration: 2000,
-    iterations: Infinity
-  });
-}
-
-/**
- * Анимация встряхивания
- */
-function createShakeEffect(element, intensity = 10) {
-  const shakeKeyframes = [
-    { transform: 'translateX(0)' },
-    { transform: `translateX(-${intensity}px)` },
-    { transform: `translateX(${intensity}px)` },
-    { transform: `translateX(-${intensity}px)` },
-    { transform: `translateX(${intensity}px)` },
-    { transform: 'translateX(0)' }
-  ];
-  
-  return animateWithWebAnimations(element, shakeKeyframes, {
-    duration: 500
-  });
-}
-
-/**
- * Анимация появления снизу
- */
-function createSlideInUpEffect(element) {
-  const slideInKeyframes = [
-    { 
-      transform: 'translateY(100%)',
-      opacity: 0
-    },
-    { 
-      transform: 'translateY(0)',
-      opacity: 1
+    /**
+     * Создаёт анимацию появления элемента снизу вверх
+     * @param {Element} element - DOM элемент для анимации
+     * @param {Object} options - дополнительные параметры анимации
+     * @returns {Promise} - Promise, который разрешается после завершения анимации
+     */
+    function slideInUp(element, options = {}) {
+        if (!element) return Promise.resolve();
+        
+        const duration = options.duration || ANIMATION_CONFIG.duration;
+        const easing = options.easing || ANIMATION_CONFIG.easing;
+        const distance = options.distance || 30;
+        
+        return element.animate([
+            { 
+                opacity: 0,
+                transform: `translateY(${distance}px)`
+            },
+            { 
+                opacity: 1,
+                transform: 'translateY(0)'
+            }
+        ], {
+            duration: duration,
+            easing: easing,
+            fill: 'forwards'
+        }).finished;
     }
-  ];
-  
-  return animateWithWebAnimations(element, slideInKeyframes, {
-    duration: 600,
-    easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-  });
-}
 
-/**
- * Анимация затухания
- */
-function createFadeOutEffect(element) {
-  const fadeOutKeyframes = [
-    { opacity: 1 },
-    { opacity: 0 }
-  ];
-  
-  return animateWithWebAnimations(element, fadeOutKeyframes, {
-    duration: 300
-  }).onfinish = () => {
-    element.style.display = 'none';
-  };
-}
-
-/**
- * Адаптивная частота кадров
- */
-function getAdaptiveFrameRate() {
-  // Определяем частоту кадров устройства
-  let fps = 60;
-  
-  if ('matchMedia' in window) {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      fps = 30;
+    /**
+     * Создаёт анимацию появления элемента с масштабированием
+     * @param {Element} element - DOM элемент для анимации
+     * @param {Object} options - дополнительные параметры анимации
+     * @returns {Promise} - Promise, который разрешается после завершения анимации
+     */
+    function scaleIn(element, options = {}) {
+        if (!element) return Promise.resolve();
+        
+        const duration = options.duration || ANIMATION_CONFIG.duration;
+        const easing = options.easing || ANIMATION_CONFIG.easing;
+        const scale = options.scale || 0.8;
+        
+        return element.animate([
+            { 
+                opacity: 0,
+                transform: `scale(${scale})`
+            },
+            { 
+                opacity: 1,
+                transform: 'scale(1)'
+            }
+        ], {
+            duration: duration,
+            easing: easing,
+            fill: 'forwards'
+        }).finished;
     }
-  }
-  
-  return fps;
-}
 
-/**
- * Оптимизация производительности анимаций
- */
-function optimizeAnimations() {
-  const fps = getAdaptiveFrameRate();
-  const frameInterval = 1000 / fps;
-  let then = Date.now();
-  
-  function animateOptimized() {
-    requestAnimationFrame(animateOptimized);
-    
-    const now = Date.now();
-    const elapsed = now - then;
-    
-    if (elapsed > frameInterval) {
-      then = now - (elapsed % frameInterval);
-      
-      // Выполняем анимации только с нужной частотой
-      updateAnimations();
+    /**
+     * Создаёт пульсирующую анимацию
+     * @param {Element} element - DOM элемент для анимации
+     * @param {Object} options - дополнительные параметры анимации
+     * @returns {Animation} - Объект анимации для управления
+     */
+    function pulse(element, options = {}) {
+        if (!element) return null;
+        
+        const duration = options.duration || 2000;
+        const scale = options.scale || 1.05;
+        
+        return element.animate([
+            { transform: 'scale(1)' },
+            { transform: `scale(${scale})` },
+            { transform: 'scale(1)' }
+        ], {
+            duration: duration,
+            easing: 'ease-in-out',
+            iterations: Infinity
+        });
     }
-  }
-  
-  animateOptimized();
-}
 
-/**
- * Обновление анимаций
- */
-function updateAnimations() {
-  // Обновляем все активные анимации
-  // Эта функция вызывается с оптимизированной частотой
-}
-
-/**
- * Пауза анимаций
- */
-function pauseAnimations() {
-  if (animationFrameId) {
-    cancelAnimationFrame(animationFrameId);
-    animationFrameId = null;
-  }
-}
-
-/**
- * Возобновление анимаций
- */
-function resumeAnimations() {
-  if (!animationFrameId) {
-    startAnimationLoop();
-  }
-}
-
-/**
- * Очистка анимаций
- */
-function cleanupAnimations() {
-  // Останавливаем цикл анимаций
-  pauseAnimations();
-  
-  // Удаляем частицы
-  particles.forEach(particle => {
-    if (particle.parentNode) {
-      particle.parentNode.removeChild(particle);
+    /**
+     * Создаёт анимацию тряски
+     * @param {Element} element - DOM элемент для анимации
+     * @param {Object} options - дополнительные параметры анимации
+     * @returns {Promise} - Promise, который разрешается после завершения анимации
+     */
+    function shake(element, options = {}) {
+        if (!element) return Promise.resolve();
+        
+        const duration = options.duration || 500;
+        const intensity = options.intensity || 10;
+        
+        return element.animate([
+            { transform: 'translateX(0)' },
+            { transform: `translateX(-${intensity}px)` },
+            { transform: `translateX(${intensity}px)` },
+            { transform: `translateX(-${intensity}px)` },
+            { transform: `translateX(${intensity}px)` },
+            { transform: 'translateX(0)' }
+        ], {
+            duration: duration,
+            easing: 'ease-in-out'
+        }).finished;
     }
-  });
-  particles = [];
-  
-  // Удаляем контейнер частиц
-  const particlesContainer = document.querySelector('.particles');
-  if (particlesContainer) {
-    particlesContainer.remove();
-  }
-}
 
-/**
- * Обработка изменения ориентации устройства
- */
-function handleOrientationChange() {
-  if ('screen' in window && 'orientation' in window.screen) {
-    window.addEventListener('orientationchange', () => {
-      setTimeout(() => {
-        // Пересчитываем позиции элементов при изменении ориентации
-        recalculateElementPositions();
-      }, 100);
+    /**
+     * Создаёт анимацию вращения
+     * @param {Element} element - DOM элемент для анимации
+     * @param {Object} options - дополнительные параметры анимации
+     * @returns {Animation} - Объект анимации для управления
+     */
+    function rotate(element, options = {}) {
+        if (!element) return null;
+        
+        const duration = options.duration || 1000;
+        const direction = options.direction || 'normal';
+        const degrees = direction === 'reverse' ? -360 : 360;
+        
+        return element.animate([
+            { transform: 'rotate(0deg)' },
+            { transform: `rotate(${degrees}deg)` }
+        ], {
+            duration: duration,
+            easing: 'linear',
+            iterations: Infinity
+        });
+    }
+
+    /**
+     * Создаёт анимацию появления элементов при скролле
+     * @param {NodeList|Array} elements - DOM элементы для анимации
+     * @param {Object} options - дополнительные параметры анимации
+     */
+    function animateOnScroll(elements, options = {}) {
+        if (!elements || elements.length === 0) return;
+        
+        const threshold = options.threshold || 0.1;
+        const rootMargin = options.rootMargin || '0px';
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const element = entry.target;
+                    
+                    // Добавляем класс для CSS анимаций
+                    element.classList.add('scroll-reveal');
+                    
+                    // Используем Web Animations API для дополнительной анимации
+                    if (options.useWebAnimations) {
+                        const animationType = options.animationType || 'slideInUp';
+                        
+                        switch (animationType) {
+                            case 'fadeIn':
+                                fadeIn(element, options);
+                                break;
+                            case 'slideInUp':
+                                slideInUp(element, options);
+                                break;
+                            case 'scaleIn':
+                                scaleIn(element, options);
+                                break;
+                            default:
+                                slideInUp(element, options);
+                        }
+                    }
+                    
+                    // Помечаем элемент как обработанный
+                    element.classList.add('revealed');
+                    observer.unobserve(element);
+                }
+            });
+        }, {
+            threshold: threshold,
+            rootMargin: rootMargin
+        });
+        
+        // Начинаем наблюдение за всеми элементами
+        Array.from(elements).forEach(element => {
+            if (!element.classList.contains('revealed')) {
+                observer.observe(element);
+            }
+        });
+        
+        return observer;
+    }
+
+    /**
+     * Создаёт анимацию печатания текста
+     * @param {Element} element - DOM элемент с текстом
+     * @param {Object} options - дополнительные параметры анимации
+     * @returns {Promise} - Promise, который разрешается после завершения анимации
+     */
+    function typewriter(element, options = {}) {
+        if (!element) return Promise.resolve();
+        
+        const text = element.textContent;
+        const speed = options.speed || 50; // символов в секунду
+        const duration = (text.length / speed) * 1000;
+        
+        element.textContent = '';
+        element.style.width = '0';
+        element.style.whiteSpace = 'nowrap';
+        element.style.overflow = 'hidden';
+        
+        return element.animate([
+            { width: '0' },
+            { width: '100%' }
+        ], {
+            duration: duration,
+            easing: 'steps(' + text.length + ', end)',
+            fill: 'forwards'
+        }).finished.then(() => {
+            element.style.width = '';
+            element.style.whiteSpace = '';
+            element.style.overflow = '';
+        });
+    }
+
+    /**
+     * Создаёт анимацию загрузки с точками
+     * @param {Element} container - контейнер для анимации
+     * @param {Object} options - дополнительные параметры анимации
+     * @returns {Object} - Объект для управления анимацией
+     */
+    function createLoadingDots(container, options = {}) {
+        if (!container) return null;
+        
+        const dotCount = options.dotCount || 3;
+        const duration = options.duration || 1400;
+        
+        // Создаём точки
+        const dots = [];
+        for (let i = 0; i < dotCount; i++) {
+            const dot = document.createElement('span');
+            dot.style.display = 'inline-block';
+            dot.style.width = '8px';
+            dot.style.height = '8px';
+            dot.style.borderRadius = '50%';
+            dot.style.background = 'currentColor';
+            dot.style.margin = '0 2px';
+            
+            container.appendChild(dot);
+            dots.push(dot);
+        }
+        
+        // Анимируем точки
+        dots.forEach((dot, index) => {
+            const delay = (index * duration) / dotCount;
+            
+            dot.animate([
+                { transform: 'scale(0)', opacity: 0.5 },
+                { transform: 'scale(1)', opacity: 1 },
+                { transform: 'scale(0)', opacity: 0.5 }
+            ], {
+                duration: duration,
+                delay: delay,
+                easing: 'ease-in-out',
+                iterations: Infinity
+            });
+        });
+        
+        return {
+            container,
+            dots,
+            destroy: () => {
+                container.innerHTML = '';
+            }
+        };
+    }
+
+    /**
+     * Проверяет поддержку Web Animations API
+     * @returns {boolean} - поддерживает ли браузер Web Animations API
+     */
+    function supportsWebAnimations() {
+        return typeof Element !== 'undefined' && 
+               typeof Element.prototype.animate === 'function';
+    }
+
+    /**
+     * Адаптирует параметры анимации для пользователей с чувствительностью к движению
+     * @param {Object} options - параметры анимации
+     * @returns {Object} - адаптированные параметры
+     */
+    function adaptForReducedMotion(options = {}) {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            return {
+                ...options,
+                duration: ANIMATION_CONFIG.reducedMotionDuration,
+                easing: 'linear'
+            };
+        }
+        return options;
+    }
+
+    /**
+     * Создаёт последовательную анимацию для нескольких элементов
+     * @param {Array} elements - массив DOM элементов
+     * @param {Function} animationFunction - функция анимации
+     * @param {Object} options - дополнительные параметры
+     * @returns {Promise} - Promise, который разрешается после завершения всех анимаций
+     */
+    function staggerAnimation(elements, animationFunction, options = {}) {
+        if (!elements || elements.length === 0 || !animationFunction) {
+            return Promise.resolve();
+        }
+        
+        const staggerDelay = options.staggerDelay || 100;
+        const adaptedOptions = adaptForReducedMotion(options);
+        
+        const animations = elements.map((element, index) => {
+            const elementOptions = {
+                ...adaptedOptions,
+                delay: (adaptedOptions.delay || 0) + (index * staggerDelay)
+            };
+            
+            return animationFunction(element, elementOptions);
+        });
+        
+        return Promise.all(animations);
+    }
+
+    // Экспортируем функции для использования в других модулях
+    window.KoridorAnimations = {
+        fadeIn,
+        slideInUp,
+        scaleIn,
+        pulse,
+        shake,
+        rotate,
+        animateOnScroll,
+        typewriter,
+        createLoadingDots,
+        supportsWebAnimations,
+        adaptForReducedMotion,
+        staggerAnimation
+    };
+
+    // Автоматическая инициализация анимаций при скролле
+    document.addEventListener('DOMContentLoaded', () => {
+        const scrollElements = document.querySelectorAll('.scroll-animate');
+        if (scrollElements.length > 0) {
+            animateOnScroll(scrollElements, {
+                threshold: 0.1,
+                useWebAnimations: true,
+                animationType: 'slideInUp'
+            });
+        }
     });
-  }
-}
 
-/**
- * Пересчет позиций элементов
- */
-function recalculateElementPositions() {
-  // Обновляем позиции всех анимируемых элементов
-  const animatedElements = document.querySelectorAll('[data-animated="true"]');
-  
-  animatedElements.forEach(element => {
-    // Сохраняем текущую позицию
-    const rect = element.getBoundingClientRect();
-    element.dataset.x = rect.left;
-    element.dataset.y = rect.top;
-  });
-}
-
-/**
- * Экспортируем функции
- */
-window.Animations = {
-  init: initAnimations,
-  typewriterEffect,
-  createWaveEffect,
-  animateCounter,
-  revealText,
-  createMagneticEffect,
-  createFlipCard,
-  createGlowEffect,
-  createPulseEffect,
-  createShakeEffect,
-  createSlideInUpEffect,
-  createFadeOutEffect,
-  pause: pauseAnimations,
-  resume: resumeAnimations,
-  cleanup: cleanupAnimations,
-  handleOrientationChange,
-  recalculateElementPositions
-};
-
-// Инициализация при загрузке
-document.addEventListener('DOMContentLoaded', () => {
-  if (window.Animations && typeof window.Animations.init === 'function') {
-    window.Animations.init();
-  }
-});
+})();

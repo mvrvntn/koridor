@@ -3,397 +3,362 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
-    <!-- Базовые метаданные -->
-    <title>Коридор - Интерактивный веб-опыт</title>
-    <meta name="description" content="Погрузитесь в уникальный интерактивный мир Коридора с современными анимациями и микро-взаимодействиями">
-    <meta name="keywords" content="инактивный дизайн, веб-анимации, интерактивный опыт, современный сайт, коридор">
-    <meta name="author" content="Коридор">
+    <title>коридор</title>
+    <meta name="description" content="Технологический сервис коридор.">
+    <meta name="keywords" content="сервис, технология, коридор">
     <meta name="robots" content="index, follow">
-    <meta name="language" content="Russian">
-    <meta name="theme-color" content="#0f0f0f">
+    <meta name="author" content="коридор">
     
-    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="коридор">
+    <meta property="og:description" content="Технологический сервис">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yourusername.github.io/koridor/">
-    <meta property="og:title" content="Коридор - Интерактивный веб-опыт">
-    <meta property="og:description" content="Погрузитесь в уникальный интерактивный мир Коридора с современными анимациями и микро-взаимодействиями">
-    <meta property="og:image" content="https://yourusername.github.io/koridor/assets/images/og-image.jpg">
-    <meta property="og:site_name" content="Коридор">
-    <meta property="og:locale" content="ru_RU">
     
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://yourusername.github.io/koridor/">
-    <meta property="twitter:title" content="Коридор - Интерактивный веб-опыт">
-    <meta property="twitter:description" content="Погрузитесь в уникальный интерактивный мир Коридора с современными анимациями и микро-взаимодействиями">
-    <meta property="twitter:image" content="https://yourusername.github.io/koridor/assets/images/og-image.jpg">
+    <meta name="theme-color" content="#F5F1EA">
+    <meta name="color-scheme" content="light dark">
     
-    <!-- JSON-LD структурированные данные -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "Коридор",
-        "url": "https://yourusername.github.io/koridor/",
-        "description": "Погрузитесь в уникальный интерактивный мир Коридора с современными анимациями и микро-взаимодействиями",
-        "inLanguage": "ru",
-        "isAccessibleForFree": true,
-        "isFamilyFriendly": true,
-        "author": {
-            "@type": "Organization",
-            "name": "Коридор"
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "Коридор"
-        },
-        "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://yourusername.github.io/koridor/search?q={search_term_string}",
-            "query-input": "required name=search_term_string"
-        }
-    }
-    </script>
+    <link rel="preconnect" href="https://t.me">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="preload" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Preconnect для оптимизации -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI0VCRTRENyIvPjxwYXRoIGQ9Ik0yNSAzMCBMNzAgNTAgTDI1IDcwIiBzdHJva2U9IiMzRDNEM0QiIHN0cm9rZS13aWR0aD0iNiIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PC9zdmc+">
     
-    <!-- Шрифты -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
-    
-    <!-- Иконки -->
-    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
-    <link rel="manifest" href="assets/manifest.json">
-    
-    <!-- CSS -->
+    <!-- Подключение стилей -->
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/animations.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
-    
-    <!-- Критический CSS для быстрой загрузки -->
-    <style>
-        /* Критические стили для быстрого рендеринга */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #0f0f0f;
-            color: #ffffff;
-            overflow-x: hidden;
-        }
-        
-        .preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #0f0f0f;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease;
-        }
-        
-        .preloader.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-        
-        .preloader-content {
-            text-align: center;
-        }
-        
-        .preloader-spinner {
-            width: 50px;
-            height: 50px;
-            border: 3px solid rgba(255, 255, 255, 0.1);
-            border-top: 3px solid #ff4757;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .hidden {
-            display: none;
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/particles.css">
 </head>
 <body>
-    <!-- Прелоадер -->
-    <div class="preloader" id="preloader">
-        <div class="preloader-content">
-            <div class="preloader-spinner"></div>
-            <p>Загрузка Коридора...</p>
-        </div>
-    </div>
+    <main class="page" role="main">
+        <div class="decoration decoration-1" aria-hidden="true"></div>
+        <div class="decoration decoration-2" aria-hidden="true"></div>
 
-    <!-- Основной контент -->
-    <header class="header" role="banner">
-        <nav class="navigation" role="navigation" aria-label="Основная навигация">
-            <div class="nav-container">
-                <div class="nav-logo">
-                    <a href="/" aria-label="Коридор - на главную">
-                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="40" height="40" rx="8" fill="#ff4757"/>
-                            <path d="M20 10L15 20L20 30L25 20L20 10Z" fill="white"/>
+        <div class="container">
+            <header class="header">
+                <div class="logo-wrapper">
+                    <button class="logo-button" id="mainButton" aria-label="Откройте сервис коридор">
+                        <svg class="logo-svg" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+                            <!-- Центральная стрелка (указывает вправо) - главная, идеально прямая -->
+                            <g>
+                                <line x1="35" y1="120" x2="175" y2="120" stroke="#2B2B2B" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+                                <polygon points="185,120 155,105 155,135" fill="#2B2B2B"/>
+                            </g>
                         </svg>
-                    </a>
-                </div>
-                
-                <ul class="nav-menu" role="menubar">
-                    <li role="none"><a href="#about" role="menuitem">О проекте</a></li>
-                    <li role="none"><a href="#gallery" role="menuitem">Галерея</a></li>
-                    <li role="none"><a href="#experience" role="menuitem">Опыт</a></li>
-                    <li role="none"><a href="#contact" role="menuitem">Контакты</a></li>
-                </ul>
-                
-                <button class="nav-toggle" aria-label="Переключить меню" aria-expanded="false">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
-        </nav>
-    </header>
-
-    <main role="main">
-        <!-- Hero секция -->
-        <section class="hero" id="hero" aria-labelledby="hero-title">
-            <div class="hero-container">
-                <h1 id="hero-title" class="hero-title">
-                    <span class="hero-title-line">Добро пожаловать в</span>
-                    <span class="hero-title-line hero-title-highlight">Коридор</span>
-                    <span class="hero-title-line">Интерактивное пространство</span>
-                </h1>
-                
-                <p class="hero-description">
-                    Погрузитесь в уникальный мир, где каждый элемент реагирует на ваши действия
-                </p>
-                
-                <div class="hero-actions">
-                    <button class="btn btn-primary" id="start-experience">
-                        Начать опыт
-                    </button>
-                    <button class="btn btn-secondary" id="learn-more">
-                        Узнать больше
                     </button>
                 </div>
-            </div>
-            
-            <!-- Интерактивный персонаж-маскот -->
-            <div class="mascot" id="mascot" aria-label="Интерактивный персонаж">
-                <div class="mascot-body">
-                    <div class="mascot-eye left"></div>
-                    <div class="mascot-eye right"></div>
-                    <div class="mascot-mouth"></div>
-                </div>
-                <div class="mascot-shadow"></div>
-            </div>
-        </section>
 
-        <!-- Секция "О проекте" -->
-        <section class="section about-section" id="about" aria-labelledby="about-title">
-            <div class="container">
-                <h2 id="about-title" class="section-title">О проекте</h2>
-                <div class="about-content">
-                    <div class="about-text">
-                        <p>
-                            Коридор - это не просто веб-сайт, а интерактивное пространство, 
-                            созданное с использованием передовых веб-технологий и трендов 2025-2026 годов.
-                        </p>
-                        <p>
-                            Каждый элемент этого пространства разработан с вниманием к деталям, 
-                            создавая уникальный пользовательский опыт.
-                        </p>
-                    </div>
-                    <div class="about-features">
-                        <div class="feature-card">
-                            <div class="feature-icon">🎨</div>
-                            <h3>Современный дизайн</h3>
-                            <p>Трендовые визуальные решения и анимации</p>
-                        </div>
-                        <div class="feature-card">
-                            <div class="feature-icon">⚡</div>
-                            <h3>Высокая производительность</h3>
-                            <p>Оптимизированные анимации с частотой 60fps</p>
-                        </div>
-                        <div class="feature-card">
-                            <div class="feature-icon">🎯</div>
-                            <h3>Интерактивность</h3>
-                            <p>Уникальные микро-взаимодействия</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Секция "Галерея" -->
-        <section class="section gallery-section" id="gallery" aria-labelledby="gallery-title">
-            <div class="container">
-                <h2 id="gallery-title" class="section-title">Галерея</h2>
-                <div class="gallery-grid">
-                    <div class="gallery-item" data-aos="fade-up">
-                        <div class="gallery-image">
-                            <img src="assets/images/gallery-1.jpg" alt="Интерактивный элемент 1" loading="lazy">
-                        </div>
-                    </div>
-                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
-                        <div class="gallery-image">
-                            <img src="assets/images/gallery-2.jpg" alt="Интерактивный элемент 2" loading="lazy">
-                        </div>
-                    </div>
-                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
-                        <div class="gallery-image">
-                            <img src="assets/images/gallery-3.jpg" alt="Интерактивный элемент 3" loading="lazy">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Секция "Опыт" -->
-        <section class="section experience-section" id="experience" aria-labelledby="experience-title">
-            <div class="container">
-                <h2 id="experience-title" class="section-title">Интерактивный опыт</h2>
-                <div class="experience-content">
-                    <div class="experience-text">
-                        <p>
-                            Откройте для себя мир интерактивных возможностей:
-                        </p>
-                        <ul class="experience-list">
-                            <li>Персонаж-маскот следует за курсором</li>
-                            <li>Анимации реагируют на скролл</li>
-                            <li>Элементы меняют состояние при наведении</li>
-                            <li>Динамические переходы между секциями</li>
-                        </ul>
-                    </div>
-                    <div class="experience-demo">
-                        <div class="demo-container" id="demo-container">
-                            <!-- Интерактивные демонстрации -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Секция "Контакты" -->
-        <section class="section contact-section" id="contact" aria-labelledby="contact-title">
-            <div class="container">
-                <h2 id="contact-title" class="section-title">Контакты</h2>
-                <div class="contact-content">
-                    <div class="contact-info">
-                        <p>
-                            Свяжитесь с нами, чтобы узнать больше о проекте
-                            или предложить сотрудничество.
-                        </p>
-                        <div class="contact-methods">
-                            <div class="contact-method">
-                                <div class="contact-icon">📧</div>
-                                <div class="contact-details">
-                                    <h3>Email</h3>
-                                    <a href="mailto:info@koridor.example.com">info@koridor.example.com</a>
-                                </div>
-                            </div>
-                            <div class="contact-method">
-                                <div class="contact-icon">🌐</div>
-                                <div class="contact-details">
-                                    <h3>Социальные сети</h3>
-                                    <div class="social-links">
-                                        <a href="#" aria-label="Twitter">Twitter</a>
-                                        <a href="#" aria-label="GitHub">GitHub</a>
-                                        <a href="#" aria-label="LinkedIn">LinkedIn</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <form class="contact-form" id="contact-form">
-                        <div class="form-group">
-                            <label for="name">Имя</label>
-                            <input type="text" id="name" name="name" required aria-required="true">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required aria-required="true">
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Сообщение</label>
-                            <textarea id="message" name="message" rows="5" required aria-required="true"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Отправить</button>
-                    </form>
-                </div>
-            </div>
-        </section>
+                <h1 class="title">коридор</h1>
+            </header>
+        </div>
     </main>
 
-    <!-- Футер -->
-    <footer class="footer" role="contentinfo">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Коридор</h3>
-                    <p>Интерактивный веб-опыт</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Навигация</h4>
-                    <ul>
-                        <li><a href="#about">О проекте</a></li>
-                        <li><a href="#gallery">Галерея</a></li>
-                        <li><a href="#experience">Опыт</a></li>
-                        <li><a href="#contact">Контакты</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Ресурсы</h4>
-                    <ul>
-                        <li><a href="/docs/technical-specs.md">Технические спецификации</a></li>
-                        <li><a href="/docs/deployment.md">Развертывание</a></li>
-                        <li><a href="/sitemap.xml">Карта сайта</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Коридор. Все права защищены.</p>
-                <p>
-                    <a href="/LICENSE">Лицензия MIT</a> | 
-                    <a href="/404.html">Политика конфиденциальности</a>
-                </p>
-            </div>
-        </div>
-    </footer>
+    <div id="transition-overlay" aria-hidden="true">
+        <div class="ring"></div><div class="ring"></div><div class="ring"></div><div class="ring"></div><div class="ring"></div>
+        <div class="ring"></div><div class="ring"></div><div class="ring"></div><div class="ring"></div><div class="ring"></div>
+        <div class="ring"></div><div class="ring"></div><div class="ring"></div><div class="ring"></div><div class="ring"></div>
+        <div class="ring"></div><div class="ring"></div><div class="ring"></div><div class="ring"></div><div class="ring"></div>
+    </div>
 
-    <!-- JavaScript -->
-    <script src="assets/js/main.js" defer></script>
-    <script src="assets/js/animations.js" defer></script>
-    <script src="assets/js/utils.js" defer></script>
+    <!-- Animated Cursor Follower -->
+    <div id="cursor-follower" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="rgba(0,0,0,0.1)"/>
+                </filter>
+            </defs>
+            <g filter="url(#shadow)">
+                <circle cx="50" cy="50" r="40" fill="#D4A574"/>
+                <g id="eyes">
+                    <circle cx="50" cy="45" r="15" fill="white"/>
+                    <circle id="left-pupil" cx="50" cy="45" r="7" fill="#2B2B2B"/>
+                </g>
+            </g>
+        </svg>
+    </div>
     
-    <!-- Service Worker для PWA -->
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/assets/sw.js')
-                    .then(function(registration) {
-                        console.log('ServiceWorker registration successful');
-                    })
-                    .catch(function(err) {
-                        console.log('ServiceWorker registration failed: ', err);
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    
+    <!-- Подключение JavaScript модулей -->
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/animations.js"></script>
+    <script src="assets/js/particles.js"></script>
+    <script src="assets/js/main.js"></script>
+        (function() {
+            'use strict';
+
+            // --- Configuration ---
+            const botName = 'mavrtunbot';
+            const fullLink = `https://t.me/${botName}`;
+
+            // --- Element Selectors ---
+            const mainButton = document.getElementById('mainButton');
+            const follower = document.getElementById('cursor-follower');
+            const pupil = document.getElementById('left-pupil');
+            const eyes = document.getElementById('eyes');
+            const transitionOverlay = document.getElementById('transition-overlay');
+            const rings = transitionOverlay.querySelectorAll('.ring');
+            const container = document.querySelector('.container');
+
+            // --- Early exit if essential elements are missing ---
+            if (!mainButton || !follower || !pupil || !eyes || !transitionOverlay || !container || !window.gsap) {
+                console.error('Essential elements for animation are missing.');
+                return;
+            }
+
+            // --- State ---
+            let isFollowerVisible = false;
+            let isTransitioning = false;
+
+            // --- Functions ---
+
+            /**
+             * Настраивает интерактивный маскот-курсор
+             */
+            function setupCursorFollower() {
+                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+                document.body.style.cursor = 'none';
+
+                const xTo = gsap.quickTo(follower, "x", { duration: 0.5, ease: "power3" });
+                const yTo = gsap.quickTo(follower, "y", { duration: 0.5, ease: "power3" });
+                
+                let lastX = 0, lastY = 0;
+
+                const onMouseMove = (e) => {
+                    if (isTransitioning) return;
+                    
+                    const { clientX, clientY } = e;
+                    
+                    if (!isFollowerVisible) {
+                        isFollowerVisible = true;
+                        gsap.to(follower, { opacity: 1, duration: 0.3 });
+                    }
+
+                    const dx = clientX - lastX;
+                    const dy = clientY - lastY;
+                    const speed = Math.sqrt(dx * dx + dy * dy);
+                    lastX = clientX;
+                    lastY = clientY;
+
+                    xTo(clientX);
+                    yTo(clientY);
+
+                    const scaleFactor = gsap.utils.clamp(0, 1, speed / 100);
+                    gsap.to(follower, {
+                        scaleX: 1 + scaleFactor * 1.5,
+                        scaleY: 1 - scaleFactor * 0.5,
+                        duration: 0.8,
+                        ease: "power3.out"
                     });
-            });
-        }
+                    
+                    const rect = eyes.getBoundingClientRect();
+                    if (rect.width > 0) {
+                        const eyeX = rect.left + rect.width / 2;
+                        const eyeY = rect.top + rect.height / 2;
+                        const angle = Math.atan2(clientY - eyeY, clientX - eyeX);
+                        const pupilDist = 4;
+
+                        gsap.to(pupil, {
+                            x: Math.cos(angle) * pupilDist,
+                            y: Math.sin(angle) * pupilDist,
+                            duration: 0.3,
+                            ease: "power2.out"
+                        });
+                    }
+                };
+
+                const onMouseLeave = () => {
+                    if (isTransitioning) return;
+                    isFollowerVisible = false;
+                    gsap.to(follower, { opacity: 0, duration: 0.3 });
+                };
+                
+                const onMouseEnter = () => {
+                    if (isTransitioning) return;
+                    if (!isFollowerVisible) {
+                        isFollowerVisible = true;
+                        gsap.to(follower, { opacity: 1, duration: 0.3 });
+                    }
+                };
+
+                window.addEventListener('mousemove', onMouseMove);
+                document.body.addEventListener('mouseleave', onMouseLeave);
+                document.body.addEventListener('mouseenter', onMouseEnter);
+            }
+
+            /**
+             * Настраивает взаимодействие с главной кнопкой
+             */
+            function setupMainButtonInteraction() {
+                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+                
+                const hoverTween = gsap.to(follower, { scale: 1.3, duration: 0.3, paused: true, ease: "power2.out" });
+                
+                mainButton.addEventListener('mouseenter', () => {
+                    if (isTransitioning) return;
+                    hoverTween.play();
+                    gsap.to(eyes, { y: -8, duration: 0.3, ease: 'power2.out' });
+                });
+
+                mainButton.addEventListener('mouseleave', () => {
+                    if (isTransitioning) return;
+                    hoverTween.reverse();
+                    gsap.to(eyes, { y: 0, duration: 0.3, ease: 'power2.inOut' });
+                });
+
+                mainButton.addEventListener('mousedown', () => {
+                    if (isTransitioning) return;
+                    gsap.to(follower, { scale: 0.9, duration: 0.15, ease: "power2.out" });
+                    gsap.to(eyes, { scaleY: 0.2, y: 12, duration: 0.1, transformOrigin: "center" });
+                });
+
+                mainButton.addEventListener('mouseup', () => {
+                    if (isTransitioning) return;
+                    gsap.to(follower, { scale: 1, duration: 0.3, ease: "power2.out" });
+                    gsap.to(eyes, { scaleY: 1, y: 0, duration: 0.3, ease: 'power2.inOut' });
+                });
+            }
+
+            /**
+             * Настраивает анимацию перехода "туннель"
+             */
+            function setupTransition() {
+                const tl = gsap.timeline({
+                    paused: true,
+                    onStart: () => {
+                        isTransitioning = true;
+                    },
+                    onComplete: () => {
+                        try {
+                            window.open(fullLink, '_blank', 'noopener,noreferrer');
+                        } catch (error) {
+                            console.error('Failed to open link:', error);
+                            // Запасной вариант
+                            window.location.href = fullLink;
+                        }
+                        
+                        setTimeout(() => {
+                            mainButton.classList.remove('processing');
+                            gsap.set(transitionOverlay, { opacity: 0, pointerEvents: 'none' });
+                            gsap.to(container, { opacity: 1, duration: 0.5 });
+                            // Восстановление состояния маскота
+                            isFollowerVisible = false;
+                            isTransitioning = false;
+                            gsap.set(follower, { opacity: 0, scale: 1, scaleX: 1, scaleY: 1 });
+                        }, 500);
+                    }
+                });
+
+                tl.to([container, follower], { duration: 0.3, opacity: 0, ease: 'power2.in' })
+                  .set(transitionOverlay, { opacity: 1, pointerEvents: 'auto' })
+                  .fromTo(rings, {
+                      scale: 0.01,
+                      opacity: 1
+                  }, {
+                      duration: 1.2,
+                      scale: 250,
+                      opacity: 0,
+                      stagger: {
+                          each: 0.04,
+                          from: 'center'
+                      },
+                      ease: 'power3.in'
+                  }, "-=0.2");
+
+                mainButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (tl.isActive() || isTransitioning) return;
+                    mainButton.classList.add('processing');
+                    tl.restart();
+                });
+            }
+
+            /**
+             * Предзагрузка ресурсов для оптимизации производительности
+             */
+            function preloadResources() {
+                // Предзагрузка шрифтов, если необходимо
+                if ('fonts' in document) {
+                    document.fonts.load('16px Inter');
+                    document.fonts.load('600 18px Inter');
+                }
+                
+                // Предзагрузка изображения иконки
+                const link = document.createElement('link');
+                link.rel = 'preload';
+                link.as = 'image';
+                link.href = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI0VCRTRENyIvPjxwYXRoIGQ9Ik0yNSAzMCBMNzAgNTAgTDI1IDcwIiBzdHJva2U9IiMzRDNEM0QiIHN0cm9rZS13aWR0aD0iNiIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PC9zdmc+';
+                document.head.appendChild(link);
+            }
+
+            /**
+             * Проверяет поддержку браузером необходимых функций
+             */
+            function checkBrowserSupport() {
+                const features = {
+                    gsap: typeof gsap !== 'undefined',
+                    matchMedia: typeof window.matchMedia !== 'undefined',
+                    addEventListener: typeof window.addEventListener !== 'undefined',
+                    requestAnimationFrame: typeof window.requestAnimationFrame !== 'undefined'
+                };
+                
+                const unsupported = Object.keys(features).filter(key => !features[key]);
+                if (unsupported.length > 0) {
+                    console.warn('Browser does not support the following features:', unsupported);
+                    // Можно добавить уведомление для пользователя
+                }
+                
+                return unsupported.length === 0;
+            }
+
+            /**
+             * Обработка ошибок
+             */
+            function setupErrorHandling() {
+                window.addEventListener('error', (e) => {
+                    console.error('JavaScript error:', e.error);
+                    // Можно добавить отправку ошибок в аналитику
+                });
+                
+                window.addEventListener('unhandledrejection', (e) => {
+                    console.error('Unhandled promise rejection:', e.reason);
+                    e.preventDefault();
+                });
+            }
+
+            // --- Initialization ---
+            function init() {
+                try {
+                    if (!checkBrowserSupport()) {
+                        console.error('Browser does not support required features');
+                        return;
+                    }
+                    
+                    setupErrorHandling();
+                    preloadResources();
+                    setupCursorFollower();
+                    setupMainButtonInteraction();
+                    setupTransition();
+                    
+                    // Устанавливаем начальное состояние для маскота
+                    gsap.set(follower, { opacity: 0, scale: 1 });
+                    
+                    console.log('Application initialized successfully');
+                } catch (error) {
+                    console.error('Failed to initialize application:', error);
+                }
+            }
+
+            // Запускаем инициализацию после загрузки DOM
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init);
+            } else {
+                init();
+            }
+
+        })();
     </script>
 </body>
 </html>
