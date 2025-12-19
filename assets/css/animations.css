@@ -1,0 +1,687 @@
+/* Анимации для проекта Коридор */
+
+/* Базовые анимации */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 53%, 80%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  40%, 43% {
+    transform: translate3d(0, -30px, 0);
+  }
+  70% {
+    transform: translate3d(0, -15px, 0);
+  }
+  90% {
+    transform: translate3d(0, -4px, 0);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-10px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(10px);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 5px var(--primary-color);
+  }
+  50% {
+    box-shadow: 0 0 20px var(--primary-color), 0 0 30px var(--primary-color);
+  }
+}
+
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Классы анимаций */
+.fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.fade-in-down {
+  animation: fadeInDown 0.8s ease-out;
+}
+
+.fade-in-left {
+  animation: fadeInLeft 0.8s ease-out;
+}
+
+.fade-in-right {
+  animation: fadeInRight 0.8s ease-out;
+}
+
+.slide-in-up {
+  animation: slideInUp 0.6s ease-out;
+}
+
+.slide-in-down {
+  animation: slideInDown 0.6s ease-out;
+}
+
+.pulse {
+  animation: pulse 2s infinite ease-in-out;
+}
+
+.bounce {
+  animation: bounce 1s ease-in-out;
+}
+
+.shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+.rotate {
+  animation: rotate 2s linear infinite;
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+.float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* Интерактивный персонаж-маскот */
+.mascot {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 80px;
+  height: 80px;
+  z-index: var(--z-fixed);
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+}
+
+.mascot:hover {
+  transform: scale(1.1);
+}
+
+.mascot-body {
+  width: 60px;
+  height: 60px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  position: relative;
+  margin: 0 auto;
+  box-shadow: var(--shadow-lg);
+  transition: all var(--transition-normal);
+}
+
+.mascot.excited .mascot-body {
+  background: var(--accent-color);
+  transform: scale(1.1);
+}
+
+.mascot.sleeping .mascot-body {
+  background: var(--secondary-color);
+  transform: scale(0.9);
+}
+
+.mascot-eye {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: white;
+  border-radius: 50%;
+  top: 20px;
+  transition: all var(--transition-fast);
+}
+
+.mascot-eye.left {
+  left: 15px;
+}
+
+.mascot-eye.right {
+  right: 15px;
+}
+
+.mascot.eye-tracking .mascot-eye {
+  width: 8px;
+  height: 8px;
+  background: var(--text-inverse);
+}
+
+.mascot-eye::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--text-inverse);
+  border-radius: 50%;
+  top: 2px;
+  left: 2px;
+  transition: all var(--transition-fast);
+}
+
+.mascot.winking .mascot-eye.right::after {
+  opacity: 0;
+}
+
+.mascot-mouth {
+  position: absolute;
+  width: 20px;
+  height: 10px;
+  background: var(--text-inverse);
+  border-radius: 0 0 20px 20px;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: all var(--transition-fast);
+}
+
+.mascot.happy .mascot-mouth {
+  height: 15px;
+  border-radius: 0 0 20px 20px;
+}
+
+.mascot.sad .mascot-mouth {
+  border-radius: 20px 20px 0 0;
+  bottom: 10px;
+}
+
+.mascot.surprised .mascot-mouth {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  bottom: 12px;
+}
+
+.mascot-shadow {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  filter: blur(4px);
+}
+
+/* Анимации при скролле */
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease-out;
+}
+
+.scroll-animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-animate-left {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: all 0.8s ease-out;
+}
+
+.scroll-animate-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.scroll-animate-right {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: all 0.8s ease-out;
+}
+
+.scroll-animate-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Параллакс эффект */
+.parallax {
+  position: relative;
+  overflow: hidden;
+}
+
+.parallax-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  will-change: transform;
+}
+
+.parallax-layer.bg-1 {
+  transform: translateZ(0);
+  z-index: 1;
+}
+
+.parallax-layer.bg-2 {
+  transform: translateZ(-1px) scale(2);
+  z-index: 0;
+}
+
+.parallax-layer.bg-3 {
+  transform: translateZ(-2px) scale(3);
+  z-index: -1;
+}
+
+/* Эффект волны */
+.wave {
+  position: relative;
+  overflow: hidden;
+}
+
+.wave::before,
+.wave::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.wave.active::before,
+.wave.active::after {
+  width: 300px;
+  height: 300px;
+  opacity: 0;
+}
+
+.wave::after {
+  transition-delay: 0.3s;
+}
+
+/* Эффект частиц */
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  background: var(--primary-color);
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  animation: particleFloat 10s infinite linear;
+}
+
+@keyframes particleFloat {
+  0% {
+    opacity: 0;
+    transform: translateY(100vh) translateX(0);
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100vh) translateX(100px);
+  }
+}
+
+/* Эффект печатной машинки */
+.typewriter {
+  overflow: hidden;
+  border-right: 2px solid var(--primary-color);
+  white-space: nowrap;
+  animation: typewriter 3s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes blink-caret {
+  from, to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: var(--primary-color);
+  }
+}
+
+/* Эффект свечения */
+.glow-text {
+  text-shadow: 0 0 10px var(--primary-color);
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+.glow-border {
+  box-shadow: 0 0 5px var(--primary-color);
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+/* Эффект размытия фона */
+.backdrop-blur {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(15, 15, 15, 0.8);
+}
+
+/* Анимации загрузки */
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-top: 4px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.loading-dots {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.loading-dots span {
+  width: 8px;
+  height: 8px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.loading-dots span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.loading-dots span:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+.loading-dots span:nth-child(3) {
+  animation-delay: 0s;
+}
+
+/* Эффект появления текста */
+.text-reveal {
+  position: relative;
+}
+
+.text-reveal::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--background-primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.8s ease-out;
+}
+
+.text-reveal.revealed::after {
+  transform: scaleX(1);
+  transform-origin: right;
+}
+
+/* Эффект магнитной кнопки */
+.magnetic-btn {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.magnetic-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.magnetic-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Эффект 3D трансформации */
+.flip-card {
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: var(--border-radius);
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+/* Эффект искажения */
+.distortion {
+  position: relative;
+  overflow: hidden;
+}
+
+.distortion::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.6s;
+}
+
+.distortion:hover::before {
+  transform: translateX(100%);
+}
+
+/* Адаптивные анимации */
+@media (prefers-reduced-motion: reduce) {
+  .mascot,
+  .particle,
+  .loading-spinner,
+  .pulse,
+  .bounce,
+  .float,
+  .glow {
+    animation: none;
+  }
+  
+  .mascot {
+    transition: none;
+  }
+  
+  .scroll-animate,
+  .scroll-animate-left,
+  .scroll-animate-right {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Оптимизация производительности */
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+/* Классы для управления анимациями */
+.animation-paused {
+  animation-play-state: paused !important;
+}
+
+.animation-slow {
+  animation-duration: 3s !important;
+}
+
+.animation-fast {
+  animation-duration: 0.5s !important;
+}
