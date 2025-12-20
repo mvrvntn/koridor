@@ -79,286 +79,43 @@
     </div>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script>
+        // Диагностический лог для проверки загрузки GSAP
+        console.log('GSAP loaded:', typeof gsap !== 'undefined');
+        if (typeof gsap === 'undefined') {
+            console.error('GSAP library failed to load!');
+            document.body.innerHTML = '<div style="padding: 20px; font-family: Arial; color: red;">Ошибка: Библиотека GSAP не загрузилась. Пожалуйста, обновите страницу.</div>';
+        }
+    </script>
     
-    <!-- Подключение JavaScript модулей -->
-    <script src="assets/js/utils.js"></script>
-    <script src="assets/js/animations.js"></script>
-    <script src="assets/js/particles.js"></script>
-    <script src="assets/js/main.js"></script>
-        (function() {
-            'use strict';
-
-            // --- Configuration ---
-            const botName = 'mavrtunbot';
-            const fullLink = `https://t.me/${botName}`;
-
-            // --- Element Selectors ---
-            const mainButton = document.getElementById('mainButton');
-            const follower = document.getElementById('cursor-follower');
-            const pupil = document.getElementById('left-pupil');
-            const eyes = document.getElementById('eyes');
-            const transitionOverlay = document.getElementById('transition-overlay');
-            const rings = transitionOverlay.querySelectorAll('.ring');
-            const container = document.querySelector('.container');
-
-            // --- Early exit if essential elements are missing ---
-            if (!mainButton || !follower || !pupil || !eyes || !transitionOverlay || !container || !window.gsap) {
-                console.error('Essential elements for animation are missing.');
-                return;
-            }
-
-            // --- State ---
-            let isFollowerVisible = false;
-            let isTransitioning = false;
-
-            // --- Functions ---
-
-            /**
-             * Настраивает интерактивный маскот-курсор
-             */
-            function setupCursorFollower() {
-                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-                document.body.style.cursor = 'none';
-
-                const xTo = gsap.quickTo(follower, "x", { duration: 0.5, ease: "power3" });
-                const yTo = gsap.quickTo(follower, "y", { duration: 0.5, ease: "power3" });
-                
-                let lastX = 0, lastY = 0;
-
-                const onMouseMove = (e) => {
-                    if (isTransitioning) return;
-                    
-                    const { clientX, clientY } = e;
-                    
-                    if (!isFollowerVisible) {
-                        isFollowerVisible = true;
-                        gsap.to(follower, { opacity: 1, duration: 0.3 });
-                    }
-
-                    const dx = clientX - lastX;
-                    const dy = clientY - lastY;
-                    const speed = Math.sqrt(dx * dx + dy * dy);
-                    lastX = clientX;
-                    lastY = clientY;
-
-                    xTo(clientX);
-                    yTo(clientY);
-
-                    const scaleFactor = gsap.utils.clamp(0, 1, speed / 100);
-                    gsap.to(follower, {
-                        scaleX: 1 + scaleFactor * 1.5,
-                        scaleY: 1 - scaleFactor * 0.5,
-                        duration: 0.8,
-                        ease: "power3.out"
-                    });
-                    
-                    const rect = eyes.getBoundingClientRect();
-                    if (rect.width > 0) {
-                        const eyeX = rect.left + rect.width / 2;
-                        const eyeY = rect.top + rect.height / 2;
-                        const angle = Math.atan2(clientY - eyeY, clientX - eyeX);
-                        const pupilDist = 4;
-
-                        gsap.to(pupil, {
-                            x: Math.cos(angle) * pupilDist,
-                            y: Math.sin(angle) * pupilDist,
-                            duration: 0.3,
-                            ease: "power2.out"
-                        });
-                    }
-                };
-
-                const onMouseLeave = () => {
-                    if (isTransitioning) return;
-                    isFollowerVisible = false;
-                    gsap.to(follower, { opacity: 0, duration: 0.3 });
-                };
-                
-                const onMouseEnter = () => {
-                    if (isTransitioning) return;
-                    if (!isFollowerVisible) {
-                        isFollowerVisible = true;
-                        gsap.to(follower, { opacity: 1, duration: 0.3 });
-                    }
-                };
-
-                window.addEventListener('mousemove', onMouseMove);
-                document.body.addEventListener('mouseleave', onMouseLeave);
-                document.body.addEventListener('mouseenter', onMouseEnter);
-            }
-
-            /**
-             * Настраивает взаимодействие с главной кнопкой
-             */
-            function setupMainButtonInteraction() {
-                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-                
-                const hoverTween = gsap.to(follower, { scale: 1.3, duration: 0.3, paused: true, ease: "power2.out" });
-                
-                mainButton.addEventListener('mouseenter', () => {
-                    if (isTransitioning) return;
-                    hoverTween.play();
-                    gsap.to(eyes, { y: -8, duration: 0.3, ease: 'power2.out' });
-                });
-
-                mainButton.addEventListener('mouseleave', () => {
-                    if (isTransitioning) return;
-                    hoverTween.reverse();
-                    gsap.to(eyes, { y: 0, duration: 0.3, ease: 'power2.inOut' });
-                });
-
-                mainButton.addEventListener('mousedown', () => {
-                    if (isTransitioning) return;
-                    gsap.to(follower, { scale: 0.9, duration: 0.15, ease: "power2.out" });
-                    gsap.to(eyes, { scaleY: 0.2, y: 12, duration: 0.1, transformOrigin: "center" });
-                });
-
-                mainButton.addEventListener('mouseup', () => {
-                    if (isTransitioning) return;
-                    gsap.to(follower, { scale: 1, duration: 0.3, ease: "power2.out" });
-                    gsap.to(eyes, { scaleY: 1, y: 0, duration: 0.3, ease: 'power2.inOut' });
-                });
-            }
-
-            /**
-             * Настраивает анимацию перехода "туннель"
-             */
-            function setupTransition() {
-                const tl = gsap.timeline({
-                    paused: true,
-                    onStart: () => {
-                        isTransitioning = true;
-                    },
-                    onComplete: () => {
-                        try {
-                            window.open(fullLink, '_blank', 'noopener,noreferrer');
-                        } catch (error) {
-                            console.error('Failed to open link:', error);
-                            // Запасной вариант
-                            window.location.href = fullLink;
-                        }
-                        
-                        setTimeout(() => {
-                            mainButton.classList.remove('processing');
-                            gsap.set(transitionOverlay, { opacity: 0, pointerEvents: 'none' });
-                            gsap.to(container, { opacity: 1, duration: 0.5 });
-                            // Восстановление состояния маскота
-                            isFollowerVisible = false;
-                            isTransitioning = false;
-                            gsap.set(follower, { opacity: 0, scale: 1, scaleX: 1, scaleY: 1 });
-                        }, 500);
-                    }
-                });
-
-                tl.to([container, follower], { duration: 0.3, opacity: 0, ease: 'power2.in' })
-                  .set(transitionOverlay, { opacity: 1, pointerEvents: 'auto' })
-                  .fromTo(rings, {
-                      scale: 0.01,
-                      opacity: 1
-                  }, {
-                      duration: 1.2,
-                      scale: 250,
-                      opacity: 0,
-                      stagger: {
-                          each: 0.04,
-                          from: 'center'
-                      },
-                      ease: 'power3.in'
-                  }, "-=0.2");
-
-                mainButton.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    if (tl.isActive() || isTransitioning) return;
-                    mainButton.classList.add('processing');
-                    tl.restart();
-                });
-            }
-
-            /**
-             * Предзагрузка ресурсов для оптимизации производительности
-             */
-            function preloadResources() {
-                // Предзагрузка шрифтов, если необходимо
-                if ('fonts' in document) {
-                    document.fonts.load('16px Inter');
-                    document.fonts.load('600 18px Inter');
-                }
-                
-                // Предзагрузка изображения иконки
-                const link = document.createElement('link');
-                link.rel = 'preload';
-                link.as = 'image';
-                link.href = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI0VCRTRENyIvPjxwYXRoIGQ9Ik0yNSAzMCBMNzAgNTAgTDI1IDcwIiBzdHJva2U9IiMzRDNEM0QiIHN0cm9rZS13aWR0aD0iNiIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PC9zdmc+';
-                document.head.appendChild(link);
-            }
-
-            /**
-             * Проверяет поддержку браузером необходимых функций
-             */
-            function checkBrowserSupport() {
-                const features = {
-                    gsap: typeof gsap !== 'undefined',
-                    matchMedia: typeof window.matchMedia !== 'undefined',
-                    addEventListener: typeof window.addEventListener !== 'undefined',
-                    requestAnimationFrame: typeof window.requestAnimationFrame !== 'undefined'
-                };
-                
-                const unsupported = Object.keys(features).filter(key => !features[key]);
-                if (unsupported.length > 0) {
-                    console.warn('Browser does not support the following features:', unsupported);
-                    // Можно добавить уведомление для пользователя
-                }
-                
-                return unsupported.length === 0;
-            }
-
-            /**
-             * Обработка ошибок
-             */
-            function setupErrorHandling() {
-                window.addEventListener('error', (e) => {
-                    console.error('JavaScript error:', e.error);
-                    // Можно добавить отправку ошибок в аналитику
-                });
-                
-                window.addEventListener('unhandledrejection', (e) => {
-                    console.error('Unhandled promise rejection:', e.reason);
-                    e.preventDefault();
-                });
-            }
-
-            // --- Initialization ---
-            function init() {
-                try {
-                    if (!checkBrowserSupport()) {
-                        console.error('Browser does not support required features');
-                        return;
-                    }
-                    
-                    setupErrorHandling();
-                    preloadResources();
-                    setupCursorFollower();
-                    setupMainButtonInteraction();
-                    setupTransition();
-                    
-                    // Устанавливаем начальное состояние для маскота
-                    gsap.set(follower, { opacity: 0, scale: 1 });
-                    
-                    console.log('Application initialized successfully');
-                } catch (error) {
-                    console.error('Failed to initialize application:', error);
-                }
-            }
-
-            // Запускаем инициализацию после загрузки DOM
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', init);
-            } else {
-                init();
-            }
-
-        })();
+    <!-- Подключение JavaScript модулей с диагностикой -->
+    <script>
+        console.log('Starting to load JavaScript modules...');
+    </script>
+    <script src="assets/js/utils.js" onerror="console.error('Failed to load utils.js')" onload="console.log('utils.js loaded successfully')"></script>
+    <script src="assets/js/animations.js" onerror="console.error('Failed to load animations.js')" onload="console.log('animations.js loaded successfully')"></script>
+    <script src="assets/js/particles.js" onerror="console.error('Failed to load particles.js')" onload="console.log('particles.js loaded successfully')"></script>
+    <script src="assets/js/main-optimized.js" onerror="console.error('Failed to load main-optimized.js')" onload="console.log('main-optimized.js loaded successfully')"></script>
+    <script>
+        console.log('All JavaScript modules loaded. Checking dependencies...');
+        console.log('KoridorUtils available:', typeof window.KoridorUtils !== 'undefined');
+        console.log('KoridorAnimations available:', typeof window.KoridorAnimations !== 'undefined');
+        console.log('ParticleSystem available:', typeof window.ParticleSystem !== 'undefined');
+        console.log('GSAP available:', typeof gsap !== 'undefined');
+        
+        // Проверка наличия всех необходимых зависимостей
+        if (typeof window.KoridorUtils === 'undefined') {
+            console.error('KoridorUtils module not loaded!');
+        }
+        if (typeof window.KoridorAnimations === 'undefined') {
+            console.error('KoridorAnimations module not loaded!');
+        }
+        if (typeof window.ParticleSystem === 'undefined') {
+            console.error('ParticleSystem module not loaded!');
+        }
+        if (typeof gsap === 'undefined') {
+            console.error('GSAP library not loaded!');
+        }
     </script>
 </body>
 </html>
