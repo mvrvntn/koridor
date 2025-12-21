@@ -3,61 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="коридор - минималистичный сервис для навигации">
+    <meta name="keywords" content="коридор, навигация, сервис">
+    <meta name="author" content="Art. Lebedev Studio">
+    <meta property="og:title" content="коридор">
+    <meta property="og:description" content="коридор - минималистичный сервис для навигации">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="коридор">
+    <meta name="twitter:description" content="коридор - минималистичный сервис для навигации">
     <title>коридор</title>
     <style>
         body {
-            margin: 0;
-            padding: 0;
+            background-color: #f5f1ea;
+            font-family: sans-serif;
+            color: #2b2b2b;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-color: #ffffff;
-            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
         }
         
         .button {
-            width: 200px;
-            height: 200px;
+            width: 280px;
+            height: 280px;
+            background-color: #2b2b2b;
+            border: none;
             border-radius: 50%;
-            background-color: #f5f1ea;
-            border: 2px solid #2b2b2b;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 24px;
-        }
-        
-        .button:hover {
-            background-color: #ebe5d7;
+            margin-bottom: 64px;
         }
         
         .button svg {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
         }
         
         .title {
-            font-size: 18px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: lowercase;
             color: #2b2b2b;
             margin: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .button {
+                width: 220px;
+                height: 220px;
+                margin-bottom: 48px;
+            }
+            
+            .button svg {
+                width: 90px;
+                height: 90px;
+            }
+            
+            .title {
+                font-size: 24px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .button {
+                width: 180px;
+                height: 180px;
+                margin-bottom: 36px;
+            }
+            
+            .button svg {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .title {
+                font-size: 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <button class="button" id="mainButton" aria-label="Откройте сервис коридор">
-        <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <line x1="35" y1="120" x2="175" y2="120" stroke="#2B2B2B" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
-            <polygon points="185,120 155,105 155,135" fill="#2B2B2B"/>
-        </svg>
-    </button>
-    
-    <h1 class="title">коридор</h1>
+    <main>
+        <button class="button" id="mainButton" aria-label="Откройте сервис коридор">
+            <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <line x1="35" y1="120" x2="175" y2="120" stroke="#F5F1EA" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+                <polygon points="185,120 155,105 155,135" fill="#F5F1EA"/>
+            </svg>
+        </button>
+        
+        <h1 class="title">коридор</h1>
+    </main>
     
     <script>
         document.getElementById('mainButton').addEventListener('click', function() {
