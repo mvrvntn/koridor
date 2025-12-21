@@ -3,105 +3,369 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="коридор - минималистичный сервис для навигации">
-    <meta name="keywords" content="коридор, навигация, сервис">
+    <meta name="description" content="коридор - минималистичный сервис для навигации в цифровом пространстве">
+    <meta name="keywords" content="коридор, навигация, сервис, минимализм, digital">
     <meta name="author" content="Art. Lebedev Studio">
-    <meta property="og:title" content="коридор">
-    <meta property="og:description" content="коридор - минималистичный сервис для навигации">
+    
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="коридор">
-    <meta name="twitter:description" content="коридор - минималистичный сервис для навигации">
+    <meta property="og:url" content="https://koridor.github.io/">
+    <meta property="og:title" content="коридор">
+    <meta property="og:description" content="коридор - минималистичный сервис для навигации в цифровом пространстве">
+    <meta property="og:image" content="https://koridor.github.io/assets/og-image.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://koridor.github.io/">
+    <meta property="twitter:title" content="коридор">
+    <meta property="twitter:description" content="коридор - минималистичный сервис для навигации в цифровом пространстве">
+    <meta property="twitter:image" content="https://koridor.github.io/assets/og-image.jpg">
+    
     <title>коридор</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
+        :root {
+            --primary-color: #1a1a1a;
+            --secondary-color: #f5f1ea;
+            --accent-color: #ff6b35;
+            --text-color: #2b2b2b;
+            --light-gray: #e8e8e8;
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
         body {
-            background-color: #f5f1ea;
-            font-family: sans-serif;
-            color: #2b2b2b;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            display: grid;
+            place-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--light-gray), transparent);
+            z-index: 1;
+        }
+        
+        .container {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
-            margin: 0;
-            padding: 20px;
+            gap: 4rem;
+            padding: 2rem;
+            max-width: 100%;
+            width: 100%;
+            z-index: 2;
+            position: relative;
         }
         
-        .button {
-            width: 280px;
-            height: 280px;
-            background-color: #2b2b2b;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            margin-bottom: 64px;
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            animation: fadeIn 0.8s ease-out;
         }
         
-        .button svg {
+        .logo {
             width: 120px;
             height: 120px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--primary-color);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s var(--transition-smooth), box-shadow 0.3s var(--transition-smooth);
+        }
+        
+        .logo-circle::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 60%;
+            height: 2px;
+            background: var(--secondary-color);
+            transform: translate(-50%, -50%);
+            transition: width 0.3s var(--transition-smooth);
+        }
+        
+        .logo-circle::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 20%;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 6px 0 6px 10px;
+            border-color: transparent transparent transparent var(--secondary-color);
+            transform: translateY(-50%);
+            transition: right 0.3s var(--transition-smooth);
+        }
+        
+        .logo:hover .logo-circle {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .logo:hover .logo-circle::before {
+            width: 70%;
+        }
+        
+        .logo:hover .logo-circle::after {
+            right: 15%;
         }
         
         .title {
-            font-size: 32px;
-            font-weight: 700;
-            letter-spacing: 0.05em;
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 0.1em;
             text-transform: lowercase;
-            color: #2b2b2b;
+            color: var(--text-color);
             margin: 0;
+            opacity: 0;
+            animation: slideUp 0.8s ease-out 0.2s forwards;
+            position: relative;
+        }
+        
+        .title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            width: 0;
+            height: 1px;
+            background: var(--accent-color);
+            transform: translateX(-50%);
+            transition: width 0.5s var(--transition-smooth);
+        }
+        
+        .title:hover::after {
+            width: 60px;
+        }
+        
+        .button-container {
+            opacity: 0;
+            animation: slideUp 0.8s ease-out 0.4s forwards;
+        }
+        
+        .enter-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.2rem 2.5rem;
+            background: var(--primary-color);
+            color: var(--secondary-color);
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s var(--transition-smooth);
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .enter-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s var(--transition-smooth);
+        }
+        
+        .enter-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .enter-button:hover::before {
+            left: 100%;
+        }
+        
+        .enter-button:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .footer {
+            position: absolute;
+            bottom: 2rem;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-color);
+            opacity: 0.6;
+            animation: fadeIn 1s ease-out 0.8s forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         @media (max-width: 768px) {
-            .button {
-                width: 220px;
-                height: 220px;
-                margin-bottom: 48px;
+            .container {
+                gap: 3rem;
+                padding: 1.5rem;
             }
             
-            .button svg {
-                width: 90px;
-                height: 90px;
+            .logo {
+                width: 100px;
+                height: 100px;
             }
             
             .title {
-                font-size: 24px;
+                font-size: 2rem;
+            }
+            
+            .enter-button {
+                padding: 1rem 2rem;
+                font-size: 0.9rem;
             }
         }
         
         @media (max-width: 480px) {
-            .button {
-                width: 180px;
-                height: 180px;
-                margin-bottom: 36px;
+            .container {
+                gap: 2rem;
+                padding: 1rem;
             }
             
-            .button svg {
-                width: 70px;
-                height: 70px;
+            .logo {
+                width: 80px;
+                height: 80px;
             }
             
             .title {
-                font-size: 20px;
+                font-size: 1.8rem;
+            }
+            
+            .enter-button {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.85rem;
             }
         }
     </style>
 </head>
 <body>
-    <main>
-        <button class="button" id="mainButton" aria-label="Откройте сервис коридор">
-            <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <line x1="35" y1="120" x2="175" y2="120" stroke="#F5F1EA" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
-                <polygon points="185,120 155,105 155,135" fill="#F5F1EA"/>
-            </svg>
-        </button>
+    <main class="container">
+        <div class="logo-container">
+            <div class="logo">
+                <div class="logo-circle" role="img" aria-label="Логотип коридор"></div>
+            </div>
+            <h1 class="title">коридор</h1>
+        </div>
         
-        <h1 class="title">коридор</h1>
+        <div class="button-container">
+            <a href="https://t.me/mavrtunbot" target="_blank" rel="noopener noreferrer" class="enter-button" aria-label="Войти в коридор">
+                войти
+            </a>
+        </div>
     </main>
     
+    <footer class="footer">
+        © 2023 коридор. дизайн art. lebedev studio
+    </footer>
+    
     <script>
-        document.getElementById('mainButton').addEventListener('click', function() {
-            window.open('https://t.me/mavrtunbot', '_blank', 'noopener,noreferrer');
+        document.addEventListener('DOMContentLoaded', function() {
+            const button = document.querySelector('.enter-button');
+            
+            button.addEventListener('click', function(e) {
+                // Создание ряби при клике
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.classList.add('ripple');
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
         });
     </script>
+    
+    <style>
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            transform: scale(0);
+            animation: ripple-animation 0.6s ease-out;
+            pointer-events: none;
+        }
+        
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+    </style>
 </body>
 </html>
