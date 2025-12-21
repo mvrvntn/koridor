@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>коридор</title>
+    <meta name="description" content="Технологический сервис коридор.">
+    <meta name="keywords" content="сервис, технология, коридор">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="коридор">
+    
+    <meta property="og:title" content="коридор">
+    <meta property="og:description" content="Технологический сервис">
+    <meta property="og:type" content="website">
+    
+    <meta name="theme-color" content="#F5F1EA">
+    <meta name="color-scheme" content="light dark">
+    
+    <link rel="preconnect" href="https://t.me">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="preload" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI0VCRTRENyIvPjxwYXRoIGQ9Ik0yNSAzMCBMNzAgNTAgTDI1IDcwIiBzdHJva2U9IiMzRDNEM0QiIHN0cm9rZS13aWR0aD0iNiIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PC9zdmc+">
+    
+    <!-- Подключение стилей -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/particles.css">
+    
+    <style>
+        /* Дополнительные стили для оптимизированной кнопки */
+        .logo-button {
+            background: linear-gradient(135deg, #F5F1EA 0%, #FFFFFF 100%);
+            border: 3px solid #2B2B2B;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo-button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(139, 115, 85, 0.1) 50%, transparent 70%);
+            border-radius: 50%;
+            transition: all 0.6s ease;
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        
+        .logo-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(139, 115, 85, 0.2);
+            border-color: #8B7355;
+        }
+        
+        .logo-button:hover::before {
+            opacity: 1;
+            transform: scale(1.2) rotate(180deg);
+        }
+        
+        .logo-button:active {
+            transform: scale(0.98);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .logo-button:active::before {
+            transform: scale(0.9) rotate(90deg);
+            opacity: 0.5;
+        }
+        
+        /* Оптимизация для мобильных устройств */
+        @media (max-width: 768px) {
+            .logo-button {
+                width: 240px;
+                height: 240px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo-button {
+                width: 200px;
+                height: 200px;
+            }
+        }
+        
+        /* Улучшение доступности */
+        .logo-button:focus {
+            outline: 2px solid #8B7355;
+            outline-offset: 4px;
+        }
+        
+        /* Анимация пульсации */
+        @keyframes buttonPulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.02);
+            }
+        }
+        
+        .logo-button.processing {
+            animation: buttonPulse 1.5s ease-in-out infinite;
+            pointer-events: none;
+        }
+        
+        /* Улучшение контейнера */
+        .container {
+            max-width: 100%;
+            padding: 20px;
+        }
+        
+        /* Оптимизация заголовка */
+        .title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-top: 24px;
+            letter-spacing: 0.08em;
+            line-height: 1.2;
+            color: #2B2B2B;
+            text-transform: uppercase;
+            opacity: 1;
+        }
+        
+        /* Улучшение декоративных элементов */
+        .decoration {
+            opacity: 0.05;
+        }
+        
+        /* Оптимизация для темной темы */
+        @media (prefers-color-scheme: dark) {
+            .logo-button {
+                background: linear-gradient(135deg, #2B2B2B 0%, #1A1A1A 100%);
+                border-color: #8B7355;
+            }
+            
+            .title {
+                color: #F5F1EA;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="page" role="main">
+        <div class="decoration decoration-1" aria-hidden="true"></div>
+        <div class="decoration decoration-2" aria-hidden="true"></div>
+
+        <div class="container">
+            <header class="header">
+                <div class="logo-wrapper">
+                    <button class="logo-button" id="mainButton" aria-label="Откройте сервис коридор">
+                        <svg class="logo-svg" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+                            <!-- Центральная стрелка (указывает вправо) - главная, идеально прямая -->
+                            <g>
+                                <line x1="35" y1="120" x2="175" y2="120" stroke="#2B2B2B" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+                                <polygon points="185,120 155,105 155,135" fill="#2B2B2B"/>
+                            </g>
+                        </svg>
+                    </button>
+                </div>
+
+                <h1 class="title">коридор</h1>
+            </header>
+        </div>
+    </main>
+
+    <div id="transition-overlay" aria-hidden="true">
+        <div class="ring"></div><div class="ring"></div><div class="ring"></div><div class="ring"></div>
+        <div class="ring"></div><div class="ring"></div><div class="ring"></div><div class="ring"></div>
+        <div class="ring"></div><div class="ring"></div><div class="ring"></div><div class="ring"></div>
+        <div class="ring"></div><div class="ring"></div><div class="ring"></div><div class="ring"></div>
+        <div class="ring"></div><div class="ring"></div><div class="ring"></div><div class="ring"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    
+    <!-- Подключение JavaScript модулей -->
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/animations.js"></script>
+    <script src="assets/js/particles.js"></script>
+    
+    <script>
+        // Оптимизированный JavaScript для работы с кнопкой
+        (function() {
+            'use strict';
+
+            // Конфигурация
+            const CONFIG = {
+                botName: 'mavrtunbot',
+                animationDuration: 1200,
+                buttonScale: 1.05,
+                reducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+            };
+
+            // Инициализация элементов
+            const mainButton = document.getElementById('mainButton');
+            const transitionOverlay = document.getElementById('transition-overlay');
+            const rings = transitionOverlay.querySelectorAll('.ring');
+            const container = document.querySelector('.container');
+
+            // Проверка наличия элементов
+            if (!mainButton || !transitionOverlay || !rings.length || !container) {
+                console.error('Essential elements not found');
+                return;
+            }
+
+            // Проверка загрузки GSAP
+            if (typeof gsap === 'undefined') {
+                console.error('GSAP library not loaded');
+                return;
+            }
+
+            // Настройка анимации перехода
+            const tl = gsap.timeline({
+                paused: true,
+                onStart: () => {
+                    mainButton.classList.add('processing');
+                },
+                onComplete: () => {
+                    try {
+                        window.open(`https://t.me/${CONFIG.botName}`, '_blank', 'noopener,noreferrer');
+                    } catch (error) {
+                        console.error('Failed to open link:', error);
+                        window.location.href = `https://t.me/${CONFIG.botName}`;
+                    }
+                    
+                    setTimeout(() => {
+                        mainButton.classList.remove('processing');
+                        gsap.set(transitionOverlay, { opacity: 0, pointerEvents: 'none' });
+                        gsap.to(container, { opacity: 1, duration: 0.5 });
+                    }, 500);
+                }
+            });
+
+            tl.to([container], { duration: 0.3, opacity: 0, ease: 'power2.in' })
+              .set(transitionOverlay, { opacity: 1, pointerEvents: 'auto' })
+              .fromTo(rings, {
+                  scale: 0.01,
+                  opacity: 1
+              }, {
+                  duration: 1.2,
+                  scale: 250,
+                  opacity: 0,
+                  stagger: {
+                      each: 0.04,
+                      from: 'center'
+                  },
+                  ease: 'power3.in'
+              }, "-=0.2");
+
+            // Обработчик клика
+            mainButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (tl.isActive() || mainButton.classList.contains('processing')) return;
+                tl.restart();
+            });
+
+            // Инициализация системы частиц, если доступна
+            if (typeof window.ParticleSystem !== 'undefined') {
+                try {
+                    window.particleSystem = window.ParticleSystem.init();
+                    console.log('Particle system initialized');
+                } catch (error) {
+                    console.error('Failed to initialize particle system:', error);
+                }
+            }
+
+            console.log('Application initialized successfully');
+        })();
+    </script>
+</body>
+</html>
