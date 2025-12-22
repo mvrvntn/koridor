@@ -3,257 +3,272 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="коридор - минималистичный сервис для навигации в цифровом пространстве">
-    <meta name="keywords" content="коридор, навигация, сервис, минимализм, digital">
-    <meta name="author" content="Art. Lebedev Studio">
+    <meta name="description" content="коридор — путь в твоё пространство">
+    <meta name="keywords" content="коридор, навигация, цифровой путь, telegram">
+    <meta name="author" content="Коридор">
     
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://koridor.github.io/">
     <meta property="og:title" content="коридор">
-    <meta property="og:description" content="коридор - минималистичный сервис для навигации в цифровом пространстве">
-    <meta property="og:image" content="https://koridor.github.io/assets/og-image.jpg">
+    <meta property="og:description" content="коридор — путь в твоё пространство">
     
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://koridor.github.io/">
-    <meta property="twitter:title" content="коридор">
-    <meta property="twitter:description" content="коридор - минималистичный сервис для навигации в цифровом пространстве">
-    <meta property="twitter:image" content="https://koridor.github.io/assets/og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="коридор">
+    <meta name="twitter:description" content="коридор — путь в твоё пространство">
     
     <title>коридор</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --primary-color: #1a1a1a;
-            --secondary-color: #f5f1ea;
-            --accent-color: #ff6b35;
-            --text-color: #2b2b2b;
-            --light-gray: #e8e8e8;
+            --color-cloud-dancer: #f8f7f5;
+            --color-charcoal: #1a1a1a;
+            --color-text: #2b2b2b;
+            --color-text-light: #5a5a5a;
+            --color-accent: #0a0a0a;
+            --color-border: #e8e5e0;
             --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         
-        html {
-            scroll-behavior: smooth;
+        html, body {
+            width: 100%;
+            height: 100%;
         }
         
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--secondary-color);
-            color: var(--text-color);
-            display: grid;
-            place-items: center;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--color-cloud-dancer);
+            color: var(--color-text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
+            padding: 0;
         }
         
+        /* Subtle gradient background */
         body::before {
             content: '';
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--light-gray), transparent);
-            z-index: 1;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.5) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(26, 26, 26, 0.02) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
         }
         
         .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 4rem;
-            padding: 2rem;
-            max-width: 100%;
             width: 100%;
-            z-index: 2;
-            position: relative;
-        }
-        
-        .logo-container {
+            max-width: 100vw;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 1.5rem;
-            animation: fadeIn 0.8s ease-out;
+            justify-content: center;
+            padding: 2rem;
+            z-index: 1;
+            position: relative;
         }
         
-        .logo {
-            width: 120px;
-            height: 120px;
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 3.5rem;
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            animation: fadeInUp 0.8s var(--transition-smooth);
+        }
+        
+        .logo-wrapper {
             position: relative;
+            width: 160px;
+            height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
         
-        .logo-circle {
+        .arrow {
             width: 100%;
             height: 100%;
-            border-radius: 50%;
-            background: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s var(--transition-smooth), box-shadow 0.3s var(--transition-smooth);
+            cursor: pointer;
+            transition: all 0.4s var(--transition-smooth);
         }
         
-        .logo-circle::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 60%;
-            height: 2px;
-            background: var(--secondary-color);
-            transform: translate(-50%, -50%);
-            transition: width 0.3s var(--transition-smooth);
+        .arrow:hover {
+            transform: translateX(4px);
         }
         
-        .logo-circle::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            right: 20%;
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 6px 0 6px 10px;
-            border-color: transparent transparent transparent var(--secondary-color);
-            transform: translateY(-50%);
-            transition: right 0.3s var(--transition-smooth);
+        .arrow svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 2px 4px rgba(26, 26, 26, 0.08));
+            transition: all 0.4s var(--transition-smooth);
         }
         
-        .logo:hover .logo-circle {
-            transform: scale(1.05);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-        }
-        
-        .logo:hover .logo-circle::before {
-            width: 70%;
-        }
-        
-        .logo:hover .logo-circle::after {
-            right: 15%;
+        .arrow:hover svg {
+            filter: drop-shadow(0 4px 12px rgba(26, 26, 26, 0.12));
         }
         
         .title {
-            font-size: 2.5rem;
-            font-weight: 300;
-            letter-spacing: 0.1em;
+            font-family: 'Unbounded', sans-serif;
+            font-size: clamp(2rem, 8vw, 4.5rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
             text-transform: lowercase;
-            color: var(--text-color);
-            margin: 0;
-            opacity: 0;
-            animation: slideUp 0.8s ease-out 0.2s forwards;
+            color: var(--color-text);
+            text-align: center;
+            line-height: 1.1;
+            animation: fadeInUp 0.8s var(--transition-smooth) 0.1s both;
             position: relative;
+            word-spacing: 100vw;
         }
         
         .title::after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: -12px;
             left: 50%;
-            width: 0;
-            height: 1px;
-            background: var(--accent-color);
             transform: translateX(-50%);
-            transition: width 0.5s var(--transition-smooth);
+            width: 0;
+            height: 2px;
+            background: var(--color-accent);
+            transition: width 0.6s var(--transition-smooth);
         }
         
-        .title:hover::after {
-            width: 60px;
+        .header:hover .title::after {
+            width: 80px;
         }
         
-        .button-container {
-            opacity: 0;
-            animation: slideUp 0.8s ease-out 0.4s forwards;
+        .description {
+            display: none;
         }
         
-        .enter-button {
+        .button-wrapper {
+            animation: fadeInUp 0.8s var(--transition-smooth) 0.3s both;
+        }
+        
+        .btn-enter {
+            position: relative;
+            padding: 1rem 2.5rem;
+            background: var(--color-accent);
+            color: var(--color-cloud-dancer);
+            border: 1px solid var(--color-accent);
+            border-radius: 2px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: lowercase;
+            cursor: pointer;
+            transition: all 0.4s var(--transition-smooth);
+            text-decoration: none;
             display: inline-flex;
             align-items: center;
-            justify-content: center;
-            padding: 1.2rem 2.5rem;
-            background: var(--primary-color);
-            color: var(--secondary-color);
-            border: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 500;
-            letter-spacing: 0.05em;
-            cursor: pointer;
-            position: relative;
+            gap: 0.75rem;
             overflow: hidden;
-            transition: all 0.3s var(--transition-smooth);
-            text-decoration: none;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            min-height: 48px;
         }
         
-        .enter-button::before {
+        .btn-enter::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s var(--transition-smooth);
+            background: var(--color-charcoal);
+            transition: left 0.4s var(--transition-smooth);
+            z-index: -1;
         }
         
-        .enter-button:hover {
+        .btn-enter:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 24px rgba(26, 26, 26, 0.12);
+            letter-spacing: 0.1em;
         }
         
-        .enter-button:hover::before {
-            left: 100%;
+        .btn-enter:hover::before {
+            left: 0;
         }
         
-        .enter-button:active {
+        .btn-enter:active {
             transform: translateY(0);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(26, 26, 26, 0.08);
+        }
+        
+        .arrow-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.8;
+            transition: all 0.3s var(--transition-smooth);
+        }
+        
+        .btn-enter:hover .arrow-icon {
+            transform: translateX(4px);
+            opacity: 1;
+        }
+        
+        .divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--color-border) 50%, transparent);
+            margin: 2rem 0;
+            opacity: 0.5;
+            animation: fadeInUp 0.8s var(--transition-smooth) 0.4s both;
         }
         
         .footer {
-            position: absolute;
-            bottom: 2rem;
-            left: 0;
-            right: 0;
-            text-align: center;
-            font-size: 0.8rem;
-            color: var(--text-color);
-            opacity: 0.6;
-            animation: fadeIn 1s ease-out 0.8s forwards;
-            opacity: 0;
+            display: none;
         }
         
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+        .footer-link {
+            color: inherit;
+            text-decoration: none;
+            transition: opacity 0.3s var(--transition-smooth);
         }
         
-        @keyframes slideUp {
+        .footer-link:hover {
+            opacity: 0.8;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -261,75 +276,147 @@
             }
         }
         
+        /* Grid background subtle detail */
+        .grid-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                linear-gradient(rgba(26, 26, 26, 0.01) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(26, 26, 26, 0.01) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            opacity: 0.3;
+            z-index: 0;
+        }
+        
+        /* Mobile responsiveness */
         @media (max-width: 768px) {
             .container {
-                gap: 3rem;
                 padding: 1.5rem;
             }
             
-            .logo {
-                width: 100px;
-                height: 100px;
+            .content {
+                gap: 2.5rem;
+            }
+            
+            .logo-wrapper {
+                width: 140px;
+                height: 70px;
             }
             
             .title {
-                font-size: 2rem;
+                font-size: 2.5rem;
+                word-spacing: normal;
             }
             
-            .enter-button {
-                padding: 1rem 2rem;
-                font-size: 0.9rem;
+            .btn-enter {
+                padding: 0.9rem 2rem;
+                font-size: 0.85rem;
             }
         }
         
         @media (max-width: 480px) {
             .container {
-                gap: 2rem;
                 padding: 1rem;
             }
             
-            .logo {
-                width: 80px;
-                height: 80px;
+            .content {
+                gap: 2rem;
+            }
+            
+            .logo-wrapper {
+                width: 120px;
+                height: 60px;
             }
             
             .title {
                 font-size: 1.8rem;
+                word-spacing: normal;
             }
             
-            .enter-button {
+            .btn-enter {
                 padding: 0.8rem 1.5rem;
-                font-size: 0.85rem;
+                font-size: 0.8rem;
+            }
+            
+            .divider {
+                margin: 1.5rem 0;
+            }
+        }
+        
+        /* Micro-interactions */
+        @supports (backdrop-filter: blur(10px)) {
+            .container {
+                backdrop-filter: blur(0.5px);
             }
         }
     </style>
 </head>
 <body>
-    <main class="container">
-        <div class="logo-container">
-            <div class="logo">
-                <div class="logo-circle" role="img" aria-label="Логотип коридор"></div>
-            </div>
-            <h1 class="title">коридор</h1>
-        </div>
-        
-        <div class="button-container">
-            <a href="https://t.me/mavrtunbot" target="_blank" rel="noopener noreferrer" class="enter-button" aria-label="Войти в коридор">
-                войти
-            </a>
-        </div>
-    </main>
+    <div class="grid-pattern"></div>
     
-    <footer class="footer">
-        © 2025
-    </footer>
+    <div class="container">
+        <div class="content">
+            <div class="header">
+                <div class="logo-wrapper">
+                    <div class="arrow">
+                        <svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Top line -->
+                            <line x1="20" y1="30" x2="140" y2="30" stroke="currentColor" stroke-width="8" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+                            
+                            <!-- Arrow head right -->
+                            <path d="M 140 30 L 160 50 L 140 70" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+                            
+                            <!-- Bottom line -->
+                            <line x1="20" y1="70" x2="140" y2="70" stroke="currentColor" stroke-width="8" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+                        </svg>
+                    </div>
+                </div>
+                
+                <h1 class="title">коридор</h1>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <div class="button-wrapper">
+                <a href="https://t.me/mavrtunbot" target="_blank" rel="noopener noreferrer" class="btn-enter" aria-label="Войти в коридор">
+                    войти
+                    <span class="arrow-icon">→</span>
+                </a>
+            </div>
+        </div>
+    </div>
     
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const button = document.querySelector('.enter-button');
-            
+        // Parallax on mouse move (subtle)
+        document.addEventListener('mousemove', (e) => {
+            const arrow = document.querySelector('.arrow');
+            if (arrow) {
+                const rect = arrow.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                
+                const angleX = (e.clientY - centerY) * 0.02;
+                const angleY = (e.clientX - centerX) * 0.02;
+                
+                arrow.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) scale(1.02)`;
+            }
+        });
+        
+        document.addEventListener('mouseleave', () => {
+            const arrow = document.querySelector('.arrow');
+            if (arrow) {
+                arrow.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+            }
+        });
+        
+        // Button ripple effect
+        const button = document.querySelector('.btn-enter');
+        if (button) {
             button.addEventListener('click', function(e) {
-                // Создание ряби при клике
                 const ripple = document.createElement('span');
                 const rect = this.getBoundingClientRect();
                 const size = Math.max(rect.width, rect.height);
@@ -339,33 +426,29 @@
                 ripple.style.width = ripple.style.height = size + 'px';
                 ripple.style.left = x + 'px';
                 ripple.style.top = y + 'px';
-                ripple.classList.add('ripple');
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(255, 255, 255, 0.3)';
+                ripple.style.pointerEvents = 'none';
+                ripple.style.animation = 'rippleAnimation 0.6s ease-out';
                 
                 this.appendChild(ripple);
                 
-                setTimeout(() => {
-                    ripple.remove();
-                }, 600);
+                setTimeout(() => ripple.remove(), 600);
             });
-        });
-    </script>
-    
-    <style>
-        .ripple {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.5);
-            transform: scale(0);
-            animation: ripple-animation 0.6s ease-out;
-            pointer-events: none;
         }
         
-        @keyframes ripple-animation {
-            to {
-                transform: scale(4);
-                opacity: 0;
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes rippleAnimation {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
             }
-        }
-    </style>
+        `;
+        document.head.appendChild(style);
+    </script>
 </body>
 </html>
