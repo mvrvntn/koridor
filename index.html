@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="коридор — путь в твоё пространство">
-    <meta name="keywords" content="коридор, навигация, цифровой путь, telegram">
+    <meta name="keywords" content="коридор, навигация, цифровой путь, vpn, telegram">
     <meta name="author" content="Коридор">
     
     <meta property="og:type" content="website">
@@ -23,12 +23,13 @@
     
     <style>
         :root {
-            --color-cloud-dancer: #f8f7f5;
-            --color-charcoal: #1a1a1a;
-            --color-text: #2b2b2b;
-            --color-text-light: #5a5a5a;
-            --color-accent: #0a0a0a;
-            --color-border: #e8e5e0;
+            /* Обновленная палитра The Corridor Nexus Node v2.0 (Светлая тема) */
+            --color-bg: #FFFFFF;
+            --color-charcoal: #000000;
+            --color-text: #000000;
+            --color-text-light: #888888;
+            --color-accent: #00D1FF; /* Saturated Electric Cyan */
+            --color-border: #E0E0E0;
             --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
         }
         
@@ -47,7 +48,7 @@
         
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background-color: var(--color-cloud-dancer);
+            background-color: var(--color-bg);
             color: var(--color-text);
             display: flex;
             align-items: center;
@@ -58,7 +59,7 @@
             padding: 0;
         }
         
-        /* Subtle gradient background */
+        /* Subtle gradient background с легким бирюзовым отливом */
         body::before {
             content: '';
             position: fixed;
@@ -66,8 +67,8 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.5) 0%, transparent 50%),
-                        radial-gradient(circle at 70% 80%, rgba(26, 26, 26, 0.02) 0%, transparent 50%);
+            background: radial-gradient(circle at 30% 50%, rgba(0, 209, 255, 0.04) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(0, 0, 0, 0.02) 0%, transparent 50%);
             pointer-events: none;
             z-index: 0;
         }
@@ -103,10 +104,11 @@
             animation: fadeInUp 0.8s var(--transition-smooth);
         }
         
+        /* Квадратный контейнер под новую эмблему */
         .logo-wrapper {
             position: relative;
-            width: 160px;
-            height: 80px;
+            width: 130px;
+            height: 130px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -124,18 +126,18 @@
         }
         
         .arrow:hover {
-            transform: translateX(4px);
+            transform: translateY(-4px) scale(1.02);
         }
         
         .arrow svg {
             width: 100%;
             height: 100%;
-            filter: drop-shadow(0 2px 4px rgba(26, 26, 26, 0.08));
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.06));
             transition: all 0.4s var(--transition-smooth);
         }
         
         .arrow:hover svg {
-            filter: drop-shadow(0 4px 12px rgba(26, 26, 26, 0.12));
+            filter: drop-shadow(0 8px 24px rgba(0, 209, 255, 0.15));
         }
         
         .title {
@@ -152,6 +154,7 @@
             word-spacing: 100vw;
         }
         
+        /* Подчеркивание акцентным цветом */
         .title::after {
             content: '';
             position: absolute;
@@ -159,9 +162,10 @@
             left: 50%;
             transform: translateX(-50%);
             width: 0;
-            height: 2px;
+            height: 3px;
             background: var(--color-accent);
             transition: width 0.6s var(--transition-smooth);
+            border-radius: 2px;
         }
         
         .header:hover .title::after {
@@ -180,12 +184,12 @@
             position: relative;
             padding: 1rem 2.5rem;
             background: var(--color-accent);
-            color: var(--color-cloud-dancer);
-            border: 1px solid var(--color-accent);
+            color: #FFFFFF;
+            border: none;
             border-radius: 2px;
             font-family: 'Inter', sans-serif;
             font-size: 0.9rem;
-            font-weight: 500;
+            font-weight: 600;
             letter-spacing: 0.08em;
             text-transform: lowercase;
             cursor: pointer;
@@ -213,8 +217,9 @@
         
         .btn-enter:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(26, 26, 26, 0.12);
+            box-shadow: 0 8px 24px rgba(0, 209, 255, 0.25);
             letter-spacing: 0.1em;
+            color: #FFFFFF;
         }
         
         .btn-enter:hover::before {
@@ -223,7 +228,7 @@
         
         .btn-enter:active {
             transform: translateY(0);
-            box-shadow: 0 4px 12px rgba(26, 26, 26, 0.08);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
         
         .arrow-icon {
@@ -232,7 +237,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            opacity: 0.8;
+            opacity: 0.9;
             transition: all 0.3s var(--transition-smooth);
         }
         
@@ -246,22 +251,12 @@
             height: 1px;
             background: linear-gradient(90deg, transparent, var(--color-border) 50%, transparent);
             margin: 2rem 0;
-            opacity: 0.5;
+            opacity: 0.6;
             animation: fadeInUp 0.8s var(--transition-smooth) 0.4s both;
         }
         
         .footer {
             display: none;
-        }
-        
-        .footer-link {
-            color: inherit;
-            text-decoration: none;
-            transition: opacity 0.3s var(--transition-smooth);
-        }
-        
-        .footer-link:hover {
-            opacity: 0.8;
         }
         
         /* Animations */
@@ -276,7 +271,7 @@
             }
         }
         
-        /* Grid background subtle detail */
+        /* Grid background subtle detail (обновлено под светлую тему) */
         .grid-pattern {
             position: absolute;
             top: 0;
@@ -284,11 +279,11 @@
             right: 0;
             bottom: 0;
             background-image:
-                linear-gradient(rgba(26, 26, 26, 0.01) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(26, 26, 26, 0.01) 1px, transparent 1px);
+                linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
             background-size: 40px 40px;
             pointer-events: none;
-            opacity: 0.3;
+            opacity: 0.5;
             z-index: 0;
         }
         
@@ -297,21 +292,17 @@
             .container {
                 padding: 1.5rem;
             }
-            
             .content {
                 gap: 2.5rem;
             }
-            
             .logo-wrapper {
-                width: 140px;
-                height: 70px;
+                width: 110px;
+                height: 110px;
             }
-            
             .title {
                 font-size: 2.5rem;
                 word-spacing: normal;
             }
-            
             .btn-enter {
                 padding: 0.9rem 2rem;
                 font-size: 0.85rem;
@@ -322,26 +313,21 @@
             .container {
                 padding: 1rem;
             }
-            
             .content {
                 gap: 2rem;
             }
-            
             .logo-wrapper {
-                width: 120px;
-                height: 60px;
+                width: 90px;
+                height: 90px;
             }
-            
             .title {
                 font-size: 1.8rem;
                 word-spacing: normal;
             }
-            
             .btn-enter {
                 padding: 0.8rem 1.5rem;
                 font-size: 0.8rem;
             }
-            
             .divider {
                 margin: 1.5rem 0;
             }
@@ -363,15 +349,23 @@
             <div class="header">
                 <div class="logo-wrapper">
                     <div class="arrow">
-                        <svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Top line -->
-                            <line x1="20" y1="30" x2="140" y2="30" stroke="currentColor" stroke-width="8" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+                            <defs>
+                                <linearGradient id="nexusNeonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#DFFF00"/>
+                                    <stop offset="100%" stop-color="#C2E600"/>
+                                </linearGradient>
+                            </defs>
                             
-                            <!-- Arrow head right -->
-                            <path d="M 140 30 L 160 50 L 140 70" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+                            <path fill="none" stroke="#E0E0E0" stroke-width="2" d="M 20 20 H 90 L 180 100 L 90 180 H 20 L 110 100 Z" />
                             
-                            <!-- Bottom line -->
-                            <line x1="20" y1="70" x2="140" y2="70" stroke="currentColor" stroke-width="8" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+                            <path fill="#1A1A1A" d="M 20 20 H 90 L 180 100 L 90 180 H 20 L 110 100 Z" />
+                            
+                            <path fill="url(#nexusNeonGradient)" d="M 60 52 H 100 L 170 100 L 100 148 H 60 L 130 100 Z" />
+                            
+                            <path fill="#1A1A1A" d="M 100 84 H 120 L 160 100 L 120 116 H 100 L 140 100 Z" />
+                            
+                            <path fill="url(#nexusNeonGradient)" d="M 130 92 L 140 100 L 130 108 L 120 100 Z" />
                         </svg>
                     </div>
                 </div>
@@ -428,7 +422,7 @@
                 ripple.style.top = y + 'px';
                 ripple.style.position = 'absolute';
                 ripple.style.borderRadius = '50%';
-                ripple.style.background = 'rgba(255, 255, 255, 0.3)';
+                ripple.style.background = 'rgba(255, 255, 255, 0.4)';
                 ripple.style.pointerEvents = 'none';
                 ripple.style.animation = 'rippleAnimation 0.6s ease-out';
                 
