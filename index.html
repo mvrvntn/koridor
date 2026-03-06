@@ -7,58 +7,41 @@
     <meta name="keywords" content="коридор, навигация, цифровой путь, vpn, telegram">
     <meta name="author" content="Коридор">
     
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="коридор">
-    <meta property="og:description" content="коридор — путь в твоё пространство">
-    
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="коридор">
-    <meta name="twitter:description" content="коридор — путь в твоё пространство">
-    
     <title>коридор</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
         /* =========================================================
-           ФИНАЛЬНАЯ ЦВЕТОВАЯ МАТРИЦА NEXUS V2.5 (SYSTEM SWITCH)
-           Синтез AWGE/A$AP Rocky x La Routine
+           AWGE x CORRIDOR SYSTEM
+           Сырой брутализм, глитч, отсутствие рамок.
            ========================================================= */
 
         :root {
-            /* Нейтральные (Константы) */
-            --color-black: #000000;
-            --color-white: #FFFFFF;
-            --color-silver-chrome: #A0A0A0; /* Прямая отсылка к ювелирке image_6,7,8 */
-            
-            /* Дефолтная Light (La Routine Pure Tech) */
+            /* Light Theme (Сырой белый) */
             --color-bg: #FFFFFF;
-            --color-surface: #FAFAFA;
             --color-text: #000000;
-            --color-text-secondary: #888888;
-            --color-accent: #00D1FF; /* Electric Cyan - идеален для La Routine */
-            --color-divider: #E0E0E0;
-            
-            /* Статусы (Универсальные Неоновые) */
-            --color-status-success: #00E676; /* Neon Green */
-            --color-status-warning: #FFD600; /* Neon Yellow */
-            --color-status-error: #FF1744;   /* Neon Ruby */
-            
-            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-            --border-radius-minimal: 0; /* Brutalism/AWGE sharp edges */
+            --color-svg-base: #1A1A1A;
+            --color-glitch-1: #00D1FF; /* Cyan */
+            --color-glitch-2: #2ecc71; /* Green */
+            --color-neon-start: #3498db;
+            --color-neon-end: #2ecc71;
+            --noise-opacity: 0.15;
         }
 
-        /* Системное переключение на Dark Theme (Tech-Fashion Brutalism / AWGE) */
         @media (prefers-color-scheme: dark) {
             :root {
-                --color-bg: #000000; /* AMOLED Black - безопасность и скрытность */
-                --color-surface: #121212;
+                /* Dark Theme (AMOLED Black Matrix) */
+                --color-bg: #000000;
                 --color-text: #FFFFFF;
-                --color-text-secondary: var(--color-silver-chrome);
-                --color-accent: #BB00FF; /* Ultraviolet - A$AP Rocky/AWGE Maximalism */
-                --color-divider: #333333;
+                --color-svg-base: #FFFFFF;
+                --color-glitch-1: #00D1FF; /* Cyan */
+                --color-glitch-2: #BB00FF; /* Ultraviolet */
+                --color-neon-start: #DFFF00; /* Lime */
+                --color-neon-end: #C2E600;
+                --noise-opacity: 0.3;
             }
         }
 
@@ -66,465 +49,231 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
-        html, body {
+        body, html {
             width: 100%;
             height: 100%;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background-color: var(--color-bg);
             color: var(--color-text);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-            padding: 0;
-        }
-
-        /* AWGE Слой 1: Фоновая кинопленка/зерно (Grit) */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-                radial-gradient(circle at 30% 50%, rgba(200, 200, 200, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 70% 80%, rgba(100, 100, 100, 0.05) 0%, transparent 40%),
-                linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
-            background-size: 100% 100%, 100% 100%, 80px 80px, 80px 80px;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.6;
-        }
-
-        /* AWGE Слой 2: Текстурный глитч (Статика) */
-        .grid-pattern {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23FFFFFF' fill-opacity='0.02' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 100vw;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            z-index: 1;
-            position: relative;
-        }
-
-        .content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 3.5rem;
-            max-width: 600px;
-            width: 100%;
-            border: 1px solid var(--color-divider);
-            padding: 4rem;
-            border-radius: var(--border-radius-minimal);
-            background: rgba(var(--color-surface), 0.3);
-            backdrop-filter: blur(1px);
-            position: relative;
-        }
-
-        /* Brutalist border echo */
-        .content::before {
-            content: '';
-            position: absolute;
-            top: 8px;
-            left: 8px;
-            right: -8px;
-            bottom: -8px;
-            border: 1px solid var(--color-text-secondary);
-            z-index: -1;
-            opacity: 0.5;
-        }
-
-        .header {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2.5rem;
-            animation: fadeInUp 0.8s var(--transition-smooth);
-        }
-
-        /* ФИНАЛЬНЫЙ СИНТЕЗ ЭМБЛЕМЫ "THE CORRIDOR NEXUS NODE"
-           Убираем "странный квадрат". Эмблема теперь парит в центре.
-        */
-        .logo-wrapper {
-            position: relative;
-            width: 130px;
-            height: 130px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Убраны плоские бордеры. Добавлены слои. */
-        .arrow {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            cursor: pointer;
-            transition: all 0.4s var(--transition-smooth);
-            z-index: 1;
-        }
-
-        .arrow:hover {
-            transform: translateY(-4px) scale(1.02);
-        }
-
-        /* Эмблема с сине-зеленым градиентом image_15,16,18 */
-        .arrow svg {
-            width: 100%;
-            height: 100%;
-            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
-            transition: all 0.4s var(--transition-smooth);
-        }
-
-        /* AWGE Слой 1: Текстурный глитч шум под эмблемой (glitch static) */
-        .logo-wrapper::before {
-            content: '';
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            right: -10px;
-            bottom: -10px;
-            background-image: 
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill='%23FFFFFF' fill-opacity='0.03'%3E%3Cpath d='M0 0h20v20H0V0zm20 20h20v20H20V20z'%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
-            opacity: 0.6;
-            z-index: -1;
-            transition: all 0.4s var(--transition-smooth);
-        }
-
-        /* AWGE Слой 2: Хромированный контур с image_12.png */
-        .logo-wrapper::after {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: 10px;
-            bottom: 10px;
-            border: 1px solid var(--color-silver-chrome);
-            border-radius: var(--border-radius-minimal);
-            z-index: -1;
-            opacity: 0.4;
-            transition: all 0.4s var(--transition-smooth);
-        }
-
-        .arrow:hover svg {
-            filter: drop-shadow(0 8px 24px rgba(var(--color-accent), 0.2));
-        }
-
-        .header:hover .logo-wrapper::before {
-            transform: translate(4px, 4px);
-            opacity: 0.9;
-        }
-
-        .header:hover .logo-wrapper::after {
-            transform: translate(-4px, -4px);
-            opacity: 0.8;
-            border-color: var(--color-accent);
-        }
-
-        .title {
-            font-family: 'Unbounded', sans-serif;
-            font-size: clamp(2rem, 8vw, 4rem);
-            font-weight: 700;
-            letter-spacing: -0.04em;
-            text-transform: lowercase;
-            color: var(--color-text);
-            text-align: center;
-            line-height: 1.1;
-            animation: fadeInUp 0.8s var(--transition-smooth) 0.1s both;
-            position: relative;
-        }
-
-        /* AWGE Typo Distortion Layer 
-           Минимальное, но агрессивное искажение на ховер.
-        */
-        .title:hover {
-            text-shadow: 2px 2px 0 var(--color-accent), -2px -2px 0 var(--color-text-secondary);
-        }
-
-        .description {
-            display: none;
-        }
-
-        .button-wrapper {
-            animation: fadeInUp 0.8s var(--transition-smooth) 0.3s both;
-        }
-
-        /* AWGE x La Routine Button: Brutalist, high-contrast, layered */
-        .btn-enter {
-            position: relative;
-            padding: 1rem 2.5rem;
-            background: var(--color-white);
-            color: var(--color-black);
-            border: 2px solid var(--color-divider);
-            border-radius: var(--border-radius-minimal);
             font-family: 'Inter', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            text-transform: lowercase;
-            cursor: pointer;
-            transition: all 0.4s var(--transition-smooth);
-            text-decoration: none;
+            overflow: hidden; /* Запрещаем скролл для эффекта "экрана" */
+        }
+
+        /* 1. Эффект старого телевизора / Белый шум */
+        .noise {
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            right: -50%;
+            bottom: -50%;
+            width: 200%;
+            height: 200vh;
+            background: transparent url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+            opacity: var(--noise-opacity);
+            pointer-events: none;
+            z-index: 50;
+            animation: noiseAnim 0.2s infinite;
+        }
+
+        @keyframes noiseAnim {
+            0% { transform: translate(0,0); }
+            10% { transform: translate(-5%,-5%); }
+            20% { transform: translate(-10%,5%); }
+            30% { transform: translate(5%,-10%); }
+            40% { transform: translate(-5%,15%); }
+            50% { transform: translate(-10%,5%); }
+            60% { transform: translate(15%,0); }
+            70% { transform: translate(0,15%); }
+            80% { transform: translate(3%,35%); }
+            90% { transform: translate(-10%,10%); }
+            100% { transform: translate(0,0); }
+        }
+
+        /* Сканлайны (полосы от кинескопа) */
+        .scanlines {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
+            background-size: 100% 4px;
+            z-index: 51;
+            pointer-events: none;
+        }
+
+        /* Основной контейнер - полная свобода, никаких карточек */
+        .main-stage {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        /* ЭМБЛЕМА: Просто висит в воздухе */
+        .raw-emblem {
+            width: clamp(150px, 30vw, 250px);
+            height: clamp(150px, 30vw, 250px);
+            margin-bottom: 2rem;
+            cursor: crosshair;
+            position: relative;
+        }
+
+        .raw-emblem svg {
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
+
+        /* Глитч-анимация эмблемы при наведении */
+        .raw-emblem:hover svg {
+            animation: svgGlitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+            filter: drop-shadow(5px 0 0 var(--color-glitch-1)) drop-shadow(-5px 0 0 var(--color-glitch-2));
+        }
+
+        @keyframes svgGlitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-3px, 3px) }
+            40% { transform: translate(-3px, -3px) }
+            60% { transform: translate(3px, 3px) }
+            80% { transform: translate(3px, -3px) }
+            100% { transform: translate(0) }
+        }
+
+        /* ЗАГОЛОВОК: Огромный, брутальный */
+        .glitch-title {
+            font-family: 'Unbounded', sans-serif;
+            font-size: clamp(3rem, 12vw, 8rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            position: relative;
+            margin-bottom: 3rem;
+            color: var(--color-text);
+            line-height: 1;
+            cursor: default;
+        }
+
+        /* Слои глитча для текста (AWGE стиль) */
+        .glitch-title::before, .glitch-title::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+        }
+
+        .glitch-title::before {
+            left: 3px;
+            text-shadow: -3px 0 var(--color-glitch-1);
+            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+            animation: textGlitch 2s infinite linear alternate-reverse;
+        }
+
+        .glitch-title::after {
+            left: -3px;
+            text-shadow: -3px 0 var(--color-glitch-2);
+            clip-path: polygon(0 80%, 100% 20%, 100% 100%, 0 100%);
+            animation: textGlitch 3s infinite linear alternate-reverse;
+        }
+
+        @keyframes textGlitch {
+            0% { clip-path: polygon(0 20%, 100% 20%, 100% 21%, 0 21%); transform: translate(0); }
+            20% { clip-path: polygon(0 33%, 100% 33%, 100% 33%, 0 33%); transform: translate(-2px); }
+            40% { clip-path: polygon(0 44%, 100% 44%, 100% 44%, 0 44%); transform: translate(2px); }
+            60% { clip-path: polygon(0 50%, 100% 50%, 100% 20%, 0 20%); transform: translate(-2px); }
+            80% { clip-path: polygon(0 70%, 100% 70%, 100% 70%, 0 70%); transform: translate(2px); }
+            100% { clip-path: polygon(0 80%, 100% 80%, 100% 80%, 0 80%); transform: translate(0); }
+        }
+
+        /* КНОПКА: Сырой блок */
+        .brutal-btn {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 1rem;
+            padding: 1rem 3rem;
+            font-family: 'Unbounded', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--color-bg);
+            background-color: var(--color-text);
+            text-decoration: none;
+            border: none;
+            position: relative;
+            cursor: pointer;
             overflow: hidden;
-            z-index: 1;
-            min-height: 48px;
         }
 
-        @media (prefers-color-scheme: dark) {
-            .btn-enter {
-                background: var(--color-white);
-                color: var(--color-black);
-            }
-        }
-
-        /* AWGE Misaligned echo layer */
-        .btn-enter::before {
+        .brutal-btn::before {
             content: '';
             position: absolute;
-            top: 3px;
-            left: 3px;
-            right: -3px;
-            bottom: -3px;
-            border: 1px solid var(--color-silver-chrome);
-            border-radius: var(--border-radius-minimal);
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: var(--color-glitch-1);
             z-index: -1;
-            opacity: 0.6;
-            transition: all 0.3s var(--transition-smooth);
+            transition: left 0.15s steps(3); /* Резкий, "рваный" переход */
         }
 
-        /* Hover effect: A$AP Rocky/AWGE Maximalism */
-        .btn-enter:hover {
-            transform: translateY(-2px);
-            background: var(--color-accent);
-            color: var(--color-white);
-            border-color: var(--color-accent);
-            box-shadow: 0 0 16px rgba(var(--color-accent), 0.25);
+        .brutal-btn:hover::before {
+            left: 0;
         }
 
-        .btn-enter:hover::before {
-            top: -2px;
-            left: -2px;
-            right: 2px;
-            bottom: 2px;
-            opacity: 1;
-            filter: drop-shadow(0 0 4px var(--color-silver-chrome));
+        .brutal-btn:hover {
+            color: #000; /* Черный текст на кислотном фоне при наведении */
+            transform: scale(1.05) rotate(-1deg);
         }
 
-        .btn-enter:active {
-            transform: translateY(1px);
+        .brutal-btn:active {
+            transform: scale(0.95) rotate(1deg);
         }
-
+        
         .arrow-icon {
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 1;
-            transition: all 0.3s var(--transition-smooth);
+            font-family: 'Inter', sans-serif;
+            transition: transform 0.1s;
+        }
+        
+        .brutal-btn:hover .arrow-icon {
+            transform: translateX(10px);
         }
 
-        .btn-enter:hover .arrow-icon {
-            transform: translateX(6px);
-        }
-
-        .divider {
-            display: none;
-        }
-
-        .footer {
-            display: none;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Mobile responsiveness */
-        @media (max-width: 768px) {
-            .container {
-                padding: 1.5rem;
-            }
-            .content {
-                gap: 2.5rem;
-                padding: 3rem 2rem;
-            }
-            .logo-wrapper {
-                width: 110px;
-                height: 110px;
-            }
-            .title {
-                font-size: 2.5rem;
-            }
-            .btn-enter {
-                padding: 0.9rem 2rem;
-                font-size: 0.8rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 1rem;
-            }
-            .content {
-                gap: 2rem;
-                padding: 2.5rem 1.5rem;
-            }
-            .logo-wrapper {
-                width: 90px;
-                height: 90px;
-            }
-            .title {
-                font-size: 1.8rem;
-            }
-            .btn-enter {
-                padding: 0.8rem 1.5rem;
-                font-size: 0.75rem;
-            }
-        }
     </style>
 </head>
 <body>
-    <div class="grid-pattern"></div>
+    <div class="noise"></div>
+    <div class="scanlines"></div>
     
-    <div class="container">
-        <div class="content">
-            <div class="header">
-                <div class="logo-wrapper">
-                    <div class="arrow">
-                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
-                            <defs>
-                                <linearGradient id="nexusNeonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" stop-color="#DFFF00"/>
-                                    <stop offset="100%" stop-color="#C2E600"/>
-                                </linearGradient>
-                            </defs>
-                            
-                            <path fill="none" stroke="#E0E0E0" stroke-width="2" d="M 20 20 H 90 L 180 100 L 90 180 H 20 L 110 100 Z" />
-                            
-                            <path fill="#1A1A1A" d="M 20 20 H 90 L 180 100 L 90 180 H 20 L 110 100 Z" />
-                            
-                            <path fill="url(#nexusNeonGradient)" d="M 60 52 H 100 L 170 100 L 100 148 H 60 L 130 100 Z" />
-                            
-                            <path fill="#1A1A1A" d="M 100 84 H 120 L 160 100 L 120 116 H 100 L 140 100 Z" />
-                            
-                            <path fill="url(#nexusNeonGradient)" d="M 130 92 L 140 100 L 130 108 L 120 100 Z" />
-                        </svg>
-                    </div>
-                </div>
+    <div class="main-stage">
+        
+        <div class="raw-emblem">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                <defs>
+                    <linearGradient id="nexusNeonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="var(--color-neon-start)"/>
+                        <stop offset="100%" stop-color="var(--color-neon-end)"/>
+                    </linearGradient>
+                </defs>
                 
-                <h1 class="title">коридор</h1>
-            </div>
-            
-            <div class="button-wrapper">
-                <a href="https://t.me/mavrtunbot" target="_blank" rel="noopener noreferrer" class="btn-enter" aria-label="Войти в коридор">
-                    войти
-                    <span class="arrow-icon">→</span>
-                </a>
-            </div>
+                <path fill="var(--color-svg-base)" d="M 20 20 H 90 L 180 100 L 90 180 H 20 L 110 100 Z" />
+                
+                <path fill="url(#nexusNeonGradient)" d="M 60 52 H 100 L 170 100 L 100 148 H 60 L 130 100 Z" />
+                
+                <path fill="var(--color-bg)" d="M 100 84 H 120 L 160 100 L 120 116 H 100 L 140 100 Z" />
+                
+                <path fill="url(#nexusNeonGradient)" d="M 130 92 L 140 100 L 130 108 L 120 100 Z" />
+            </svg>
         </div>
+
+        <h1 class="glitch-title" data-text="коридор">коридор</h1>
+        
+        <a href="https://t.me/mavrtunbot" target="_blank" rel="noopener noreferrer" class="brutal-btn">
+            вход
+            <span class="arrow-icon">→</span>
+        </a>
+
     </div>
-    
-    <script>
-        // Parallax on mouse move for AWGE emblem
-        document.addEventListener('mousemove', (e) => {
-            const arrow = document.querySelector('.arrow');
-            if (arrow) {
-                const rect = arrow.getBoundingClientRect();
-                const centerX = rect.left + rect.width / 2;
-                const centerY = rect.top + rect.height / 2;
-                
-                const angleX = (centerY - e.clientY) * 0.04; // Inverted for more aggressive AWGE feel
-                const angleY = (e.clientX - centerX) * 0.04;
-                
-                arrow.style.transform = `perspective(800px) rotateX(${angleX}deg) rotateY(${angleY}deg) scale(1.02)`;
-            }
-        });
-        
-        document.addEventListener('mouseleave', () => {
-            const arrow = document.querySelector('.arrow');
-            if (arrow) {
-                arrow.style.transform = 'perspective(800px) rotateX(0) rotateY(0) scale(1)';
-            }
-        });
-        
-        // Final button ripple for tactile feedback
-        const button = document.querySelector('.btn-enter');
-        if (button) {
-            button.addEventListener('click', function(e) {
-                const ripple = document.createElement('span');
-                const rect = this.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
-                const x = e.clientX - rect.left - size / 2;
-                const y = e.clientY - rect.top - size / 2;
-                
-                ripple.style.width = ripple.style.height = size + 'px';
-                ripple.style.left = x + 'px';
-                ripple.style.top = y + 'px';
-                ripple.style.position = 'absolute';
-                ripple.style.borderRadius = '0%';
-                ripple.style.background = 'rgba(255, 255, 255, 0.4)';
-                ripple.style.pointerEvents = 'none';
-                ripple.style.animation = 'rippleAnimation 0.6s ease-out';
-                
-                this.appendChild(ripple);
-                
-                setTimeout(() => ripple.remove(), 600);
-            });
-        }
-        
-        // Brutalist ripple animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes rippleAnimation {
-                to {
-                    transform: scale(2);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-    </script>
 </body>
 </html>
