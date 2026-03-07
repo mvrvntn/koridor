@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="коридор — путь в твоё пространство">
-    <meta name="keywords" content="коридор, навигация, цифровой путь, vpn, telegram">
+    <meta name="description" content="коридор — инструменты для роутинга трафика">
+    <meta name="keywords" content="коридор, навигация, цифровой путь, роутинг трафика, telegram">
     <meta name="author" content="Коридор">
     
     <title>коридор</title>
@@ -16,33 +16,17 @@
     <style>
         /* =========================================================
            AWGE x CORRIDOR SYSTEM
-           Сырой брутализм, глитч, отсутствие рамок.
+           Сырой брутализм, глитч, только тёмная тема.
            ========================================================= */
 
         :root {
-            /* Light Theme (Сырой белый) */
-            --color-bg: #FFFFFF;
-            --color-text: #000000;
-            --color-svg-base: #1A1A1A;
-            --color-glitch-1: #00D1FF; /* Cyan */
-            --color-glitch-2: #2ecc71; /* Green */
-            --color-neon-start: #3498db;
-            --color-neon-end: #2ecc71;
-            --noise-opacity: 0.15;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            :root {
-                /* Dark Theme (AMOLED Black Matrix) */
-                --color-bg: #000000;
-                --color-text: #FFFFFF;
-                --color-svg-base: #FFFFFF;
-                --color-glitch-1: #00D1FF; /* Cyan */
-                --color-glitch-2: #BB00FF; /* Ultraviolet */
-                --color-neon-start: #DFFF00; /* Lime */
-                --color-neon-end: #C2E600;
-                --noise-opacity: 0.3;
-            }
+            /* Ультимативный Dark Mode (Void Black) */
+            --color-bg: #050505;
+            --color-text: #F5F5F5;
+            --color-glitch-1: #00D1FF; /* Neon Cyan */
+            --color-glitch-2: #BB00FF; /* Ultraviolet */
+            --color-accent: #CCFF00;   /* Acid Lime */
+            --noise-opacity: 0.35;
         }
 
         * {
@@ -60,7 +44,7 @@
             overflow: hidden; /* Запрещаем скролл для эффекта "экрана" */
         }
 
-        /* 1. Эффект старого телевизора / Белый шум */
+        /* 1. Эффект старого телевизора / Зернистый шум */
         .noise {
             position: fixed;
             top: -50%;
@@ -100,7 +84,7 @@
             pointer-events: none;
         }
 
-        /* Основной контейнер - полная свобода, никаких карточек */
+        /* Основной контейнер */
         .main-stage {
             position: relative;
             width: 100%;
@@ -112,7 +96,7 @@
             z-index: 10;
         }
 
-        /* ЭМБЛЕМА: Просто висит в воздухе */
+        /* ЭМБЛЕМА: AWGE Y2K Globe */
         .raw-emblem {
             width: clamp(150px, 30vw, 250px);
             height: clamp(150px, 30vw, 250px);
@@ -127,10 +111,10 @@
             overflow: visible;
         }
 
-        /* Глитч-анимация эмблемы при наведении */
+        /* Дополнительный резкий глитч эмблемы при наведении */
         .raw-emblem:hover svg {
             animation: svgGlitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
-            filter: drop-shadow(5px 0 0 var(--color-glitch-1)) drop-shadow(-5px 0 0 var(--color-glitch-2));
+            filter: drop-shadow(4px 0 0 var(--color-glitch-1)) drop-shadow(-4px 0 0 var(--color-glitch-2));
         }
 
         @keyframes svgGlitch {
@@ -213,7 +197,7 @@
             content: '';
             position: absolute;
             top: 0; left: -100%; width: 100%; height: 100%;
-            background: var(--color-glitch-1);
+            background: var(--color-accent);
             z-index: -1;
             transition: left 0.15s steps(3); /* Резкий, "рваный" переход */
         }
@@ -249,21 +233,28 @@
     <div class="main-stage">
         
         <div class="raw-emblem">
-            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-                <defs>
-                    <linearGradient id="nexusNeonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="var(--color-neon-start)"/>
-                        <stop offset="100%" stop-color="var(--color-neon-end)"/>
-                    </linearGradient>
-                </defs>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+                <g stroke="var(--color-glitch-2)" stroke-width="4" opacity="0.9" transform="translate(-4, 0)">
+                    <circle cx="100" cy="100" r="45"/>
+                    <ellipse cx="100" cy="100" rx="15" ry="45"/>
+                    <ellipse cx="100" cy="100" rx="45" ry="15"/>
+                </g>
                 
-                <path fill="var(--color-svg-base)" d="M 20 20 H 90 L 180 100 L 90 180 H 20 L 110 100 Z" />
+                <g stroke="var(--color-glitch-1)" stroke-width="4" opacity="0.9" transform="translate(4, 0)">
+                    <circle cx="100" cy="100" r="45"/>
+                    <ellipse cx="100" cy="100" rx="15" ry="45"/>
+                    <ellipse cx="100" cy="100" rx="45" ry="15"/>
+                </g>
+
+                <g stroke="var(--color-text)" stroke-width="4">
+                    <circle cx="100" cy="100" r="45"/>
+                    <ellipse cx="100" cy="100" rx="15" ry="45"/>
+                    <ellipse cx="100" cy="100" rx="45" ry="15"/>
+                </g>
+
+                <path d="M 55 60 H 95 L 145 100 L 95 140 H 55 L 105 100 Z" fill="var(--color-bg)" stroke="var(--color-bg)" stroke-width="12" stroke-linejoin="miter" stroke-miterlimit="10"/>
                 
-                <path fill="url(#nexusNeonGradient)" d="M 60 52 H 100 L 170 100 L 100 148 H 60 L 130 100 Z" />
-                
-                <path fill="var(--color-bg)" d="M 100 84 H 120 L 160 100 L 120 116 H 100 L 140 100 Z" />
-                
-                <path fill="url(#nexusNeonGradient)" d="M 130 92 L 140 100 L 130 108 L 120 100 Z" />
+                <path d="M 55 60 H 95 L 145 100 L 95 140 H 55 L 105 100 Z" fill="var(--color-accent)"/>
             </svg>
         </div>
 
