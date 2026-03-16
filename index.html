@@ -2,10 +2,10 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="коридор — инструменты для роутинга трафика">
-    <meta name="keywords" content="коридор, навигация, цифровой путь, роутинг трафика, telegram">
-    <meta name="author" content="Коридор">
+    <meta name="keywords" content="коридор, vpn, навигация, цифровой путь, роутинг трафика, telegram">
+    <meta name="author" content="Мавр">
     
     <title>коридор</title>
     
@@ -14,257 +14,96 @@
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        /* =========================================================
-           AWGE x CORRIDOR SYSTEM
-           Сырой брутализм, глитч, только тёмная тема.
-           ========================================================= */
-
         :root {
-            /* Ультимативный Dark Mode (Void Black) */
-            --color-bg: #050505;
-            --color-text: #F5F5F5;
-            --color-glitch-1: #00D1FF; /* Neon Cyan */
-            --color-glitch-2: #BB00FF; /* Ultraviolet */
-            --color-accent: #CCFF00;   /* Acid Lime */
-            --noise-opacity: 0.35;
+            --color-bg: #000000;
+            --color-text: #FFFFFF;
+            --color-cyan: #00D1FF;
+            --color-lime: #CCFF00;
+            --grid-color: rgba(0, 209, 255, 0.2);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body, html {
-            width: 100%;
-            height: 100%;
-            background-color: var(--color-bg);
-            color: var(--color-text);
-            font-family: 'Inter', sans-serif;
-            overflow: hidden; /* Запрещаем скролл для эффекта "экрана" */
-        }
-
-        /* 1. Эффект старого телевизора / Зернистый шум */
-        .noise {
-            position: fixed;
-            top: -50%;
-            left: -50%;
-            right: -50%;
-            bottom: -50%;
-            width: 200%;
-            height: 200vh;
-            background: transparent url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
-            opacity: var(--noise-opacity);
-            pointer-events: none;
-            z-index: 50;
-            animation: noiseAnim 0.2s infinite;
-        }
-
-        @keyframes noiseAnim {
-            0% { transform: translate(0,0); }
-            10% { transform: translate(-5%,-5%); }
-            20% { transform: translate(-10%,5%); }
-            30% { transform: translate(5%,-10%); }
-            40% { transform: translate(-5%,15%); }
-            50% { transform: translate(-10%,5%); }
-            60% { transform: translate(15%,0); }
-            70% { transform: translate(0,15%); }
-            80% { transform: translate(3%,35%); }
-            90% { transform: translate(-10%,10%); }
-            100% { transform: translate(0,0); }
-        }
-
-        /* Сканлайны (полосы от кинескопа) */
-        .scanlines {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
-            background-size: 100% 4px;
-            z-index: 51;
-            pointer-events: none;
-        }
-
-        /* Основной контейнер */
-        .main-stage {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-        }
-
-        /* ЭМБЛЕМА: AWGE Y2K Globe */
-        .raw-emblem {
-            width: clamp(150px, 30vw, 250px);
-            height: clamp(150px, 30vw, 250px);
-            margin-bottom: 2rem;
-            cursor: crosshair;
-            position: relative;
-        }
-
-        .raw-emblem svg {
-            width: 100%;
-            height: 100%;
-            overflow: visible;
-        }
-
-        /* Дополнительный резкий глитч эмблемы при наведении */
-        .raw-emblem:hover svg {
-            animation: svgGlitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
-            filter: drop-shadow(4px 0 0 var(--color-glitch-1)) drop-shadow(-4px 0 0 var(--color-glitch-2));
-        }
-
-        @keyframes svgGlitch {
-            0% { transform: translate(0) }
-            20% { transform: translate(-3px, 3px) }
-            40% { transform: translate(-3px, -3px) }
-            60% { transform: translate(3px, 3px) }
-            80% { transform: translate(3px, -3px) }
-            100% { transform: translate(0) }
-        }
-
-        /* ЗАГОЛОВОК: Огромный, брутальный */
-        .glitch-title {
-            font-family: 'Unbounded', sans-serif;
-            font-size: clamp(3rem, 12vw, 8rem);
-            font-weight: 900;
-            text-transform: uppercase;
-            position: relative;
-            margin-bottom: 3rem;
-            color: var(--color-text);
-            line-height: 1;
-            cursor: default;
-        }
-
-        /* Слои глитча для текста (AWGE стиль) */
-        .glitch-title::before, .glitch-title::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.8;
-        }
-
-        .glitch-title::before {
-            left: 3px;
-            text-shadow: -3px 0 var(--color-glitch-1);
-            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
-            animation: textGlitch 2s infinite linear alternate-reverse;
-        }
-
-        .glitch-title::after {
-            left: -3px;
-            text-shadow: -3px 0 var(--color-glitch-2);
-            clip-path: polygon(0 80%, 100% 20%, 100% 100%, 0 100%);
-            animation: textGlitch 3s infinite linear alternate-reverse;
-        }
-
-        @keyframes textGlitch {
-            0% { clip-path: polygon(0 20%, 100% 20%, 100% 21%, 0 21%); transform: translate(0); }
-            20% { clip-path: polygon(0 33%, 100% 33%, 100% 33%, 0 33%); transform: translate(-2px); }
-            40% { clip-path: polygon(0 44%, 100% 44%, 100% 44%, 0 44%); transform: translate(2px); }
-            60% { clip-path: polygon(0 50%, 100% 50%, 100% 20%, 0 20%); transform: translate(-2px); }
-            80% { clip-path: polygon(0 70%, 100% 70%, 100% 70%, 0 70%); transform: translate(2px); }
-            100% { clip-path: polygon(0 80%, 100% 80%, 100% 80%, 0 80%); transform: translate(0); }
-        }
-
-        /* КНОПКА: Сырой блок */
-        .brutal-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            padding: 1rem 3rem;
-            font-family: 'Unbounded', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: var(--color-bg);
-            background-color: var(--color-text);
-            text-decoration: none;
-            border: none;
-            position: relative;
-            cursor: pointer;
-            overflow: hidden;
-        }
-
-        .brutal-btn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%; width: 100%; height: 100%;
-            background: var(--color-accent);
-            z-index: -1;
-            transition: left 0.15s steps(3); /* Резкий, "рваный" переход */
-        }
-
-        .brutal-btn:hover::before {
-            left: 0;
-        }
-
-        .brutal-btn:hover {
-            color: #000; /* Черный текст на кислотном фоне при наведении */
-            transform: scale(1.05) rotate(-1deg);
-        }
-
-        .brutal-btn:active {
-            transform: scale(0.95) rotate(1deg);
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        .arrow-icon {
-            font-family: 'Inter', sans-serif;
-            transition: transform 0.1s;
-        }
-        
-        .brutal-btn:hover .arrow-icon {
-            transform: translateX(10px);
+        body, html { 
+            width: 100%; height: 100%; 
+            background-color: var(--color-bg); color: var(--color-text); 
+            font-family: 'Inter', sans-serif; 
+            overflow: hidden; overscroll-behavior: none; position: fixed;
         }
 
+        /* ФИКС: Жесткая привязка сетки к низу экрана для мобилок */
+        .grid-container {
+            position: fixed; bottom: 0; left: -50%; width: 200%; height: 100vh;
+            background-image: linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 40px 40px; 
+            transform-origin: bottom center;
+            transform: perspective(300px) rotateX(80deg); 
+            animation: gridMove 2s linear infinite;
+            -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+            mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%); z-index: 1;
+        }
+
+        @keyframes gridMove { 
+            0% { transform: perspective(300px) rotateX(80deg) translateY(0); } 
+            100% { transform: perspective(300px) rotateX(80deg) translateY(40px); } 
+        }
+
+        .subtle-noise { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noise"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noise)" opacity="0.04"/%3E%3C/svg%3E'); pointer-events: none; z-index: 50; }
+        .vignette { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, transparent 20%, #000 100%); z-index: 2; pointer-events: none; }
+
+        .main-stage { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10; padding: 24px; }
+
+        .raw-emblem { width: clamp(100px, 30vw, 150px); height: clamp(100px, 30vw, 150px); margin-bottom: 24px; cursor: pointer; position: relative; }
+        .raw-emblem svg { width: 100%; height: 100%; overflow: visible; }
+        .raw-emblem:hover svg { animation: svgGlitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite; filter: drop-shadow(4px 0 0 var(--color-cyan)) drop-shadow(-4px 0 0 var(--color-lime)); }
+
+        @keyframes svgGlitch { 0% { transform: translate(0) } 20% { transform: translate(-2px, 2px) } 40% { transform: translate(-2px, -2px) } 60% { transform: translate(2px, 2px) } 80% { transform: translate(2px, -2px) } 100% { transform: translate(0) } }
+
+        .glitch-title { font-family: 'Unbounded', sans-serif; font-size: clamp(2.5rem, 12vw, 6rem); font-weight: 900; text-transform: uppercase; margin-bottom: 40px; color: var(--color-text); line-height: 1; text-align: center; text-shadow: 0 0 20px rgba(0, 209, 255, 0.3); white-space: nowrap; }
+
+        .glass-btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+            padding: 16px 32px; font-family: 'Unbounded', sans-serif; font-size: clamp(12px, 4vw, 14px); font-weight: 900; letter-spacing: 1px; text-transform: uppercase;
+            color: var(--color-lime); text-decoration: none; border-radius: 100px;
+            background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); position: relative; overflow: hidden; white-space: nowrap;
+        }
+
+        .glass-btn:hover { background: rgba(204, 255, 0, 0.1); border-color: rgba(204, 255, 0, 0.3); transform: translateY(-2px); box-shadow: 0 10px 20px rgba(204, 255, 0, 0.15); }
+        .glass-btn:active { transform: translateY(1px); }
+        .arrow-icon { font-family: 'Inter', sans-serif; transition: transform 0.3s; }
+        .glass-btn:hover .arrow-icon { transform: translateX(5px); }
     </style>
 </head>
 <body>
-    <div class="noise"></div>
-    <div class="scanlines"></div>
+    <div class="grid-container"></div>
+    <div class="vignette"></div>
+    <div class="subtle-noise"></div>
     
     <div class="main-stage">
-        
         <div class="raw-emblem">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
-                <g stroke="var(--color-glitch-2)" stroke-width="4" opacity="0.9" transform="translate(-4, 0)">
-                    <circle cx="100" cy="100" r="45"/>
-                    <ellipse cx="100" cy="100" rx="15" ry="45"/>
-                    <ellipse cx="100" cy="100" rx="45" ry="15"/>
+                <g stroke="var(--color-cyan)" stroke-width="4" opacity="0.9" transform="translate(-4, 0)">
+                    <circle cx="100" cy="100" r="45"/><ellipse cx="100" cy="100" rx="15" ry="45"/><ellipse cx="100" cy="100" rx="45" ry="15"/>
                 </g>
-                
-                <g stroke="var(--color-glitch-1)" stroke-width="4" opacity="0.9" transform="translate(4, 0)">
-                    <circle cx="100" cy="100" r="45"/>
-                    <ellipse cx="100" cy="100" rx="15" ry="45"/>
-                    <ellipse cx="100" cy="100" rx="45" ry="15"/>
+                <g stroke="var(--color-lime)" stroke-width="4" opacity="0.9" transform="translate(4, 0)">
+                    <circle cx="100" cy="100" r="45"/><ellipse cx="100" cy="100" rx="15" ry="45"/><ellipse cx="100" cy="100" rx="45" ry="15"/>
                 </g>
-
                 <g stroke="var(--color-text)" stroke-width="4">
-                    <circle cx="100" cy="100" r="45"/>
-                    <ellipse cx="100" cy="100" rx="15" ry="45"/>
-                    <ellipse cx="100" cy="100" rx="45" ry="15"/>
+                    <circle cx="100" cy="100" r="45"/><ellipse cx="100" cy="100" rx="15" ry="45"/><ellipse cx="100" cy="100" rx="45" ry="15"/>
                 </g>
-
                 <path d="M 55 60 H 95 L 145 100 L 95 140 H 55 L 105 100 Z" fill="var(--color-bg)" stroke="var(--color-bg)" stroke-width="12" stroke-linejoin="miter" stroke-miterlimit="10"/>
-                
-                <path d="M 55 60 H 95 L 145 100 L 95 140 H 55 L 105 100 Z" fill="var(--color-accent)"/>
+                <path d="M 55 60 H 95 L 145 100 L 95 140 H 55 L 105 100 Z" fill="var(--color-lime)"/>
             </svg>
         </div>
 
-        <h1 class="glitch-title" data-text="коридор">коридор</h1>
+        <h1 class="glitch-title">коридор</h1>
         
-        <a href="https://t.me/mavrtunbot" target="_blank" rel="noopener noreferrer" class="brutal-btn">
-            вход
+        <a href="https://t.me/mavrtunbot" target="_blank" rel="noopener noreferrer" class="glass-btn">
+            Запустить бота
             <span class="arrow-icon">→</span>
         </a>
-
     </div>
 </body>
 </html>
