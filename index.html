@@ -3,105 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="коридор — инструменты для роутинга трафика">
-    <meta name="keywords" content="коридор, vpn, навигация, цифровой путь, роутинг трафика, telegram">
-    <meta name="author" content="Мавр">
-    
+    <meta name="description" content="коридор — инструменты роутинга">
+    <meta name="keywords" content="коридор, навигация, роутинг, telegram">
+    <meta name="author" content="мавр">
     <title>коридор</title>
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    
     <style>
         :root {
-            --color-bg: #000000;
-            --color-text: #FFFFFF;
-            --color-cyan: #00D1FF;
-            --color-lime: #CCFF00;
-            --grid-color: rgba(0, 209, 255, 0.2);
+            --color-bg: #000000; --color-text: #FFFFFF;
+            --color-cyan: #00D1FF; --color-lime: #CCFF00; --color-purple: #BB00FF;
+            --grid-color: rgba(0, 209, 255, 0.25);
+            /* Переменные для логотипа */
+            --logo-layer-1: var(--color-purple);
+            --logo-layer-2: var(--color-cyan);
+            --logo-main: var(--color-lime);
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, html { width: 100%; height: 100%; background-color: var(--color-bg); color: var(--color-text); font-family: 'Inter', sans-serif; overflow: hidden; overscroll-behavior: none; position: fixed; }
+
+        .bg-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; overflow: hidden; }
         
-        body, html { 
-            width: 100%; height: 100%; 
-            background-color: var(--color-bg); color: var(--color-text); 
-            font-family: 'Inter', sans-serif; 
-            overflow: hidden; overscroll-behavior: none; position: fixed;
-        }
+        .ambient-blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.45; animation: float 10s infinite alternate ease-in-out; }
+        .blob-1 { width: 50vw; height: 50vw; background: var(--color-cyan); top: -10%; left: -20%; }
+        .blob-2 { width: 40vw; height: 40vw; background: var(--color-purple); bottom: 10%; right: -10%; animation-delay: -4s; }
+        @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(10vw, 10vh) scale(1.1); } }
 
-        /* ФИКС: Жесткая привязка сетки к низу экрана для мобилок */
-        .grid-container {
-            position: fixed; bottom: 0; left: -50%; width: 200%; height: 100vh;
-            background-image: linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-            background-size: 40px 40px; 
-            transform-origin: bottom center;
-            transform: perspective(300px) rotateX(80deg); 
-            animation: gridMove 2s linear infinite;
-            -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
-            mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%); z-index: 1;
-        }
+        .grid-container { position: absolute; bottom: 0; left: 0; width: 100%; height: 50vh; background-image: linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px); background-size: 40px 40px; background-position: center bottom; transform-origin: top center; transform: perspective(400px) rotateX(70deg); animation: gridMove 2s linear infinite; mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,1) 100%); -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 40%, rgba(0,0,0,1) 100%); }
+        @keyframes gridMove { 0% { background-position: 0 0; } 100% { background-position: 0 40px; } }
 
-        @keyframes gridMove { 
-            0% { transform: perspective(300px) rotateX(80deg) translateY(0); } 
-            100% { transform: perspective(300px) rotateX(80deg) translateY(40px); } 
-        }
-
-        .subtle-noise { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noise"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noise)" opacity="0.04"/%3E%3C/svg%3E'); pointer-events: none; z-index: 50; }
-        .vignette { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, transparent 20%, #000 100%); z-index: 2; pointer-events: none; }
+        .subtle-noise { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noise"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noise)" opacity="0.05"/%3E%3C/svg%3E'); opacity: 0.9; }
 
         .main-stage { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10; padding: 24px; }
 
-        .raw-emblem { width: clamp(100px, 30vw, 150px); height: clamp(100px, 30vw, 150px); margin-bottom: 24px; cursor: pointer; position: relative; }
-        .raw-emblem svg { width: 100%; height: 100%; overflow: visible; }
-        .raw-emblem:hover svg { animation: svgGlitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite; filter: drop-shadow(4px 0 0 var(--color-cyan)) drop-shadow(-4px 0 0 var(--color-lime)); }
+        .brand-logo { width: clamp(100px, 20vw, 130px); height: auto; margin-bottom: 32px; filter: drop-shadow(0 0 15px rgba(204, 255, 0, 0.1)); transition: filter 0.4s ease; cursor: pointer; }
+        .brand-logo:hover { filter: drop-shadow(0 0 25px rgba(204, 255, 0, 0.3)); }
+        .brand-logo .glitch-layer-1, .brand-logo .glitch-layer-2 { transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: center; }
+        .brand-logo:hover .glitch-layer-1 { transform: translate(-3px, 3px); }
+        .brand-logo:hover .glitch-layer-2 { transform: translate(3px, -3px); }
 
-        @keyframes svgGlitch { 0% { transform: translate(0) } 20% { transform: translate(-2px, 2px) } 40% { transform: translate(-2px, -2px) } 60% { transform: translate(2px, 2px) } 80% { transform: translate(2px, -2px) } 100% { transform: translate(0) } }
-
-        .glitch-title { font-family: 'Unbounded', sans-serif; font-size: clamp(2.5rem, 12vw, 6rem); font-weight: 900; text-transform: uppercase; margin-bottom: 40px; color: var(--color-text); line-height: 1; text-align: center; text-shadow: 0 0 20px rgba(0, 209, 255, 0.3); white-space: nowrap; }
+        .glitch-title { font-family: 'Unbounded', sans-serif; font-size: clamp(2.5rem, 12vw, 6rem); font-weight: 900; text-transform: lowercase; margin-bottom: 40px; color: var(--color-text); line-height: 1; text-align: center; text-shadow: 0 0 20px rgba(0, 209, 255, 0.3); white-space: nowrap; }
 
         .glass-btn {
             display: inline-flex; align-items: center; justify-content: center; gap: 12px;
-            padding: 16px 32px; font-family: 'Unbounded', sans-serif; font-size: clamp(12px, 4vw, 14px); font-weight: 900; letter-spacing: 1px; text-transform: uppercase;
+            padding: 16px 32px; font-family: 'Unbounded', sans-serif; font-size: clamp(12px, 4vw, 14px); font-weight: 900; letter-spacing: 1px; text-transform: lowercase;
             color: var(--color-lime); text-decoration: none; border-radius: 100px;
-            background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); position: relative; overflow: hidden; white-space: nowrap;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08); border-top: 1px solid rgba(255, 255, 255, 0.15); border-left: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(24px) saturate(150%); -webkit-backdrop-filter: blur(24px) saturate(150%);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); position: relative; overflow: hidden; white-space: nowrap;
         }
 
-        .glass-btn:hover { background: rgba(204, 255, 0, 0.1); border-color: rgba(204, 255, 0, 0.3); transform: translateY(-2px); box-shadow: 0 10px 20px rgba(204, 255, 0, 0.15); }
+        .glass-btn:hover { background: rgba(255, 255, 255, 0.08); border-color: rgba(204, 255, 0, 0.3); transform: translateY(-2px); box-shadow: 0 12px 32px 0 rgba(204, 255, 0, 0.15); }
         .glass-btn:active { transform: translateY(1px); }
         .arrow-icon { font-family: 'Inter', sans-serif; transition: transform 0.3s; }
         .glass-btn:hover .arrow-icon { transform: translateX(5px); }
     </style>
 </head>
 <body>
-    <div class="grid-container"></div>
-    <div class="vignette"></div>
-    <div class="subtle-noise"></div>
+    <div class="bg-layer">
+        <div class="ambient-blob blob-1"></div>
+        <div class="ambient-blob blob-2"></div>
+        <div class="grid-container"></div>
+        <div class="subtle-noise"></div>
+    </div>
     
     <div class="main-stage">
-        <div class="raw-emblem">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
-                <g stroke="var(--color-cyan)" stroke-width="4" opacity="0.9" transform="translate(-4, 0)">
-                    <circle cx="100" cy="100" r="45"/><ellipse cx="100" cy="100" rx="15" ry="45"/><ellipse cx="100" cy="100" rx="45" ry="15"/>
-                </g>
-                <g stroke="var(--color-lime)" stroke-width="4" opacity="0.9" transform="translate(4, 0)">
-                    <circle cx="100" cy="100" r="45"/><ellipse cx="100" cy="100" rx="15" ry="45"/><ellipse cx="100" cy="100" rx="45" ry="15"/>
-                </g>
-                <g stroke="var(--color-text)" stroke-width="4">
-                    <circle cx="100" cy="100" r="45"/><ellipse cx="100" cy="100" rx="15" ry="45"/><ellipse cx="100" cy="100" rx="45" ry="15"/>
-                </g>
-                <path d="M 55 60 H 95 L 145 100 L 95 140 H 55 L 105 100 Z" fill="var(--color-bg)" stroke="var(--color-bg)" stroke-width="12" stroke-linejoin="miter" stroke-miterlimit="10"/>
-                <path d="M 55 60 H 95 L 145 100 L 95 140 H 55 L 105 100 Z" fill="var(--color-lime)"/>
-            </svg>
-        </div>
+        <svg class="brand-logo" viewBox="0 0 207 184" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g class="glitch-layer-1" opacity="0.9">
+                <path d="M98.9 181.55C148.481 181.55 188.675 141.356 188.675 91.775C188.675 42.1936 148.481 2 98.9 2C49.3186 2 9.125 42.1936 9.125 91.775C9.125 141.356 49.3186 181.55 98.9 181.55Z" stroke="var(--logo-layer-1)" stroke-width="4"/>
+                <path d="M98.9016 181.55C115.429 181.55 128.827 141.356 128.827 91.775C128.827 42.1936 115.429 2 98.9016 2C82.3744 2 68.9766 42.1936 68.9766 91.775C68.9766 141.356 82.3744 181.55 98.9016 181.55Z" stroke="var(--logo-layer-1)" stroke-width="4"/>
+                <path d="M98.9 121.7C148.481 121.7 188.675 108.302 188.675 91.7751C188.675 75.248 148.481 61.8501 98.9 61.8501C49.3186 61.8501 9.125 75.248 9.125 91.7751C9.125 108.302 49.3186 121.7 98.9 121.7Z" stroke="var(--logo-layer-1)" stroke-width="4"/>
+            </g>
+            <g class="glitch-layer-2" opacity="0.9">
+                <path d="M114.857 181.55C164.438 181.55 204.632 141.356 204.632 91.775C204.632 42.1936 164.438 2 114.857 2C65.2757 2 25.082 42.1936 25.082 91.775C25.082 141.356 65.2757 181.55 114.857 181.55Z" stroke="var(--logo-layer-2)" stroke-width="4"/>
+                <path d="M114.859 181.55C131.386 181.55 144.784 141.356 144.784 91.775C144.784 42.1936 131.386 2 114.859 2C98.3315 2 84.9336 42.1936 84.9336 91.775C84.9336 141.356 98.3315 181.55 114.859 181.55Z" stroke="var(--logo-layer-2)" stroke-width="4"/>
+                <path d="M114.857 121.7C164.438 121.7 204.632 108.302 204.632 91.7751C204.632 75.248 164.438 61.8501 114.857 61.8501C65.2757 61.8501 25.082 75.248 25.082 91.7751C25.082 108.302 65.2757 121.7 114.857 121.7Z" stroke="var(--logo-layer-2)" stroke-width="4"/>
+            </g>
+            <path d="M106.88 181.55C156.462 181.55 196.655 141.356 196.655 91.775C196.655 42.1936 156.462 2 106.88 2C57.2991 2 17.1055 42.1936 17.1055 91.775C17.1055 141.356 57.2991 181.55 106.88 181.55Z" stroke="var(--color-text)" stroke-width="4"/>
+            <path d="M106.882 181.55C123.409 181.55 136.807 141.356 136.807 91.775C136.807 42.1936 123.409 2 106.882 2C90.3549 2 76.957 42.1936 76.957 91.775C76.957 141.356 90.3549 181.55 106.882 181.55Z" stroke="var(--color-text)" stroke-width="4"/>
+            <path d="M106.88 121.7C156.462 121.7 196.655 108.302 196.655 91.7751C196.655 75.248 156.462 61.8501 106.88 61.8501C57.2991 61.8501 17.1055 75.248 17.1055 91.7751C17.1055 108.302 57.2991 121.7 106.88 121.7Z" stroke="var(--color-text)" stroke-width="4"/>
+            <path d="M17.1055 11.9756H96.9055L196.655 91.7756L96.9055 171.576H17.1055L116.855 91.7756L17.1055 11.9756Z" fill="var(--color-bg)" stroke="var(--color-bg)" stroke-width="12" stroke-miterlimit="10"/>
+            <path d="M17.1055 11.9756H96.9055L196.655 91.7756L96.9055 171.576H17.1055L116.855 91.7756L17.1055 11.9756Z" fill="var(--logo-main)"/>
+        </svg>
 
         <h1 class="glitch-title">коридор</h1>
         
         <a href="https://t.me/mavrtunbot" target="_blank" rel="noopener noreferrer" class="glass-btn">
-            Запустить бота
+            запустить
             <span class="arrow-icon">→</span>
         </a>
     </div>
