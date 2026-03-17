@@ -38,7 +38,9 @@
 
                 // Определяем тему для таймера
                 let theme = urlParams.has('redirect') ? urlParams.get('redirect') : detectOS();
-                let themeURL = `themes/${theme}.html`;
+                
+                // ИСПРАВЛЕНИЕ ЗДЕСЬ: папка называется redirect, а не themes
+                let themeURL = `redirect/${theme}.html`;
 
                 if (redirectTo) {
                     themeURL += `?redirect_to=${encodeURIComponent(redirectTo)}`;
