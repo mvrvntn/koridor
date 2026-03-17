@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://mvrvntn.github.io/mavr-vpn.online/sitemap.xml
