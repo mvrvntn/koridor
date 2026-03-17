@@ -8,6 +8,47 @@
     <meta name="author" content="мавр">
     
     <title>коридор</title>
+
+    <script>
+        (function() {
+            const search = window.location.search;
+            const urlParams = new URLSearchParams(search);
+
+            // Если есть параметр redirect или system, запускаем перехват
+            if (urlParams.has('redirect') || urlParams.has('system')) {
+                let redirectTo = null;
+                
+                // Парсим redirect_to вручную, чтобы сохранить вложенные параметры
+                const redirectToMatch = search.match(/[&?]redirect_to=/);
+                if (redirectToMatch) {
+                    const redirectToStart = redirectToMatch.index + redirectToMatch[0].length;
+                    const redirectToValue = search.substring(redirectToStart);
+                    redirectTo = decodeURIComponent(redirectToValue);
+                }
+
+                function detectOS() {
+                    const userAgent = navigator.userAgent.toLowerCase();
+                    const platform = navigator.platform.toLowerCase();
+                    if (platform.indexOf('win') !== -1 || userAgent.indexOf('windows') !== -1) return 'microsoft';
+                    if (platform.indexOf('mac') !== -1 || userAgent.indexOf('macintosh') !== -1 || userAgent.indexOf('mac os') !== -1) return 'apple';
+                    if (/iphone|ipad|ipod/.test(userAgent)) return 'apple';
+                    if (userAgent.indexOf('android') !== -1) return 'google';
+                    return 'telegram';
+                }
+
+                // Определяем тему для таймера
+                let theme = urlParams.has('redirect') ? urlParams.get('redirect') : detectOS();
+                let themeURL = `themes/${theme}.html`;
+
+                if (redirectTo) {
+                    themeURL += `?redirect_to=${encodeURIComponent(redirectTo)}`;
+                }
+
+                // Редирект на страницу с таймером
+                window.location.replace(themeURL);
+            }
+        })();
+    </script>
     
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 207 184' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg opacity='0.9'%3E%3Cpath d='M98.9 181.55C148.481 181.55 188.675 141.356 188.675 91.775C188.675 42.1936 148.481 2 98.9 2C49.3186 2 9.125 42.1936 9.125 91.775C9.125 141.356 49.3186 181.55 98.9 181.55Z' stroke='%23BB00FF' stroke-width='4'/%3E%3Cpath d='M98.9016 181.55C115.429 181.55 128.827 141.356 128.827 91.775C128.827 42.1936 115.429 2 98.9016 2C82.3744 2 68.9766 42.1936 68.9766 91.775C68.9766 141.356 82.3744 181.55 98.9016 181.55Z' stroke='%23BB00FF' stroke-width='4'/%3E%3Cpath d='M98.9 121.7C148.481 121.7 188.675 108.302 188.675 91.7751C188.675 75.248 148.481 61.8501 98.9 61.8501C49.3186 61.8501 9.125 75.248 9.125 91.7751C9.125 108.302 49.3186 121.7 98.9 121.7Z' stroke='%23BB00FF' stroke-width='4'/%3E%3C/g%3E%3Cg opacity='0.9'%3E%3Cpath d='M114.857 181.55C164.438 181.55 204.632 141.356 204.632 91.775C204.632 42.1936 164.438 2 114.857 2C65.2757 2 25.082 42.1936 25.082 91.775C25.082 141.356 65.2757 181.55 114.857 181.55Z' stroke='%2300D1FF' stroke-width='4'/%3E%3Cpath d='M114.859 181.55C131.386 181.55 144.784 141.356 144.784 91.775C144.784 42.1936 131.386 2 114.859 2C98.3315 2 84.9336 42.1936 84.9336 91.775C84.9336 141.356 98.3315 181.55 114.859 181.55Z' stroke='%2300D1FF' stroke-width='4'/%3E%3Cpath d='M114.857 121.7C164.438 121.7 204.632 108.302 204.632 91.7751C204.632 75.248 164.438 61.8501 114.857 61.8501C65.2757 61.8501 25.082 75.248 25.082 91.7751C25.082 108.302 65.2757 121.7 114.857 121.7Z' stroke='%2300D1FF' stroke-width='4'/%3E%3C/g%3E%3Cpath d='M106.88 181.55C156.462 181.55 196.655 141.356 196.655 91.775C196.655 42.1936 156.462 2 106.88 2C57.2991 2 17.1055 42.1936 17.1055 91.775C17.1055 141.356 57.2991 181.55 106.88 181.55Z' stroke='%23F5F5F5' stroke-width='4'/%3E%3Cpath d='M106.882 181.55C123.409 181.55 136.807 141.356 136.807 91.775C136.807 42.1936 123.409 2 106.882 2C90.3549 2 76.957 42.1936 76.957 91.775C76.957 141.356 90.3549 181.55 106.882 181.55Z' stroke='%23F5F5F5' stroke-width='4'/%3E%3Cpath d='M106.88 121.7C156.462 121.7 196.655 108.302 196.655 91.7751C196.655 75.248 156.462 61.8501 106.88 61.8501C57.2991 61.8501 17.1055 75.248 17.1055 91.7751C17.1055 108.302 57.2991 121.7 106.88 121.7Z' stroke='%23F5F5F5' stroke-width='4'/%3E%3Cpath d='M17.1055 11.9756H96.9055L196.655 91.7756L96.9055 171.576H17.1055L116.855 91.7756L17.1055 11.9756Z' fill='%23000000' stroke='%23000000' stroke-width='12' stroke-miterlimit='10'/%3E%3Cpath d='M17.1055 11.9756H96.9055L196.655 91.7756L96.9055 171.576H17.1055L116.855 91.7756L17.1055 11.9756Z' fill='%23CCFF00'/%3E%3C/svg%3E">
     
@@ -106,7 +147,7 @@
                 <path d="M114.857 121.7C164.438 121.7 204.632 108.302 204.632 91.7751C204.632 75.248 164.438 61.8501 114.857 61.8501C65.2757 61.8501 25.082 75.248 25.082 91.7751C25.082 108.302 65.2757 121.7 114.857 121.7Z" stroke="var(--logo-layer-2)" stroke-width="4"/>
             </g>
             <path d="M106.88 181.55C156.462 181.55 196.655 141.356 196.655 91.775C196.655 42.1936 156.462 2 106.88 2C57.2991 2 17.1055 42.1936 17.1055 91.775C17.1055 141.356 57.2991 181.55 106.88 181.55Z" stroke="var(--color-text)" stroke-width="4"/>
-            <path d="M106.882 181.55C123.409 181.55 136.807 141.356 136.807 91.775C136.807 42.1936 123.409 2 106.882 2C90.3549 2 76.957 42.1936 76.957 91.775C76.957 141.356 90.3549 181.55 106.882 181.55Z" stroke="var(--color-text)" stroke-width="4"/>
+            <path d="M106.882 181.55C123.409 181.55 136.807 141.356 136.807 91.775C136.807 42.1936 123.409 2 106.882 2C90.3549 2 76.957 42.1936 76.957 91.775C76.957 141.356 90.3549 181.55 106.882 181.55Z" stroke="var(--color-text)" stroke, stroke-width="4"/>
             <path d="M106.88 121.7C156.462 121.7 196.655 108.302 196.655 91.7751C196.655 75.248 156.462 61.8501 106.88 61.8501C57.2991 61.8501 17.1055 75.248 17.1055 91.7751C17.1055 108.302 57.2991 121.7 106.88 121.7Z" stroke="var(--color-text)" stroke-width="4"/>
             <path d="M17.1055 11.9756H96.9055L196.655 91.7756L96.9055 171.576H17.1055L116.855 91.7756L17.1055 11.9756Z" fill="var(--color-bg)" stroke="var(--color-bg)" stroke-width="12" stroke-miterlimit="10"/>
             <path d="M17.1055 11.9756H96.9055L196.655 91.7756L96.9055 171.576H17.1055L116.855 91.7756L17.1055 11.9756Z" fill="var(--logo-main)"/>
