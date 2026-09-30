@@ -2,10 +2,17 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="коридор — инструменты роутинга">
     <meta name="keywords" content="коридор, навигация, роутинг, telegram">
     <meta name="author" content="мавр">
+
+    <!-- OpenGraph / Social Sharing (Telegram, Discord, Twitter) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="коридор">
+    <meta property="og:description" content="инструменты роутинга">
+    <meta property="og:image" content="logo.png">
+    <meta name="twitter:card" content="summary_large_image">
     
     <title>коридор</title>
 
@@ -38,8 +45,6 @@
 
                 // Определяем тему для таймера
                 let theme = urlParams.has('redirect') ? urlParams.get('redirect') : detectOS();
-                
-                // ИСПРАВЛЕНИЕ ЗДЕСЬ: папка называется redirect, а не themes
                 let themeURL = `redirect/${theme}.html`;
 
                 if (redirectTo) {
@@ -52,16 +57,22 @@
         })();
     </script>
     
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg viewBox='0 0 207 184' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg opacity='0.9'%3E%3Cpath d='M98.9 181.55C148.481 181.55 188.675 141.356 188.675 91.775C188.675 42.1936 148.481 2 98.9 2C49.3186 2 9.125 42.1936 9.125 91.775C9.125 141.356 49.3186 181.55 98.9 181.55Z' stroke='%23FF1744' stroke-width='4'/%3E%3Cpath d='M98.9016 181.55C115.429 181.55 128.827 141.356 128.827 91.775C128.827 42.1936 115.429 2 98.9016 2C82.3744 2 68.9766 42.1936 68.9766 91.775C68.9766 141.356 82.3744 181.55 98.9016 181.55Z' stroke='%23FF1744' stroke-width='4'/%3E%3Cpath d='M98.9 121.7C148.481 121.7 188.675 108.302 188.675 91.7751C188.675 75.248 148.481 61.8501 98.9 61.8501C49.3186 61.8501 9.125 75.248 9.125 91.7751C9.125 108.302 49.3186 121.7 98.9 121.7Z' stroke='%23FF1744' stroke-width='4'/%3E%3C/g%3E%3Cg opacity='0.9'%3E%3Cpath d='M114.857 181.55C164.438 181.55 204.632 141.356 204.632 91.775C204.632 42.1936 164.438 2 114.857 2C65.2757 2 25.082 42.1936 25.082 91.775C25.082 141.356 65.2757 181.55 114.857 181.55Z' stroke='%2300D1FF' stroke-width='4'/%3E%3Cpath d='M114.859 181.55C131.386 181.55 144.784 141.356 144.784 91.775C144.784 42.1936 131.386 2 114.859 2C98.3315 2 84.9336 42.1936 84.9336 91.775C84.9336 141.356 98.3315 181.55 114.859 181.55Z' stroke='%2300D1FF' stroke-width='4'/%3E%3Cpath d='M114.857 121.7C164.438 121.7 204.632 108.302 204.632 91.7751C204.632 75.248 164.438 61.8501 114.857 61.8501C65.2757 61.8501 25.082 75.248 25.082 91.7751C25.082 108.302 65.2757 121.7 114.857 121.7Z' stroke='%2300D1FF' stroke-width='4'/%3E%3C/g%3E%3Cpath d='M106.88 181.55C156.462 181.55 196.655 141.356 196.655 91.775C196.655 42.1936 156.462 2 106.88 2C57.2991 2 17.1055 42.1936 17.1055 91.775C17.1055 141.356 57.2991 181.55 106.88 181.55Z' stroke='%23F5F5F5' stroke-width='4'/%3E%3Cpath d='M106.882 181.55C123.409 181.55 136.807 141.356 136.807 91.775C136.807 42.1936 123.409 2 106.882 2C90.3549 2 76.957 42.1936 76.957 91.775C76.957 141.356 90.3549 181.55 106.882 181.55Z' stroke='%23F5F5F5' stroke-width='4'/%3E%3Cpath d='M106.88 121.7C156.462 121.7 196.655 108.302 196.655 91.7751C196.655 75.248 156.462 61.8501 106.88 61.8501C57.2991 61.8501 17.1055 75.248 17.1055 91.7751C17.1055 108.302 57.2991 121.7 106.88 121.7Z' stroke='%23F5F5F5' stroke-width='4'/%3E%3Cpath d='M17.1055 11.9756H96.9055L196.655 91.7756L96.9055 171.576H17.1055L116.855 91.7756L17.1055 11.9756Z' fill='%230A0A0A' stroke='%230A0A0A' stroke-width='12' stroke-miterlimit='10'/%3E%3Cpath d='M17.1055 11.9756H96.9055L196.655 91.7756L96.9055 171.576H17.1055L116.855 91.7756L17.1055 11.9756Z' fill='%23BDE619'/%3E%3C/svg%3E">
+    <!-- Фирменный фавикон 3-B маскота коридор -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' rx='60' fill='%230D0E12'/%3E%3Cg transform='translate(128, 128)'%3E%3Ccircle cx='0' cy='0' r='82' fill='%2305070A'/%3E%3Cpath d='M -82 0 C -82 -45.3 -45.3 -82 0 -82 C 38.5 -82 70.8 -55.5 79 -24 L 35 -10 C 29 -27 16 -38 0 -38 C -21 -38 -38 -21 -38 0 Z' fill='%23FFFFFF'/%3E%3Cpath d='M -82 0 C -82 45.3 -45.3 82 0 82 C 38.5 82 70.8 55.5 79 24 L 35 10 C 29 27 16 38 0 38 C -21 38 -38 21 -38 0 Z' fill='%23FFFFFF'/%3E%3Cpath d='M -98 -20 L 46 -20 L 104 0 L 46 20 L -98 20 C -105 20 -109 10 -109 0 C -109 -10 -105 -20 -98 -20 Z' fill='%23C6F135'/%3E%3Cellipse cx='-28' cy='-2' rx='8.5' ry='11' transform='rotate(7, -28, -2)' fill='%230D0E12'/%3E%3Cellipse cx='16' cy='-2' rx='8.5' ry='11' transform='rotate(-7, 16, -2)' fill='%230D0E12'/%3E%3C/g%3E%3C/svg%3E">
+    <link rel="icon" href="ico.ico" sizes="any">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Jost:wght@300;400;500;600&family=Manrope:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Оптимизированная загрузка только используемых шрифтов -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&family=Outfit:wght@800&family=Space+Grotesk:wght@400&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --color-bg: #0A0A0A; --color-text: #F5F5F5;
-            --color-cyan: #00D1FF; --color-lime: #BDE619; --color-purple: #FF1744;
+            --color-bg: #0A0A0A; 
+            --color-text: #F5F5F5;
+            --color-cyan: #00D1FF; 
+            --color-lime: #C6F135; 
+            --color-purple: #FF1744;
             --grid-color: rgba(0, 209, 255, 0.25);
             /* Переменные для логотипа и кнопки */
             --logo-layer-1: var(--color-purple);
@@ -86,28 +97,35 @@
 
         .main-stage { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10; padding: 24px; }
 
-        .brand-logo { width: clamp(100px, 20vw, 130px); height: auto; margin-bottom: 32px; filter: drop-shadow(0 0 15px rgba(189, 230, 25, 0.1)); transition: filter 0.4s ease; cursor: pointer; }
-        .brand-logo:hover { filter: drop-shadow(0 0 25px rgba(189, 230, 25, 0.3)); }
-        .brand-logo .glitch-layer-1, .brand-logo .glitch-layer-2 { transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: center; }
-        .brand-logo:hover .glitch-layer-1 { transform: translate(-3px, 3px); }
-        .brand-logo:hover .glitch-layer-2 { transform: translate(3px, -3px); }
+        .brand-logo { 
+            width: clamp(120px, 22vw, 150px); 
+            height: auto; 
+            margin-bottom: 32px; 
+            filter: drop-shadow(0 0 20px rgba(198, 241, 53, 0.2)); 
+            transition: filter 0.4s ease, transform 0.3s ease; 
+            cursor: pointer; 
+        }
+        .brand-logo:hover { 
+            filter: drop-shadow(0 0 35px rgba(198, 241, 53, 0.5)); 
+            transform: scale(1.04);
+        }
 
-        .glitch-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.2rem, 10vw, 5rem); font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; padding-left: 0.18em; margin-bottom: 40px; color: var(--color-text); line-height: 1; text-align: center; text-shadow: 0 0 20px rgba(189, 230, 25, 0.2); animation: text-glow 4s infinite ease-in-out; white-space: nowrap; }
+        .glitch-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.2rem, 10vw, 5rem); font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; padding-left: 0.18em; margin-bottom: 40px; color: var(--color-text); line-height: 1; text-align: center; text-shadow: 0 0 20px rgba(198, 241, 53, 0.2); animation: text-glow 4s infinite ease-in-out; white-space: nowrap; }
 
         /* ИДЕАЛЬНОЕ МАТОВОЕ СТЕКЛО */
         .glass-btn {
             display: inline-flex; align-items: center; justify-content: center; gap: 12px;
             padding: 16px 32px; font-family: 'Outfit', sans-serif; font-size: clamp(12px, 4vw, 14px); font-weight: 800; letter-spacing: 1px; text-transform: lowercase;
             color: #000000; background: var(--color-lime); text-decoration: none; border-radius: 16px;
-            box-shadow: 0 0 20px rgba(189, 230, 25, 0.15);
+            box-shadow: 0 0 20px rgba(198, 241, 53, 0.2);
             transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: relative; overflow: hidden; white-space: nowrap;
         }
 
         .glass-btn:hover { 
-            background: #a9cf13;
+            background: #b5e027;
             transform: translateY(-2px); 
-            box-shadow: 0 0 30px rgba(189, 230, 25, 0.25); 
+            box-shadow: 0 0 30px rgba(198, 241, 53, 0.4); 
         }
         
         .glass-btn:active { transform: translateY(1px); }
@@ -115,10 +133,9 @@
         .glass-btn:hover .arrow-icon { transform: translateX(5px); }
     
         @keyframes text-glow {
-            0%, 100% { text-shadow: 0 0 20px rgba(189, 230, 25, 0.2); }
-            50% { text-shadow: 0 0 35px rgba(189, 230, 25, 0.55), 0 0 10px rgba(189, 230, 25, 0.2); }
+            0%, 100% { text-shadow: 0 0 20px rgba(198, 241, 53, 0.2); }
+            50% { text-shadow: 0 0 35px rgba(198, 241, 53, 0.55), 0 0 10px rgba(198, 241, 53, 0.2); }
         }
-    
     </style>
 </head>
 <body>
@@ -130,22 +147,23 @@
     </div>
     
     <div class="main-stage">
-        <svg class="brand-logo" viewBox="0 0 207 184" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g class="glitch-layer-1" opacity="0.9">
-                <path d="M98.9 181.55C148.481 181.55 188.675 141.356 188.675 91.775C188.675 42.1936 148.481 2 98.9 2C49.3186 2 9.125 42.1936 9.125 91.775C9.125 141.356 49.3186 181.55 98.9 181.55Z" stroke="var(--logo-layer-1)" stroke-width="4"/>
-                <path d="M98.9016 181.55C115.429 181.55 128.827 141.356 128.827 91.775C128.827 42.1936 115.429 2 98.9016 2C82.3744 2 68.9766 42.1936 68.9766 91.775C68.9766 141.356 82.3744 181.55 98.9016 181.55Z" stroke="var(--logo-layer-1)" stroke-width="4"/>
-                <path d="M98.9 121.7C148.481 121.7 188.675 108.302 188.675 91.7751C188.675 75.248 148.481 61.8501 98.9 61.8501C49.3186 61.8501 9.125 75.248 9.125 91.7751C9.125 108.302 49.3186 121.7 98.9 121.7Z" stroke="var(--logo-layer-1)" stroke-width="4"/>
+        <!-- Официальный 3-B маскот коридор -->
+        <svg class="brand-logo" role="img" aria-label="коридор" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(128, 128)">
+                <!-- Inner Portal Void -->
+                <circle cx="0" cy="0" r="82" fill="#05070A"/>
+                
+                <!-- White C Monolith Archway -->
+                <path d="M -82 0 C -82 -45.3 -45.3 -82 0 -82 C 38.5 -82 70.8 -55.5 79 -24 L 35 -10 C 29 -27 16 -38 0 -38 C -21 -38 -38 -21 -38 0 Z" fill="#FFFFFF"/>
+                <path d="M -82 0 C -82 45.3 -45.3 82 0 82 C 38.5 82 70.8 55.5 79 24 L 35 10 C 29 27 16 38 0 38 C -21 38 -38 21 -38 0 Z" fill="#FFFFFF"/>
+                
+                <!-- Neon Lime Visor Arrow -->
+                <path d="M -98 -20 L 46 -20 L 104 0 L 46 20 L -98 20 C -105 20 -109 10 -109 0 C -109 -10 -105 -20 -98 -20 Z" fill="var(--color-lime)"/>
+                
+                <!-- Approved 3-B Soft-Tilt Ovals (7°) -->
+                <ellipse cx="-28" cy="-2" rx="8.5" ry="11" transform="rotate(7, -28, -2)" fill="#05070A"/>
+                <ellipse cx="16" cy="-2" rx="8.5" ry="11" transform="rotate(-7, 16, -2)" fill="#05070A"/>
             </g>
-            <g class="glitch-layer-2" opacity="0.9">
-                <path d="M114.857 181.55C164.438 181.55 204.632 141.356 204.632 91.775C204.632 42.1936 164.438 2 114.857 2C65.2757 2 25.082 42.1936 25.082 91.775C25.082 141.356 65.2757 181.55 114.857 181.55Z" stroke="var(--logo-layer-2)" stroke-width="4"/>
-                <path d="M114.859 181.55C131.386 181.55 144.784 141.356 144.784 91.775C144.784 42.1936 131.386 2 114.859 2C98.3315 2 84.9336 42.1936 84.9336 91.775C84.9336 141.356 98.3315 181.55 114.859 181.55Z" stroke="var(--logo-layer-2)" stroke-width="4"/>
-                <path d="M114.857 121.7C164.438 121.7 204.632 108.302 204.632 91.7751C204.632 75.248 164.438 61.8501 114.857 61.8501C65.2757 61.8501 25.082 75.248 25.082 91.7751C25.082 108.302 65.2757 121.7 114.857 121.7Z" stroke="var(--logo-layer-2)" stroke-width="4"/>
-            </g>
-            <path d="M106.88 181.55C156.462 181.55 196.655 141.356 196.655 91.775C196.655 42.1936 156.462 2 106.88 2C57.2991 2 17.1055 42.1936 17.1055 91.775C17.1055 141.356 57.2991 181.55 106.88 181.55Z" stroke="var(--color-text)" stroke-width="4"/>
-            <path d="M106.882 181.55C123.409 181.55 136.807 141.356 136.807 91.775C136.807 42.1936 123.409 2 106.882 2C90.3549 2 76.957 42.1936 76.957 91.775C76.957 141.356 90.3549 181.55 106.882 181.55Z" stroke="var(--color-text)" stroke, stroke-width="4"/>
-            <path d="M106.88 121.7C156.462 121.7 196.655 108.302 196.655 91.7751C196.655 75.248 156.462 61.8501 106.88 61.8501C57.2991 61.8501 17.1055 75.248 17.1055 91.7751C17.1055 108.302 57.2991 121.7 106.88 121.7Z" stroke="var(--color-text)" stroke-width="4"/>
-            <path d="M17.1055 11.9756H96.9055L196.655 91.7756L96.9055 171.576H17.1055L116.855 91.7756L17.1055 11.9756Z" fill="var(--color-bg)" stroke="var(--color-bg)" stroke-width="12" stroke-miterlimit="10"/>
-            <path d="M17.1055 11.9756H96.9055L196.655 91.7756L96.9055 171.576H17.1055L116.855 91.7756L17.1055 11.9756Z" fill="var(--logo-main)"/>
         </svg>
 
         <h1 class="glitch-title">коридор</h1>
